@@ -1,0 +1,142 @@
+{% extends 'layouts/default.html' %}
+{% block content %}
+<div class="report">
+
+	<!-- header -->
+	<div class="header">
+		<div class="row">
+			<div class="col-sm-6"><h3>dcMax - Index Annuity Comparison</h3></div>
+			<div class="col-sm-6"><h3 id="timestamp-label" class="pull-right"></h3></div>
+		</div>
+	</div>
+	<!-- header -->
+
+	<!-- summary -->
+	<div class="summary">
+		<div class="row">
+			<div class="col-sm-2"><span class="pull-right">Client Name:</span></div>
+			<div class="col-sm-2"><span id="client-name-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Current Age:</span></div>
+			<div class="col-sm-2"><span id="current-age-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Initial Deposit:</span></div>
+			<div class="col-sm-2"><span id="initial-deposit-label" class="font-bold"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2"><span class="pull-right">Insurance Company:</span></div>
+			<div class="col-sm-2"><span id="insurance-company-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Retirement Age:</span></div>
+			<div class="col-sm-2"><span id="retirement-age-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Initial Withdrawal:</span></div>
+			<div class="col-sm-2"><span id="initial-withdrawal-label" class="font-bold"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2"><span class="pull-right">Annuity Income:</span></div>
+			<div class="col-sm-2"><span id="annuity-income-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right"># Retirement Years:</span></div>
+			<div class="col-sm-2"><span id="number-of-periods-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Net ROR:</span></div>
+			<div class="col-sm-2"><span id="net-rate-of-return-label" class="font-bold"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
+			<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Payoff Age:</span></div>
+			<div class="col-sm-2"><span id="payoff-age-label" class="font-bold"></span></div>
+			<div class="col-sm-2">&nbsp;</div>
+			<div class="col-sm-2">&nbsp;</div>
+		</div>
+	</div>
+	<!-- summary -->
+
+	<!-- cumulative income comparison -->
+	<div class="summary text-center">
+		<div class="row">
+			<div class="col-sm-12"><h3>First Year</h3></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">Income from Annuity</div>
+			<div class="col-sm-4">&nbsp;</div>
+			<div class="col-sm-4">Income from 4% Rule</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><h3 id="cumulative-annuity-income-0-label" class="font-bold"></h3></div>
+			<div class="col-sm-4"><h3 class="font-bold">VS.</h3></div>
+			<div class="col-sm-4"><h3 id="cumulative-investment-income-0-label" class="font-bold"></h3></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
+			<div class="col-sm-4">&nbsp;</div>
+			<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
+		</div>
+	</div>
+	<!-- cumulative income comparison -->
+
+	<!-- cumulative income chart -->
+	<div class="chart-container">
+		<div id="break-even-analysis-chart"></div>
+	</div>
+	<!-- cumulative income chart -->
+
+	<!-- breakeven analysis -->
+	<div class="summary text-center">
+		<div class="row">
+			<div class="col-sm-12"><h2>Breakeven Age</h2></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12"><h2 id="breakeven-age-label" class="font-bold"></h2></div>
+		</div>
+	</div>
+	<!-- breakeven analysis -->
+
+	<!-- go-go slow-go no-go chart -->
+	<div class="schedule">
+		<div class="row">
+			<div id="go-go-schedule" class="col-sm-4"></div>
+			<div id="slow-go-schedule" class="col-sm-4"></div>
+			<div id="no-go-schedule" class="col-sm-4"></div>
+		</div>
+	</div>
+	<!-- go-go slow-go no-go chart -->
+
+	<!-- periodic analysis chart -->
+	<div class="chart-container">
+		<div id="cumulative-payout-chart"></div>
+	</div>
+	<!-- periodic analysis chart -->
+
+</div>
+
+{% endblock %}
+
+{% block _scripts %}
+{% parent %}
+<script type="text/javascript" src="/dc-max/assets/js/abid-report.js"></script>
+<script type="application/javascript">
+	$(document).ready(function () {
+		var currentAge = {{worksheet.currentAge|safe|json}};
+		var retirementAge = {{worksheet.retirementAge|safe|json}};
+		var numberOfPeriods = {{worksheet.numberOfPeriods|safe|json}};
+		var initialDeposit = {{worksheet.initialDeposit|safe|json}};
+		var rateOfReturn = {{worksheet.rateOfReturn|safe|json}};
+		var managementFee = {{worksheet.managementFee|safe|json}};
+		var insuranceProductIncome = {{worksheet.insuranceProductIncome|safe|json}};
+		var initialWithdrawal = {{worksheet.initialWithdrawal|safe|json}};
+		var inflationRate = {{worksheet.inflationRate|safe|json}};
+		var clientName = {{worksheet.clientName|safe|json}};
+		var insuranceCompany = {{worksheet.insuranceCompany|safe|json}};
+
+		var categories = {{breakEvenAnalysis.categories|safe|json}};
+		var seriesA = {{breakEvenAnalysis.seriesA|safe|json}};
+		var seriesB = {{breakEvenAnalysis.seriesB|safe|json}};
+		var breakEvenAge = {{breakEvenAnalysis.breakEvenAge|safe|json}};
+		var cumulativePayoutCategories = {{breakEvenAnalysis.cumulativePayoutCategories|safe|json}};
+		var cumulativePayoutSeriesA = {{breakEvenAnalysis.cumulativePayoutSeriesA|safe|json}};
+		var cumulativePayoutSeriesB = {{breakEvenAnalysis.cumulativePayoutSeriesB|safe|json}};
+		var gogoPayouts = {{breakEvenAnalysis.gogoPayouts|safe|json}};
+		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
+		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
+
+		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
+	});
+</script>
+{% endblock %}

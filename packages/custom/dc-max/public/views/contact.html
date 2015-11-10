@@ -1,0 +1,24 @@
+<div class="contact-form" data-ng-controller="ContactController as contact">
+	<div class="alert alert-{{contact.response.status}} animated fadeIn" ng-show="contact.response.message">{{contact.response.message}}</div>
+	<h2>Contact</h2>
+
+	<p>Please enter your email address and message to contact us.</p>
+
+	<form>
+		<div class="form-group">
+			<label for="email-input">Email</label>
+			<input id="email-input" type="email" name="email" ng-model="contact.message.email" class="form-control" required tabindex="0"/>
+			<span class="has-error" ng-show="contact.message.email.$dirty && contact.message.email.$invalid">
+				<span ng-show="contact.message.email.$error.required">Email is required.</span>
+			</span>
+		</div>
+		<div class="form-group">
+			<label for="feedback-input">Message</label>
+			<textarea id="feedback-input" rows="8" name="feedback" ng-model="contact.message.feedback" class="form-control" required tabindex="0"></textarea>
+			<span class="has-error" ng-show="contact.message.feedback.$dirty && contact.message.feedback.$invalid">
+				<span ng-show="contact.message.feedback.$error.required">Email is required.</span>
+			</span>
+		</div>
+		<input class="btn btn-default" type="submit" data-ng-click="contact.send(contact.message)" value="Send" tabindex="0"/>
+	</form>
+</div>

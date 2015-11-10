@@ -1,0 +1,15 @@
+/*UNDO CHANGES TO COMMON AND OVERRIDE IT HERE*/
+.dc-max-app {
+	margin-top: 70px;
+}
+
+
+.dc-max-app footer {
+	margin-top: 70px;
+	border-top: solid 1px #000;
+}
+
+.has-error,
+.has-error > span {
+	color: #a94442;
+}
