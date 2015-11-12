@@ -7,22 +7,22 @@ Stripe.register(function (app, auth, database) {
 
 	Stripe.menus.add({
 		title: 'stripe admin',
-		link: 'stripe admin',
+		link: 'stripe.admin',
 		roles: ['admin'],
 		menu: 'main'
 	});
 
 	Stripe.menus.add({
-		title: 'stripe add card',
-		link: 'stripe add card',
+		title: 'Payment Profile',
+		link: 'stripe.cards',
 		roles: ['authenticated'],
 		menu: 'main'
 	});
 
 	Stripe.menus.add({
-		title: 'stripe plans',
-		link: 'stripe plans',
-		roles: ['admin'],
+		title: 'Subscriptions',
+		link: 'stripe.plans',
+		roles: ['authenticated'],
 		menu: 'main'
 	});
 
@@ -34,10 +34,12 @@ Stripe.register(function (app, auth, database) {
 		Stripe.settings(function (err, config) {
 
 			if (err || !config) {
-				return console.log('error retrieving Stripe settings');
+				return console.log('error retrieving Stripe settings.');
 			}
 
-			if (!config.settings && !config.settings.privateKey || !config.settings.publicKey) return;
+			if (!config.settings && !config.settings.privateKey || !config.settings.publicKey) {
+				return;
+			}
 
 			Stripe.client = require('stripe')(config.settings.privateKey);
 		});

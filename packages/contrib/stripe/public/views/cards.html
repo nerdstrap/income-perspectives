@@ -1,0 +1,47 @@
+<div class="cards-view" data-ng-controller="CardsController as cardCtrl">
+	<h1>Manage Cards</h1>
+
+	<div class="card" ng-repeat="card in cardCtrl.cards">
+		<div>{{card.last4}}</div>
+		<div>{{card.exp_month}}/{{card.exp_year}}</div>
+		<div>{{card.brand}}</div>
+	</div>
+
+	<form name="cardCtrl.newCardFrm" novalidate>
+		<div class="form-group" bs-has>
+			<label for="number-input">Number</label>
+			<input id="number-input" type="text" size="20" name="number" data-stripe="number" ng-model="cardCtrl.newCard.number" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+			<span class="has-error" ng-show="cardCtrl.newCardFrm.number.$dirty && cardCtrl.newCardFrm.number.$invalid">
+				<span ng-show="cardCtrl.newCardFrm.number.$error.required">Card Number is required.</span>
+			</span>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="form-group" bs-has>
+					<label for="month-input">Month</label>
+					<input id="month-input" type="text" size="2" name="month" data-stripe="exp-month" ng-model="cardCtrl.newCard.month" class="form-control" required tabindex="0"/>
+					<span class="has-error" ng-show="cardCtrl.newCardFrm.month.$dirty && cardCtrl.newCardFrm.month.$invalid">
+						<span ng-show="cardCtrl.newCardFrm.month.$error.required">Month is required.</span>
+					</span>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="form-group" bs-has>
+					<label for="year-input">Year</label>
+					<input id="year-input" type="text" size="2" name="year" data-stripe="exp-year" ng-model="cardCtrl.newCard.year" class="form-control" required tabindex="0"/>
+					<span class="has-error" ng-show="cardCtrl.newCardFrm.year.$dirty && cardCtrl.newCardFrm.year.$invalid">
+						<span ng-show="cardCtrl.newCardFrm.year.$error.required">Year is required.</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" bs-has>
+			<label for="cvc-input">CVC</label>
+			<input id="cvc-input" type="text" size="4" name="cvc" data-stripe="cvc" ng-model="cardCtrl.newCard.cvc" class="form-control" required tabindex="0"/>
+			<span class="has-error" ng-show="cardCtrl.newCardFrm.cvc.$dirty && cardCtrl.newCardFrm.cvc.$invalid">
+				<span ng-show="cardCtrl.newCardFrm.cvc.$error.required">CVC is required.</span>
+			</span>
+		</div>
+		<input class="btn btn-primary" type="button" data-ng-click="cardCtrl.addCard()" value="Add Card" tabindex="0" ng-disabled="cardCtrl.status.addCardDisabled"/>
+	</form>
+</div>

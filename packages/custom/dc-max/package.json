@@ -14,8 +14,7 @@
 		"phantom": "latest",
 		"filed": "latest",
 		"mime": "latest",
-		"lodash-contrib": "latest",
-		"stripe": "latest"
+		"lodash-contrib": "latest"
 	},
 	"license": "MIT"
 }

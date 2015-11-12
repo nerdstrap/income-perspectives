@@ -1,8 +1,5 @@
 'use strict';
 
-var app = angular.module('mean.dc-max');
-app.directive('bsHas', bsHas);
-
 function bsHas(bsProcessValidator) {
 	return {
 		restrict: 'A',
@@ -12,3 +9,6 @@ function bsHas(bsProcessValidator) {
 		}
 	};
 }
+
+var app = angular.module('mean.dc-max');
+app.directive('bsHas', bsHas);

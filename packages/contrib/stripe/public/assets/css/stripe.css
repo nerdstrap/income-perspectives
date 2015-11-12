@@ -1,15 +1,29 @@
 .stripe-example h1 {
-  background-color: purple
+	background-color: purple
 }
 
 .plan {
-    width:  200px;
-    height: 200px;
-    border: solid 1px #0d3349;
-    display: inline-block;
-    margin: 20px;
+	width: 200px;
+	height: 200px;
+	border: solid 1px #0d3349;
+	display: inline-block;
+	margin: 20px;
 }
+
 .plan div {
-    text-align: center;
-    margin: 20px;
+	text-align: center;
+	margin: 20px;
+}
+
+.card {
+	width: 200px;
+	height: 200px;
+	border: solid 1px #0d3349;
+	display: inline-block;
+	margin: 20px;
+}
+
+.card div {
+	text-align: center;
+	margin: 20px;
 }

@@ -1,25 +1,23 @@
-<div class="" data-ng-controller="StripeController as Stripe" ng-init="Stripe.getSettings()">
+<div class="admin-view" data-ng-controller="StripeAdminController as admCtrl">
 	<h1>Stripe Admin</h1>
 
-	<form>
-
-		<h2>Testing Keys</h2>
-
-		<div class="row form-group">
-			<div class="col-md-3">
-				<label>Private</label>
-				<input type="text" class="form-control" ng-model="stripe.settings.privateKey" placeholder="Private"/>
-			</div>
-			<div class="col-md-3">
-				<label>Public</label>
-				<input type="text" class="form-control" ng-model="stripe.settings.publicKey" placeholder="Public"/>
-			</div>
-			<div class="col-md-2">
-
-				<input type="submit" class="btn" ng-click="Stripe.updateSettings()" value="Update"/>
-			</div>
+	<form name="admCtrl.setFrm" novalidate>
+		<div class="form-group" bs-has>
+			<label for="public-key-input">Public Key</label>
+			<input id="public-key-input" type="text" name="publicKey" ng-model="stripeCtrl.settings.publicKey" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+			<span class="has-error" ng-show="admCtrl.setFrm.publicKey.$dirty && admCtrl.setFrm.publicKey.$invalid">
+				<span ng-show="admCtrl.setFrm.publicKey.$error.required">Public Key is required.</span>
+			</span>
 		</div>
 
-	</form>
+		<div class="form-group" bs-has>
+			<label for="private-key-input">Public Key</label>
+			<input id="private-key-input" type="text" name="privateKey" ng-model="stripeCtrl.settings.privateKey" class="form-control" required tabindex="0"/>
+			<span class="has-error" ng-show="admCtrl.setFrm.privateKey.$dirty && admCtrl.setFrm.privateKey.$invalid">
+				<span ng-show="admCtrl.setFrm.privateKey.$error.required">Public Key is required.</span>
+			</span>
+		</div>
 
+		<input class="btn btn-primary" type="submit" ng-click="admCtrl.updateSettings()" value="Update" tabindex="0"/>
+	</form>
 </div>

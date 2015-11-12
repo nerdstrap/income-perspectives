@@ -49,7 +49,7 @@ module.exports.getBaseline = function (currentAge, retirementAge, numberOfPeriod
 		//,annualWithdrawal: annualWithdrawal
 		//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
 		//,accountValueAtEndOfYear: accountValueAtEndOfYear
-		,cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
+		, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 		//,yearsCompounded: yearsCompounded
 		//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
 		//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
@@ -72,7 +72,7 @@ module.exports.getBaseline = function (currentAge, retirementAge, numberOfPeriod
 			//,annualWithdrawal: annualWithdrawal
 			//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
 			//,accountValueAtEndOfYear: accountValueAtEndOfYear
-			,cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
+			, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 			//,yearsCompounded: yearsCompounded
 			//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
 			//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
@@ -82,10 +82,11 @@ module.exports.getBaseline = function (currentAge, retirementAge, numberOfPeriod
 	var investmentIncome = payouts[0].cumulativeInvestmentIncome;
 	var categories = _.pluck(payouts, 'age');
 	var seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
+	var rateOfReturnMessage = 'Based on ' + Math.floor(rateOfReturn * 100) + '% ROR';
 
 	return {
 		investmentIncome: investmentIncome,
-		rateOfReturn: rateOfReturn,
+		rateOfReturnMessage: rateOfReturnMessage,
 		categories: categories,
 		seriesA: seriesA
 	};
@@ -101,6 +102,7 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 
 	var breakEvenAge = retirementAge;
 	var breakEvenAgeSet = false;
+	var breakEvenMessage = 'Break-even Age is never reached!';
 
 	var accountValue = getFutureValue(initialDeposit, netRateOfReturn, yearsUntilRetirement);
 	var annualWithdrawal = accountValue * initialWithdrawal;
@@ -128,12 +130,12 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 		//,annualWithdrawal: annualWithdrawal
 		//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
 		//,accountValueAtEndOfYear: accountValueAtEndOfYear
-		,cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
+		, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 		//,yearsCompounded: yearsCompounded
 		//,insuranceProductIncome: insuranceProductIncome
 		//,presentValueOfInsuranceProductIncome: presentValueOfInsuranceProductIncome
 		//,cumulativePresentValueOfInsuranceProductIncome: cumulativePresentValueOfInsuranceProductIncome
-		,cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
+		, cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
 		//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
 		//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
 		//,incomeDifferential: incomeDifferential
@@ -161,12 +163,12 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 			//,annualWithdrawal: annualWithdrawal
 			//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
 			//,accountValueAtEndOfYear: accountValueAtEndOfYear
-			,cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
+			, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 			//,yearsCompounded: yearsCompounded
 			//,insuranceProductIncome: insuranceProductIncome
 			//,presentValueOfInsuranceProductIncome: presentValueOfInsuranceProductIncome
 			//,cumulativePresentValueOfInsuranceProductIncome: cumulativePresentValueOfInsuranceProductIncome
-			,cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
+			, cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
 			//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
 			//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
 			//,incomeDifferential: incomeDifferential
@@ -178,9 +180,10 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 		}
 	}
 
-	if (!breakEvenAgeSet) {
-		breakEvenAge = 1000;
+	if (breakEvenAgeSet) {
+		breakEvenMessage = 'Break-even age reached when you are ' + breakEvenAge + ' years old';
 	}
+	var rateOfReturnMessage = 'Based on ' + Math.floor(rateOfReturn * 100) + '% ROR';
 
 	var categories = _.pluck(payouts, 'age');
 	var seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
@@ -200,11 +203,11 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 	return {
 		investmentIncome: investmentIncome,
 		insuranceProductIncome: insuranceProductIncome,
-		rateOfReturn: rateOfReturn,
+		rateOfReturnMessage: rateOfReturnMessage,
 		categories: categories,
 		seriesA: seriesA,
 		seriesB: seriesB,
-		breakEvenAge: breakEvenAge,
+		breakEvenMessage: breakEvenMessage,
 		cumulativePayoutCategories: cumulativePayoutCategories,
 		cumulativePayoutSeriesA: cumulativePayoutSeriesA,
 		cumulativePayoutSeriesB: cumulativePayoutSeriesB,

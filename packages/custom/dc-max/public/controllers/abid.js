@@ -8,6 +8,8 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		initialWithdrawal: 0.04,
 		inflationRate: 0.03
 	};
+	vm.baselineMaster = {};
+	vm.breakEvenAnalysisMaster = {};
 
 	vm.status = {
 		firstOpen: true,
@@ -20,11 +22,6 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		cumulativePayoutActive: false,
 		cumulativePayoutVisible: false
 	};
-	vm.updateGeneral = updateGeneral;
-	vm.getBaseline = getBaseline;
-	vm.getBreakEvenAnalysis = getBreakEvenAnalysis;
-	vm.getPdf = getPdf;
-	vm.reset = reset;
 
 	function updateGeneral(worksheet) {
 		if (vm.abidFrm.currentAge.$valid && vm.abidFrm.retirementAge.$valid && vm.abidFrm.numberOfPeriods.$valid) {
@@ -62,8 +59,8 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 					vm.status.cumulativePayoutActive = false;
 					vm.status.cumulativePayoutVisible = false;
 
-					vm.baseline = baseline;
-					vm.baselineChart = ChartFactory.getBaselineChart(baseline.categories, baseline.seriesA);
+					vm.baseline = angular.copy(baseline);
+					vm.baselineChart = ChartFactory.getBaselineChart(vm.baseline.categories, vm.baseline.seriesA);
 				})
 				.error(function (error) {
 					console.log(error);
@@ -92,9 +89,9 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 					vm.status.cumulativePayoutActive = false;
 					vm.status.cumulativePayoutVisible = true;
 
-					vm.breakEvenAnalysis = breakEvenAnalysis;
-					vm.breakEvenAnalysisChart = ChartFactory.getBreakEvenAnalysisChart(breakEvenAnalysis.categories, breakEvenAnalysis.seriesA, breakEvenAnalysis.seriesB);
-					vm.cumulativePayoutChart = ChartFactory.getCumulativePayoutChart(breakEvenAnalysis.cumulativePayoutCategories, breakEvenAnalysis.cumulativePayoutSeriesA, breakEvenAnalysis.cumulativePayoutSeriesB);
+					vm.breakEvenAnalysis = angular.copy(breakEvenAnalysis);
+					vm.breakEvenAnalysisChart = ChartFactory.getBreakEvenAnalysisChart(vm.breakEvenAnalysis.categories, vm.breakEvenAnalysis.seriesA, vm.breakEvenAnalysis.seriesB);
+					vm.cumulativePayoutChart = ChartFactory.getCumulativePayoutChart(vm.breakEvenAnalysis.cumulativePayoutCategories, vm.breakEvenAnalysis.cumulativePayoutSeriesA, vm.breakEvenAnalysis.cumulativePayoutSeriesB);
 				})
 				.error(function (error) {
 					console.log(error);
@@ -125,10 +122,10 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		}
 	}
 
-	function reset() {
-		vm.worksheet = vm.master;
-		vm.baseline = {};
-		vm.breakEvenAnalysis = {};
+	function init() {
+		vm.worksheet = angular.copy(vm.master);
+		vm.baseline = angular.copy(vm.baselineMaster);
+		vm.breakEvenAnalysis = angular.copy(vm.breakEvenAnalysisMaster);
 		vm.status.firstOpen = true;
 		focus('firstOpened');
 		vm.status.secondOpen = false;
@@ -141,7 +138,20 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		vm.status.cumulativePayoutVisible = false;
 	}
 
-	vm.reset();
+	function reset() {
+		vm.init();
+		vm.abidFrm.$setUntouched();
+		vm.abidFrm.$setPristine();
+	}
+
+	vm.updateGeneral = updateGeneral;
+	vm.getBaseline = getBaseline;
+	vm.getBreakEvenAnalysis = getBreakEvenAnalysis;
+	vm.getPdf = getPdf;
+	vm.init = init;
+	vm.reset = reset;
+
+	vm.init();
 }
 
 var app = angular.module('mean.dc-max');

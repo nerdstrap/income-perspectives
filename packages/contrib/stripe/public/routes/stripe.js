@@ -1,21 +1,25 @@
 'use strict';
+function StripeRoutes($stateProvider) {
 
-angular.module('mean.stripe')
-	.config(['$stateProvider',
-	function ($stateProvider) {
-		$stateProvider.state('stripe admin', {
-			url: '/stripe/admin',
+	$stateProvider
+		.state('stripe', {
+			url: '/stripe',
+			abstract: true,
+			templateUrl: 'stripe/views/stripe.html'
+		})
+		.state('stripe.admin', {
+			url: '/admin',
 			templateUrl: 'stripe/views/admin.html'
-		});
-
-		$stateProvider.state('stripe add card', {
-			url: '/stripe/addCard',
-			templateUrl: 'stripe/views/addCard.html'
-		});
-
-		$stateProvider.state('stripe plans', {
-			url: '/stripe/products',
+		})
+		.state('stripe.cards', {
+			url: '/cards',
+			templateUrl: 'stripe/views/cards.html'
+		})
+		.state('stripe.plans', {
+			url: '/plans',
 			templateUrl: 'stripe/views/plans.html'
 		});
-	}
-]);
+}
+
+var app = angular.module('mean.stripe');
+app.config(StripeRoutes);

@@ -1,10 +1,11 @@
-<div class="" data-ng-controller="StripeController as Stripe" ng-init="Stripe.getPlans();">
-	<h1>Products</h1>
+<div class="plans-view" data-ng-controller="PlansController as plansCtrl">
+	<h1>Subscription Plans</h1>
 
-	<div class="plan" ng-repeat="plan in stripe.plans" ng-click="">
+	<div class="plan" ng-repeat="plan in plansCtrl.plans">
 		<div>{{plan.name}}</div>
+		<div>{{plan.amount}}</div>
 		<div>
-			<button id="customButton1" class="btn btn-primary" ng-click="Stripe.subscribe(plan.id)">pay</button>
+			<button type="submit" class="btn btn-primary" ng-click="plansCtrl.subscribe(plan.id)">Subscribe</button>
 		</div>
 	</div>
 </div>

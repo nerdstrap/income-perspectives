@@ -8,8 +8,8 @@ module.exports = function (DcMax, app, auth, database) {
 		.get(controller.getBaseline);
 	app.route('/api/dc-max/abid/break-even-analysis')
 		.get(controller.getBreakEvenAnalysis);
-	app.route('/api/dc-max/abid/report')
+	app.route('/api/dc-max/abid/report', auth.requiresLogin)
 		.get(controller.getReport);
-	app.route('/api/dc-max/abid/pdf')
+	app.route('/api/dc-max/abid/pdf', auth.requiresLogin)
 		.get(controller.getPdf);
 };
