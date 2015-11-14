@@ -24,20 +24,13 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 	}
 
 	function createTokenResponseHandler(status, response) {
-		var card = {
-			last4: response.last4,
-			brand: response.brand,
-			exp_month: response.exp_month,
-			exp_year: response.exp_year
-		};
-		StripeFactory.addCard(response)
+		StripeFactory.addCustomer(response)
 			.success(function (data) {
-				vm.status.newCardVisible = false;
-				vm.getCards();
+				vm.addSubscription();
 			})
 			.error(function (error) {
 				console.log(error);
-				vm.status.response = 'Unable to add card.';
+				vm.status.response = 'Unable to create stripe customer.';
 			});
 	}
 
@@ -48,11 +41,12 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 	var vm = this;
 
 	vm.status = {
-		newCardVisible: false,
-		showUnsubscribe: false
+		showSubscribe: false,
+		addNewCardDisabled: false,
+		showUnsubscribe: false,
+		unsubscribeDisabled: false
 	};
-	vm.plans = [];
-	vm.cards = [];
+	vm.customer = {};
 
 	function getSettings() {
 		StripeFactory.getSettings()
@@ -65,30 +59,25 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 			});
 	}
 
-	function getPlans() {
-		StripeFactory.getPlans()
-			.success(function (plans) {
-				vm.plans = angular.copy(plans);
+	function getCustomer() {
+		StripeFactory.getCustomer()
+			.success(function (data) {
+				vm.customer = angular.copy(data);
+				if (vm.customer.subscriptionId) {
+					vm.status.showSubscribe = false;
+					vm.status.showUnsubscribe = true;
+				} else {
+					vm.status.showSubscribe = true;
+					vm.status.showUnsubscribe = false;
+				}
 			})
 			.error(function (error) {
 				console.log(error);
-				vm.status.response = 'Unable to get stripe plans.';
+				vm.status.response = 'Unable to get stripe customer.';
 			});
 	}
 
-	function getCards() {
-		StripeFactory.getCards()
-			.success(function (cards) {
-				vm.cards = angular.copy(cards.data);
-				vm.status.subscribeEnabled = vm.cards.length;
-			})
-			.error(function (error) {
-				console.log(error);
-				vm.status.response = 'Unable to get stripe cards.';
-			});
-	}
-
-	function showNewCard() {
+	function subscribe() {
 		vm.newCard = angular.copy({});
 		vm.newCardFrm.$setUntouched();
 		vm.newCardFrm.$setPristine();
@@ -100,7 +89,6 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 			});
 		} else {
 			vm.status.newCardVisible = true;
-			vm.status.addNewCardDisabled = false;
 		}
 	}
 
@@ -120,36 +108,35 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 		createToken(formData);
 	}
 
-	function subscribePaidPlan() {
-		vm.status.subscribeEnabled = false;
+	function addSubscription() {
 		StripeFactory.addSubscription('individuals')
 			.success(function (data) {
-				vm.status.subscribeEnabled = true;
-				alert();
+				vm.customer = angular.copy(data);
+				vm.status.newCardVisible = false;
+				vm.status.showSubscribe = true;
+				vm.status.showUnsubscribe = true;
 			})
 			.error(function (error) {
 				console.log(error);
-				vm.status.response = 'Unable to add subscription.';
+				vm.status.response = 'Unable to add stripe subscription.';
 			});
 	}
 
-	function subscribeFreePlan() {
-		vm.status.subscribeEnabled = false;
-		StripeFactory.addSubscription('individuals')
+	function unsubscribe() {
+		vm.status.unsubscribeDisabled = true;
+		StripeFactory.removeCustomer()
 			.success(function (data) {
-				alert();
-				vm.status.subscribeEnabled = true;
+				vm.customer = angular.copy({});
+				vm.status.showSubscribe = true;
+				vm.status.showUnsubscribe = false;
 			})
 			.error(function (error) {
 				console.log(error);
-				vm.status.response = 'Unable to add subscription.';
+				vm.status.response = 'Unable to remove stripe subscription.';
 			});
 	}
 
 	function init() {
-		vm.paidPlan = false;
-		vm.freePlan = true;
-		vm.status.showUnsubscribe = MeanUser && MeanUser.user && MeanUser.user.stripe && MeanUser.user.stripe.plan === 'individuals';
 	}
 
 	function reset() {
@@ -157,24 +144,21 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanU
 	}
 
 	vm.getSettings = getSettings;
+	vm.getCustomer = getCustomer;
 
-	vm.getPlans = getPlans;
-	vm.getCards = getCards;
-
-	vm.showNewCard = showNewCard;
+	vm.subscribe = subscribe;
 	vm.cancelAddNewCard = cancelAddNewCard;
 	vm.addNewCard = addNewCard;
 
-	vm.subscribePaidPlan = subscribePaidPlan;
-	vm.subscribeFreePlan = subscribeFreePlan;
+	vm.addSubscription = addSubscription;
+	vm.unsubscribe = unsubscribe;
 
 	vm.init = init;
 	vm.reset = reset;
 
 	vm.init();
 	vm.getSettings();
-	vm.getPlans();
-	vm.getCards();
+	vm.getCustomer();
 
 }
 

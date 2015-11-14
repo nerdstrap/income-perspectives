@@ -12,16 +12,16 @@ function StripeFactory($http) {
 		return $http.post(urlBase + '/admin/settings', settings);
 	};
 
-	stripeFactory.getPlans = function () {
-		return $http.get(urlBase + '/plans');
+	//stripeFactory.getPlans = function () {
+	//	return $http.get(urlBase + '/plans');
+	//};
+
+	stripeFactory.getCustomer = function () {
+		return $http.get(urlBase + '/customer');
 	};
 
-	stripeFactory.getCards = function () {
-		return $http.get(urlBase + '/cards');
-	};
-
-	stripeFactory.addCard = function (token) {
-		return $http.post(urlBase + '/cards', {
+	stripeFactory.addCustomer = function (token) {
+		return $http.post(urlBase + '/customer', {
 			token: token
 		});
 	};
@@ -30,6 +30,10 @@ function StripeFactory($http) {
 		return $http.post(urlBase + '/subscription', {
 			planId: planId
 		});
+	};
+
+	stripeFactory.removeCustomer= function () {
+		return $http.delete(urlBase + '/customer');
 	};
 
 	return stripeFactory;

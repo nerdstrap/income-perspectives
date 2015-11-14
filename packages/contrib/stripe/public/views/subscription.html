@@ -1,17 +1,24 @@
 <div class="subscription-view" data-ng-controller="SubscriptionController as subCtrl">
-	<h1>Billing</h1>
-
-	<h2>Payment Method</h2>
+	<h1>Subscription Plans</h1>
 
 	<div class="row" ng-show="!subCtrl.status.newCardVisible">
 		<div class="col-xs-6">
 			<div class="panel panel-success">
-				<div class="panel-heading">Cards on File</div>
-				<div class="panel-body" ng-repeat="card in subCtrl.cards">
-					<p>{{card.brand}}: **** **** **** {{card.last4}} - Exp: {{card.exp_month}}/{{card.exp_year}}</p>
-				</div>
+				<div class="panel-heading">Individuals $39.99/month</div>
 				<div class="panel-body">
-					<button class="btn btn-primary" type="button" ng-click="subCtrl.showNewCard()" tabindex="-1">Save New Credit Card</button>
+					<p ng-show="subCtrl.customer.subscriptionId">
+						You are currently subscribed with card ending in {{subCtrl.customer.last4}}
+					</p>
+					<button class="btn btn-success" type="button" data-ng-click="subCtrl.subscribe()" ng-show="!subCtrl.status.showUnsubscribe" tabindex="0">Subscribe</button>
+					<button class="btn btn-danger" type="button" data-ng-click="subCtrl.unsubscribe()" ng-show="subCtrl.status.showUnsubscribe" ng-disabled="subCtrl.status.unsubscribeDisabled" tabindex="-1">Unsubscribe</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Free</div>
+				<div class="panel-body">
+					<p>demo worksheets and value proposition</p>
 				</div>
 			</div>
 		</div>
@@ -70,30 +77,6 @@
 							</div>
 						</div>
 					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<h2>Subscription Plan</h2>
-
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="panel panel-success">
-				<div class="panel-heading">Individuals $39.99/month</div>
-				<div class="panel-body">
-					<p>Access training, customize worksheets, print PDF reports</p>
-					<button class="btn btn-success" type="button" data-ng-click="subCtrl.subscribePaidPlan()" ng-show="!subCtrl.status.showUnsubscribe" ng-disabled="!subCtrl.status.subscribeEnabled" tabindex="0">Subscribe</button>
-					<button class="btn btn-danger" type="button" ng-show="subCtrl.status.showUnsubscribe" tabindex="0">Unsubscribe</button>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">Free</div>
-				<div class="panel-body">
-					<p>demo worksheets and value proposition</p>
-					<button class="btn btn-success" type="button" data-ng-click="subCtrl.subscribeFreePlan()" tabindex="0">Subscribe</button>
 				</div>
 			</div>
 		</div>
