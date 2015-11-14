@@ -24,10 +24,6 @@ function DcMaxRoutes($stateProvider) {
 			url: '/privacy',
 			templateUrl: 'dc-max/views/privacy.html'
 		})
-		.state('dcMax.subscriptions', {
-			url: '/subscriptions',
-			templateUrl: 'dc-max/views/subscriptions.html'
-		})
 		.state('dcMax.terms', {
 			url: '/terms',
 			templateUrl: 'dc-max/views/terms.html'

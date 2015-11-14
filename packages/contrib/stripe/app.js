@@ -13,15 +13,8 @@ Stripe.register(function (app, auth, database) {
 	});
 
 	Stripe.menus.add({
-		title: 'Payment Profile',
-		link: 'stripe.cards',
-		roles: ['authenticated'],
-		menu: 'main'
-	});
-
-	Stripe.menus.add({
 		title: 'Subscriptions',
-		link: 'stripe.plans',
+		link: 'stripe.subscription',
 		roles: ['authenticated'],
 		menu: 'main'
 	});

@@ -16,11 +16,11 @@ function StripeAdminController($scope, $rootScope, StripeFactory) {
 			});
 	}
 
-	function updateSettings() {
+	function updateSettings(settings) {
 		if (vm.setFrm.$valid) {
-			StripeFactory.updateSettings(vm.stripe.settings)
-				.success(function (settings) {
-					vm.settings = angular.copy(settings);
+			StripeFactory.updateSettings(settings)
+				.success(function (data) {
+					//vm.settings = angular.copy(settings);
 				})
 				.error(function (error) {
 					console.log(error);

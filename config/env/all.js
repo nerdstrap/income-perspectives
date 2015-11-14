@@ -61,7 +61,19 @@ module.exports = {
 	},
 	stripeOptions: {
 		secretKey: process.env.STRIPE_KEY || 'sk_test_irbu4eJyKToXhQS3NIUo4b5p',
-		publishableKey: process.env.STRIPE_PUB_KEY || 'pk_test_8HnHFMoMWN83e6LPHc3RFxLm'
+		publishableKey: process.env.STRIPE_PUB_KEY || 'pk_test_8HnHFMoMWN83e6LPHc3RFxLm',
+		defaultPlan: 'individuals',
+		plans: ['individuals', 'free'],
+		planData: {
+			'individuals': {
+				name: 'Individuals',
+				price: 39.99
+			},
+			'free': {
+				name: 'Free',
+				price: 0
+			}
+		}
 	}
 
 };

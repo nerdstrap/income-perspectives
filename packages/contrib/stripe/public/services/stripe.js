@@ -26,6 +26,12 @@ function StripeFactory($http) {
 		});
 	};
 
+	stripeFactory.addSubscription = function (planId) {
+		return $http.post(urlBase + '/subscription', {
+			planId: planId
+		});
+	};
+
 	return stripeFactory;
 }
 

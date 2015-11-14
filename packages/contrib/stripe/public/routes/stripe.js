@@ -11,13 +11,9 @@ function StripeRoutes($stateProvider) {
 			url: '/admin',
 			templateUrl: 'stripe/views/admin.html'
 		})
-		.state('stripe.cards', {
-			url: '/cards',
-			templateUrl: 'stripe/views/cards.html'
-		})
-		.state('stripe.plans', {
-			url: '/plans',
-			templateUrl: 'stripe/views/plans.html'
+		.state('stripe.subscription', {
+			url: '/subscription',
+			templateUrl: 'stripe/views/subscription.html'
 		});
 }
 

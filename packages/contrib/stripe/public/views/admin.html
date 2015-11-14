@@ -4,20 +4,20 @@
 	<form name="admCtrl.setFrm" novalidate>
 		<div class="form-group" bs-has>
 			<label for="public-key-input">Public Key</label>
-			<input id="public-key-input" type="text" name="publicKey" ng-model="stripeCtrl.settings.publicKey" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+			<input id="public-key-input" type="text" name="publicKey" ng-model="admCtrl.settings.publicKey" class="form-control" focus-on="firstOpened" required tabindex="0"/>
 			<span class="has-error" ng-show="admCtrl.setFrm.publicKey.$dirty && admCtrl.setFrm.publicKey.$invalid">
 				<span ng-show="admCtrl.setFrm.publicKey.$error.required">Public Key is required.</span>
 			</span>
 		</div>
 
 		<div class="form-group" bs-has>
-			<label for="private-key-input">Public Key</label>
-			<input id="private-key-input" type="text" name="privateKey" ng-model="stripeCtrl.settings.privateKey" class="form-control" required tabindex="0"/>
+			<label for="private-key-input">Private Key</label>
+			<input id="private-key-input" type="text" name="privateKey" ng-model="admCtrl.settings.privateKey" class="form-control" required tabindex="0"/>
 			<span class="has-error" ng-show="admCtrl.setFrm.privateKey.$dirty && admCtrl.setFrm.privateKey.$invalid">
-				<span ng-show="admCtrl.setFrm.privateKey.$error.required">Public Key is required.</span>
+				<span ng-show="admCtrl.setFrm.privateKey.$error.required">Private Key is required.</span>
 			</span>
 		</div>
 
-		<input class="btn btn-primary" type="submit" ng-click="admCtrl.updateSettings()" value="Update" tabindex="0"/>
+		<input class="btn btn-primary" type="submit" ng-click="admCtrl.updateSettings(admCtrl.settings)" value="Update" tabindex="0"/>
 	</form>
 </div>

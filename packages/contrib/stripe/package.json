@@ -1,15 +1,18 @@
 {
-  "name": "stripe",
-  "version": "0.0.1",
-  "description": "Some description of stripe",
-  "author": {
-    "name": "mean scaffold"
-  },
-  "mean": "0.4.3",
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.4.x"
-  },
-  "dependencies": {"stripe":"latest"},
-  "license": "MIT"
+	"name": "stripe",
+	"version": "0.0.1",
+	"description": "Some description of stripe",
+	"author": {
+		"name": "mean scaffold"
+	},
+	"mean": "0.4.3",
+	"engines": {
+		"node": "0.10.x",
+		"npm": "1.4.x"
+	},
+	"dependencies": {
+		"stripe": "latest",
+		"stripe-webhook-middleware": "latest"
+	},
+	"license": "MIT"
 }
