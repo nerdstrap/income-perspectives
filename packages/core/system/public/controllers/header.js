@@ -1,61 +1,68 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Menus', 'MeanUser', '$state',
-  function($scope, $rootScope, Menus, MeanUser, $state) {
-    
-    var vm = this;
+function HeaderController($scope, $rootScope, $state, Menus, AuthFactory, AuthEvents) {
+	var vm = this;
 
-    vm.menus = {};
-    vm.hdrvars = {
-      authenticated: MeanUser.loggedin,
-      user: MeanUser.user, 
-      isAdmin: MeanUser.isAdmin
-    };
+	vm.master = {};
 
-    // Default hard coded menu items for main menu
-    var defaultMainMenu = [];
+	vm.menus = {};
 
-    // Query menus added by modules. Only returns menus that user is allowed to see.
-    function queryMenu(name, defaultMenu) {
+	vm.status = {
+		collapsed: false,
+		loginVisible: true,
+		logoutVisible: false
+	};
 
-      Menus.query({
-        name: name,
-        defaultMenu: defaultMenu
-      }, function(menu) {
-        vm.menus[name] = menu;
-      });
-    }
+	vm.view = {
+		title: 'Page Title',
+		rootUrl: '/',
+		rootTitle: 'Home'
+	};
 
-    // Query server for menus and check permissions
-    queryMenu('main', defaultMainMenu);
-    queryMenu('account', []);
+	var defaultMainMenu = [];
 
+	function getMenu(name, defaultMenu) {
+		Menus.query({
+			name: name,
+			defaultMenu: defaultMenu
+		}, function (menu) {
+			vm.menus[name] = menu;
+		});
+	}
 
-    $scope.isCollapsed = false;
+	function logout() {
+		AuthFactory.logout();
+	}
 
-    $rootScope.$on('loggedin', function() {
-      queryMenu('main', defaultMainMenu);
+	$rootScope.$on(AuthEvents.loggedIn, function (event, user) {
+		getMenu('main', defaultMainMenu);
+		vm.status.loginVisible = false;
+		vm.status.logoutVisible = true;
+		vm.user = user;
+	});
 
-      vm.hdrvars = {
-        authenticated: MeanUser.loggedin,
-        user: MeanUser.user,
-        isAdmin: MeanUser.isAdmin
-      };
-    });
+	$rootScope.$on(AuthEvents.loggedOut, function () {
+		vm.status.loginVisible = true;
+		vm.status.logoutVisible = false;
+		vm.user = angular.copy(vm.master);
+		getMenu('main', defaultMainMenu);
+	});
 
-    vm.logout = function(){
-      MeanUser.logout();
-    };
+	function init() {
+		vm.user = angular.copy(vm.master);
+		getMenu('main', defaultMainMenu);
+	}
 
-    $rootScope.$on('logout', function() {
-      vm.hdrvars = {
-        authenticated: false,
-        user: {},
-        isAdmin: false
-      };
-      queryMenu('main', defaultMainMenu);
-      $state.go('home');
-    });
+	function reset() {
+		vm.init();
+	}
 
-  }
-]);
+	vm.logout = logout;
+	vm.init = init;
+	vm.reset = reset;
+
+	vm.init();
+}
+
+var app = angular.module('mean.system');
+app.controller('HeaderController', HeaderController);

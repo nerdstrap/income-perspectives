@@ -1,19 +1,25 @@
 'use strict';
 
-angular.module('mean.admin').controller('ModulesController', ['$scope', 'Global', '$rootScope', 'Menus', 'Modules',
-    function($scope, Global, $rootScope, Menus, Modules) {
+function ModulesController($scope, AuthFactory) {
 
-	    var vm = this;
+	var vm = this;
 
-	    $scope.modules = [];
+	vm.master = {};
 
-	    vm.init = function() {
-		    Menus.query({
-			    name: 'modules',
-			    defaultMenu: []
-		    }, function(menu) {
-			    vm.modules = menu;
-		    });
-	    };
-    }
-]);
+	vm.status = {};
+
+	function init() {
+	}
+
+	function reset() {
+		vm.init();
+	}
+
+	vm.init = init;
+	vm.reset = reset;
+
+	vm.init();
+}
+
+var app = angular.module('mean.admin');
+app.controller('ModulesController', ModulesController);

@@ -1,69 +1,72 @@
 'use strict';
 
-// $viewPathProvider, to allow overriding system default views
-angular.module('mean.system').provider('$viewPath', function() {
-  function ViewPathProvider() {
-    var overrides = {};
+function $viewPath() {
+	function ViewPathProvider() {
+		var overrides = {};
 
-    this.path = function(path) {
-      return function() {
-        return overrides[path] || path;
-      };
-    };
+		this.path = function (path) {
+			return function () {
+				return overrides[path] || path;
+			};
+		};
 
-    this.override = function(defaultPath, newPath) {
-      if (overrides[defaultPath]) {
-        throw new Error('View already has an override: ' + defaultPath);
-      }
-      overrides[defaultPath] = newPath;
-      return this;
-    };
+		this.override = function (defaultPath, newPath) {
+			if (overrides[defaultPath]) {
+				throw new Error('View already has an override: ' + defaultPath);
+			}
+			overrides[defaultPath] = newPath;
+			return this;
+		};
 
-    this.$get = function() {
-      return this;
-    };
-  }
+		this.$get = function () {
+			return this;
+		};
+	}
 
-  return new ViewPathProvider();
-});
+	return new ViewPathProvider();
+}
 
-// $meanStateProvider, provider to wire up $viewPathProvider to $stateProvider
-angular.module('mean.system').provider('$meanState', ['$stateProvider', '$viewPathProvider', function($stateProvider, $viewPathProvider) {
-  function MeanStateProvider() {
-    this.state = function(stateName, data) {
-      if (data.templateUrl) {
-        data.templateUrl = $viewPathProvider.path(data.templateUrl);
-      }
-      $stateProvider.state(stateName, data);
-      return this;
-    };
+function $meanState($stateProvider, $viewPathProvider) {
+	function MeanStateProvider() {
+		this.state = function (stateName, data) {
+			if (data.templateUrl) {
+				data.templateUrl = $viewPathProvider.path(data.templateUrl);
+			}
+			$stateProvider.state(stateName, data);
+			return this;
+		};
 
-    this.$get = function() {
-      return this;
-    };
-  }
+		this.$get = function () {
+			return this;
+		};
+	}
 
-  return new MeanStateProvider();
-}]);
+	return new MeanStateProvider();
+}
 
-//Setting up route
-angular.module('mean.system').config(['$meanStateProvider', '$urlRouterProvider',
-  function($meanStateProvider, $urlRouterProvider) {
-    // For unmatched routes:
-    $urlRouterProvider.otherwise('/');
+function UrlRouteProvider($meanStateProvider, $urlRouterProvider) {
 
-    // states for my app
-    $meanStateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'system/views/index.html'
-      });
-  }
-]).config(['$locationProvider',
-  function($locationProvider) {
-    $locationProvider.html5Mode({
-      enabled:true,
-      requireBase:false
-    });
-  }
-]);
+	// For unmatched routes:
+	$urlRouterProvider.otherwise('/');
+
+	// states for my app
+	$meanStateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: 'system/views/index.html'
+		});
+
+}
+
+function Html5Mode($locationProvider) {
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
+	});
+}
+
+var app = angular.module('mean.system');
+app.provider('$viewPath', $viewPath);
+app.provider('$meanState', $meanState);
+app.config(UrlRouteProvider);
+app.config(Html5Mode);

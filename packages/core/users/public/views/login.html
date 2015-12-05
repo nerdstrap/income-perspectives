@@ -1,34 +1,58 @@
-<div data-ng-controller="LoginCtrl as login">
+<div class="view auth-login-view" data-ng-controller="LoginController as loginCtrl">
+	<div class="row">
+		<div class="col-xs-8">
+			<form class="frm-u" name="loginCtrl.loginFrm" novalidate>
+				<header>Login to your account</header>
+				<fieldset>
+					<div class="form-group" bs-has>
+						<label for="email-input">E-mail</label>
 
-    <div class="alert alert-danger animated fadeIn" ng-show="login.loginError">{{login.loginError}}</div>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+							<input id="email-input" type="text" email="email" ng-model="loginCtrl.user.email" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="loginCtrl.loginFrm.email.$dirty && loginCtrl.loginFrm.email.$invalid">
+							<span ng-show="loginCtrl.loginFrm.email.$error.required">E-mail is required.</span>
+						</span>
+					</div>
 
-    <h2>Login</h2>
+					<div class="form-group" bs-has>
+						<label for="password-input">Password</label>
 
-    <form id="login_form" ng-submit="login.login()">
-        <div class="input-wrapper">
-            <input required id="email_block" type="email" name="email" placeholder="Email Address" ng-model="login.user.email">
-            <div class="error_message">Please enter a correct info #</div>
-            <span class="pic email"></span>
-        </div>
-        <div class="input-wrapper">
-            <input required id="password_block" name="password" type="{{login.input.type}}" placeholder="{{login.input.placeholder}}" ng-model="login.user.password">
-            <div class="error_message">Please enter a correct info #</div>
-                <span class="pic password {{login.input.iconClass}}" ng-click = "login.togglePasswordVisible()">
-                      <div class="hide_text_password">
-                          {{login.input.tooltipText}}
-                      </div>
-                </span>
-        </div>
-        <div class="forgot_password">
-            <a ui-sref='forgot-password'>Forgot your password?</a>
-        </div>
-        <div class="button_login">
-            <button type="submit" class="submit_button">Login</button>
-            <p>Don't have an account?</p>
-            <a ui-sref='auth.register' >Sign up</a>
-        </div>
-        <div class="woman_ninja_bottom">
-            <img src="/theme/assets/img/woman_ninja.png" alt="#">
-        </div>
-    </form>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+							<input id="password-input" type="password" name="password" ng-model="loginCtrl.user.password" class="form-control" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="loginCtrl.loginFrm.password.$dirty && loginCtrl.loginFrm.password.$invalid">
+							<span ng-show="loginCtrl.loginFrm.password.$error.required">Password is required.</span>
+						</span>
+					</div>
+				</fieldset>
+				<footer>
+					<input class="btn-u" type="submit" data-ng-click="loginCtrl.login(loginCtrl.user)" value="Login" tabindex="0"/>
+					<div ng-repeat="error in loginCtrl.errors">
+						<div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+					</div>
+					<hr>
+					<h4>Forget your Password?</h4>
+
+					<p>no worries,
+						<a class="color-green" ui-sref='auth.forgot-password'>click here</a> to reset your password.</p>
+					<hr>
+					<h4>Not a member of Income Perspectives?</h4>
+
+					<p>simply <a class="green" ui-sref='auth.register'>click here</a> to subscribe.</p>
+				</footer>
+			</form>
+		</div>
+		<div class="col-xs-4">
+			<ul class="list-unstyled">
+				<li ng-repeat="(key, val) in socialButtons" class="social_icon social_icon_{{key}}">
+					<a target="_self" ng-href="/api/auth/{{key}}" class="button">
+						<span class="text-capitalize">Login With {{key}}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>

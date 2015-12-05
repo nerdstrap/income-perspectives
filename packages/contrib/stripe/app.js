@@ -1,6 +1,6 @@
 'use strict';
 
-var Module = require('meanio').Module;
+var Module = require('ns-meanio').Module;
 var Stripe = new Module('stripe');
 
 Stripe.register(function (app, auth, database) {
@@ -15,8 +15,9 @@ Stripe.register(function (app, auth, database) {
 	Stripe.menus.add({
 		title: 'Subscriptions',
 		link: 'stripe.subscription',
-		roles: ['authenticated'],
-		menu: 'main'
+		roles: ['all'],
+		menu: 'main',
+		weight: 500
 	});
 
 	Stripe.routes(app, auth, database);

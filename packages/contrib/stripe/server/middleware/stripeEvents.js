@@ -90,20 +90,21 @@ var knownEvents = {
 
 		if (req.stripeEvent.data && req.stripeEvent.data.object && req.stripeEvent.data.object.customer) {
 			// find user where stripeEvent.data.object.customer
-			Stripe.models.User.findOne({
-				'stripe.customerId': req.stripeEvent.data.object.customer
-			}, function (err, user) {
-				if (err) return next(err);
-				if (!user) {
-					// user does not exist, no need to process
+			StripeCustomer.findOne({
+				'customerId': req.stripeEvent.data.object.customer
+			}, function (error, stripeCustomer) {
+				if (error) {
+					return next(error);
+				}
+				if (!stripeCustomer) {
+					// stripe customer does not exist, no need to process
 					return res.status(200).end();
 				} else {
-					user.stripe.last4 = '';
-					user.stripe.plan = 'free';
-					user.stripe.subscriptionId = '';
-					user.save(function (err) {
-						if (err) return next(err);
-						console.log('user: ' + user.email + ' subscription was successfully cancelled.');
+					stripeCustomer.remove(function (removeError) {
+						if (removeError) {
+							return next(removeError);
+						}
+						console.log('stripe customer: ' + stripeCustomer.email + ' was removed');
 						return res.status(200).end();
 					});
 				}

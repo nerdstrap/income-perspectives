@@ -1,49 +1,55 @@
 'use strict';
 
-/*
- * Defining the Package
- */
-var mean = require('meanio'),
-  Module = mean.Module;
+var mean = require('ns-meanio');
+var Module = mean.Module;
 
-function MeanUserKlass () {
-  Module.call(this, 'users');
-  this.auth = null;
+/*
+ * 1. Define the Package
+ */
+function Users() {
+	Module.call(this, 'users');
+	this.auth = null;
 }
-
-MeanUserKlass.prototype = Object.create(Module.prototype,{constructor:{
-  value:MeanUserKlass,
-  configurable: false,
-  enumerable: false,
-  writable: false
-}});
-
-var MeanUser = new MeanUserKlass();
+Users.prototype = Object.create(Module.prototype, {
+	constructor: {
+		value: Users,
+		configurable: false,
+		enumerable: false,
+		writable: false
+	}
+});
+var users = new Users();
 
 /*
- * All MEAN packages require registration
- * Dependency injection is used to define required modules
+ * 2. Register the Package (required Packages are added via Dependency Injection)
  */
-MeanUser.register(function(app, database, passport) {
-    // This is for backwards compatibility
-    MeanUser.aggregateAsset('js', '../lib/angular-jwt/dist/angular-jwt.min.js', {
-        absolute: false,
-        global: true
-    });
+users.register(function (app, database, passport) {
 
-    MeanUser.auth = require('./authorization');
-    require('./passport')(passport);
+	/*
+	 * X. Register the 'auth' Package
+	 */
+	users.auth = require('./authorization');
+	require('./passport')(passport);
+	mean.register('auth', users.auth);
 
-    mean.register('auth', MeanUser.auth);
+	/*
+	 * 3. Handle Express routes (the Package is passed by default)
+	 */
+	users.routes(app, users.auth, database, passport);
 
-    //We enable routing. By default the Package Object is passed to the routes
-    MeanUser.routes(app, MeanUser.auth, database, passport);
+	/*
+	 * 4. Specify client dependencies
+	 */
+	users.aggregateAsset('css', 'users.css');
+	users.aggregateAsset('js', '../lib/angular-jwt/dist/angular-jwt.min.js', {
+		absolute: false,
+		global: true
+	});
+	users.angularDependencies(['angular-jwt']);
 
-    MeanUser.angularDependencies(['angular-jwt']);
+	users.events.defaultData({
+		type: 'user'
+	});
 
-    MeanUser.events.defaultData({
-        type: 'user'
-    });
-
-    return MeanUser;
+	return users;
 });

@@ -2,10 +2,11 @@
   "name": "dc-max",
   "version": "0.0.1",
   "dependencies": {
-	  "jquery": "*",
-	  "lodash": "*",
-	  "moment": "*",
-	  "bootstrap": "*",
-	  "highcharts": "*"
+	  "jquery": "latest",
+	  "lodash": "latest",
+	  "moment": "latest",
+	  "bootstrap": "latest",
+	  "highcharts": "latest",
+	  "filesaver": "latest"
   }
 }

@@ -1,6 +1,7 @@
 'use strict';
 
-function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $window) {
+function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, StripeFactory) {
+
 	var vm = this;
 
 	vm.master = {
@@ -20,7 +21,8 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		breakEvenAnalysisActive: false,
 		breakEvenAnalysisVisible: false,
 		cumulativePayoutActive: false,
-		cumulativePayoutVisible: false
+		cumulativePayoutVisible: false,
+		pdfDownloaded: false
 	};
 
 	function updateGeneral(worksheet) {
@@ -47,7 +49,7 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 				worksheet.managementFee = worksheet.managementFee / 100;
 			}
 			AbidFactory.getBaseline(worksheet)
-				.success(function (baseline) {
+				.success(function (data) {
 					vm.status.firstOpen = false;
 					vm.status.secondOpen = false;
 					vm.status.thirdOpen = true;
@@ -59,7 +61,7 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 					vm.status.cumulativePayoutActive = false;
 					vm.status.cumulativePayoutVisible = false;
 
-					vm.baseline = angular.copy(baseline);
+					vm.baseline = angular.copy(data);
 					vm.baselineChart = ChartFactory.getBaselineChart(vm.baseline.categories, vm.baseline.seriesA);
 				})
 				.error(function (error) {
@@ -78,7 +80,7 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 				worksheet.inflationRate = worksheet.inflationRate / 100;
 			}
 			AbidFactory.getBreakEvenAnalysis(worksheet)
-				.success(function (breakEvenAnalysis) {
+				.success(function (data) {
 					vm.status.firstOpen = false;
 					vm.status.secondOpen = false;
 					vm.status.thirdOpen = true;
@@ -89,7 +91,7 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 					vm.status.cumulativePayoutActive = false;
 					vm.status.cumulativePayoutVisible = true;
 
-					vm.breakEvenAnalysis = angular.copy(breakEvenAnalysis);
+					vm.breakEvenAnalysis = angular.copy(data);
 					vm.breakEvenAnalysisChart = ChartFactory.getBreakEvenAnalysisChart(vm.breakEvenAnalysis.categories, vm.breakEvenAnalysis.seriesA, vm.breakEvenAnalysis.seriesB);
 					vm.cumulativePayoutChart = ChartFactory.getCumulativePayoutChart(vm.breakEvenAnalysis.cumulativePayoutCategories, vm.breakEvenAnalysis.cumulativePayoutSeriesA, vm.breakEvenAnalysis.cumulativePayoutSeriesB);
 				})
@@ -108,14 +110,16 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 			if (worksheet.inflationRate >= 1 || worksheet.inflationRate <= -1) {
 				worksheet.inflationRate = worksheet.inflationRate / 100;
 			}
+			vm.status.getPdfDisabled = true;
 			AbidFactory.getPdf(worksheet)
-				.success(function (pdfContents) {
-					var file = new Blob([pdfContents], {
-						type: 'application/pdf'
-					});
-					var fileURL = URL.createObjectURL(file);
+				.success(function (data) {
+					vm.status.getPdfDisabled = false;
+					var blob = new Blob([data], {type: 'application/pdf'});
+					saveAs(blob, 'abidReport.pdf');
+					//vm.pdfUrl = (window.URL || window.webkitURL).createObjectURL(blob);
 				})
 				.error(function (error) {
+					vm.status.getPdfDisabled = false;
 					console.log(error);
 					vm.status.response = 'Unable to get pdf.';
 				});
@@ -123,6 +127,12 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 	}
 
 	function init() {
+		vm.user = AuthFactory;
+		if (vm.user.authenticated) {
+			StripeFactory.getCustomer().success(function (data) {
+				vm.status.subscribed = true;
+			});
+		}
 		vm.worksheet = angular.copy(vm.master);
 		vm.baseline = angular.copy(vm.baselineMaster);
 		vm.breakEvenAnalysis = angular.copy(vm.breakEvenAnalysisMaster);
@@ -136,6 +146,7 @@ function AbidController($scope, $rootScope, AbidFactory, ChartFactory, focus, $w
 		vm.status.breakEvenAnalysisVisible = false;
 		vm.status.cumulativePayoutActive = false;
 		vm.status.cumulativePayoutVisible = false;
+		vm.status.pdfDownloaded = false;
 	}
 
 	function reset() {

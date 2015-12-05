@@ -7,8 +7,8 @@ function StripeAdminController($scope, $rootScope, StripeFactory) {
 
 	function getSettings() {
 		StripeFactory.getSettings()
-			.success(function (settings) {
-				vm.settings = angular.copy(settings);
+			.success(function (data) {
+				vm.settings = angular.copy(data);
 			})
 			.error(function (error) {
 				console.log(error);
@@ -20,7 +20,7 @@ function StripeAdminController($scope, $rootScope, StripeFactory) {
 		if (vm.setFrm.$valid) {
 			StripeFactory.updateSettings(settings)
 				.success(function (data) {
-					//vm.settings = angular.copy(settings);
+					vm.settings = angular.copy(data);
 				})
 				.error(function (error) {
 					console.log(error);

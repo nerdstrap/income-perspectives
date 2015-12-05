@@ -1,6 +1,6 @@
 'use strict';
 
-function SubscriptionController($scope, $rootScope, Global, StripeFactory, MeanUser) {
+function SubscriptionController($scope, $rootScope, Global, StripeFactory, AuthFactory) {
 
 	var stripeLoaded = false;
 

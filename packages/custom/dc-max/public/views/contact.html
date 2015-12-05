@@ -1,24 +1,32 @@
-<div class="contact-form" data-ng-controller="ContactController as contact">
-	<div class="alert alert-{{contact.response.status}} animated fadeIn" ng-show="contact.response.message">{{contact.response.message}}</div>
-	<h2>Contact</h2>
+<div class="view contact-view" data-ng-controller="ContactController as contactCtrl">
+	<form class="frm-u" name="contactCtrl.contactFrm" novalidate>
+		<header>Please enter your email address and message to contact us.</header>
+		<fieldset>
+			<div class="form-group" bs-has>
+				<label for="email-input">Email</label>
 
-	<p>Please enter your email address and message to contact us.</p>
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+					<input id="email-input" type="email" name="email" ng-model="contactCtrl.message.email" class="form-control" required tabindex="0"/>
+				</div>
+				<span class="has-error" ng-show="contactCtrl.contactFrm.email.$dirty && contactCtrl.contactFrm.email.$invalid">
+					<span ng-show="contactCtrl.contactFrm.email.$error.required">Email is required.</span>
+				</span>
+			</div>
+			<div class="form-group" bs-has>
+				<label for="feedback-input">Message</label>
+				<textarea id="feedback-input" rows="8" name="feedback" ng-model="contactCtrl.message.feedback" class="form-control" required tabindex="0"></textarea>
+				<span class="has-error" ng-show="contactCtrl.contactFrm.feedback.$dirty && contactCtrl.contactFrm.feedback.$invalid">
+					<span ng-show="contactCtrl.contactFrm.feedback.$error.required">Message is required.</span>
+				</span>
+			</div>
+		</fieldset>
+		<footer>
+			<input class="btn-u" type="submit" data-ng-click="contactCtrl.sendMessage(contact.message)" value="Send" tabindex="0"/>
 
-	<form>
-		<div class="form-group">
-			<label for="email-input">Email</label>
-			<input id="email-input" type="email" name="email" ng-model="contact.message.email" class="form-control" required tabindex="0"/>
-			<span class="has-error" ng-show="contact.message.email.$dirty && contact.message.email.$invalid">
-				<span ng-show="contact.message.email.$error.required">Email is required.</span>
-			</span>
-		</div>
-		<div class="form-group">
-			<label for="feedback-input">Message</label>
-			<textarea id="feedback-input" rows="8" name="feedback" ng-model="contact.message.feedback" class="form-control" required tabindex="0"></textarea>
-			<span class="has-error" ng-show="contact.message.feedback.$dirty && contact.message.feedback.$invalid">
-				<span ng-show="contact.message.feedback.$error.required">Email is required.</span>
-			</span>
-		</div>
-		<input class="btn btn-default" type="submit" data-ng-click="contact.send(contact.message)" value="Send" tabindex="0"/>
+			<div ng-repeat="error in contactCtrl.errors">
+				<div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+			</div>
+		</footer>
 	</form>
 </div>

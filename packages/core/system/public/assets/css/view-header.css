@@ -1,0 +1,44 @@
+.view-header {
+	overflow: hidden;
+	padding: 10px 0 6px;
+	border-bottom: solid 1px #eee;
+	background-color: #fbfbfb;
+}
+
+.view-header h1 {
+	color: #666;
+	font-size: 22px;
+	margin-top: 8px;
+}
+
+.breadcrumbs {
+	top: 10px;
+	padding-right: 0;
+	background: none;
+	position: relative;
+}
+.breadcrumbs a {
+	color: #777;
+}
+.breadcrumbs li.active,
+.breadcrumbs li a:hover {
+	color: #72c02c;
+	text-decoration: none;
+}
+
+@media (max-width: 550px) {
+	.view-header h1.pull-left,
+	.view-header ul.pull-right {
+		width: 100%;
+		text-align: center;
+	}
+
+	.view-header h1.pull-left {
+		margin-bottom: 0;
+	}
+
+	.view-header .breadcrumbs {
+		top: 0;
+		margin-bottom: 10px;
+	}
+}

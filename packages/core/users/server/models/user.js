@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	crypto = require('crypto'),
-	_ = require('lodash');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var crypto = require('crypto');
+var _ = require('lodash');
 
 /**
  * Validations
@@ -100,8 +100,9 @@ UserSchema.virtual('password').set(function (password) {
  * Pre-save hook
  */
 UserSchema.pre('save', function (next) {
-	if (this.isNew && this.provider === 'local' && this.password && !this.password.length)
+	if (this.isNew && this.provider === 'local' && this.password && !this.password.length) {
 		return next(new Error('Invalid password'));
+	}
 	next();
 });
 
@@ -161,7 +162,9 @@ UserSchema.methods = {
 	 * @api public
 	 */
 	hashPassword: function (password) {
-		if (!password || !this.salt) return '';
+		if (!password || !this.salt) {
+			return '';
+		}
 		var salt = new Buffer(this.salt, 'base64');
 		return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
 	},

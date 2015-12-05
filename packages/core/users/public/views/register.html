@@ -1,66 +1,91 @@
-<div data-ng-controller="RegisterCtrl as reg">
-    <div ng-repeat="error in reg.registerError">
-        <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
-    </div>
-    <div class="alert alert-danger animated fadeIn" ng-show="reg.usernameError">{{reg.usernameError}}</div>
-    <div class="alert alert-danger animated fadeIn" ng-show="reg.emailError">{{reg.emailError}}</div>
-    <form id="register_form" ng-submit="reg.register()">
-        <h2>Sign Up</h2>
+<div class="view auth-register-view" data-ng-controller="RegisterController as regCtrl">
 
-        <div class="input-wrapper">
-            <input required id="name" type="text" name="name" placeholder="Full Name"
-                   ng-model="reg.user.name">
+	<div class="row">
+		<div class="col-xs-8">
+			<form class="frm-u" name="regCtrl.regFrm" novalidate>
+				<header>Sign up for Income Perspectives</header>
+				<fieldset>
+					<div class="form-group" bs-has>
+						<label for="name-input">Full Name</label>
 
-            <div class="error_message">Please enter a correct info #</div>
-            <span class="pic user"></span>
-        </div>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+							<input id="name-input" type="text" name="name" ng-model="regCtrl.user.name" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="regCtrl.regFrm.name.$dirty && regCtrl.regFrm.name.$invalid">
+							<span ng-show="regCtrl.regFrm.name.$error.required">Full Name is required.</span>
+						</span>
+					</div>
 
-        <div class="input-wrapper">
-            <input required id="email_block" type="email" name="email" placeholder="Email Address"
-                   ng-model="reg.user.email">
+					<div class="form-group" bs-has>
+						<label for="email-input">E-mail</label>
 
-            <div class="error_message">Please enter a correct info #</div>
-            <span class="pic email"></span>
-        </div>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+							<input id="email-input" type="text" email="email" ng-model="regCtrl.user.email" class="form-control" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="regCtrl.regFrm.email.$dirty && regCtrl.regFrm.email.$invalid">
+							<span ng-show="regCtrl.regFrm.email.$error.required">E-mail is required.</span>
+						</span>
+					</div>
 
-        <div class="input-wrapper">
-            <input required id="username" type="text" name="username" placeholder="Username"
-                   ng-model="reg.user.username">
+					<div class="form-group" bs-has>
+						<label for="username-input">Username</label>
 
-            <div class="error_message">Please enter a correct info #</div>
-            <span class="pic username"></span>
-        </div>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+							<input id="username-input" type="text" name="username" ng-model="regCtrl.user.username" class="form-control" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="regCtrl.regFrm.username.$dirty && regCtrl.regFrm.username.$invalid">
+							<span ng-show="regCtrl.regFrm.username.$error.required">Username is required.</span>
+						</span>
+					</div>
 
-        <div class="input-wrapper">
-            <input required id="password_block" name="password" type="{{reg.input.type}}"
-                   placeholder="{{reg.input.placeholder}}" ng-model="reg.user.password">
+					<div class="form-group" bs-has>
+						<label for="password-input">Password</label>
 
-            <div class="error_message">Please enter a correct info #</div>
-        <span class="pic password {{reg.input.iconClass}}" ng-click="reg.togglePasswordVisible()">
-              <div class="hide_text_password">
-                  {{reg.input.tooltipText}}
-              </div>
-        </span>
-        </div>
-        <div class="input-wrapper">
-            <input required id="confirm_password" name="confirm_password" type="{{reg.input.type}}"
-                   placeholder="{{reg.input.placeholderConfirmPass}}" ng-model="reg.user.confirmPassword">
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+							<input id="password-input" type="password" name="password" ng-model="regCtrl.user.password" class="form-control" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="regCtrl.regFrm.password.$dirty && regCtrl.regFrm.password.$invalid">
+							<span ng-show="regCtrl.regFrm.password.$error.required">Password is required.</span>
+						</span>
+					</div>
 
-            <div class="error_message">Please enter a correct info #</div>
-        <span class="pic password {{reg.input.iconClassConfirmPass}}" ng-click="reg.togglePasswordConfirmVisible()">
-              <div class="hide_text_password">
-                  {{reg.input.tooltipTextConfirmPass}}
-              </div>
-        </span>
-        </div>
+					<div class="form-group" bs-has>
+						<label for="confirm-password-input">Confirm Password</label>
 
-        <div class="button_register">
-            <button type="submit" class="submit_button">Sign up</button>
-            <p>Already have an account?</p>
-            <a ui-sref='auth.login'>Log in</a>
-        </div>
-        <div class="woman_ninja_bottom">
-            <img src="/theme/assets/img/woman_ninja.png" alt="#">
-        </div>
-    </form>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+							<input id="confirm-password-input" type="password" name="confirmPassword" ng-model="regCtrl.user.confirmPassword" class="form-control" required tabindex="0"/>
+						</div>
+						<span class="has-error" ng-show="regCtrl.regFrm.confirmPassword.$dirty && regCtrl.regFrm.confirmPassword.$invalid">
+							<span ng-show="regCtrl.regFrm.confirmPassword.$error.required">Confirm Password is required.</span>
+						</span>
+					</div>
+				</fieldset>
+				<footer>
+					<input class="btn-u" type="submit" data-ng-click="regCtrl.register(regCtrl.user)" value="Register" tabindex="0"/>
+
+					<div ng-repeat="error in regCtrl.errors">
+						<div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+					</div>
+					<hr>
+					<h4>Already have an account?</h4>
+
+					<p><a class="green" ui-sref='auth.login'>Click here</a> to login.</p>
+				</footer>
+			</form>
+		</div>
+		<div class="col-xs-4">
+			<ul class="list-unstyled">
+				<li ng-repeat="(key, val) in regCtrl.socialButtons" class="social-icon social-icon-{{key}}">
+					<a target="_self" ng-href="/api/auth/{{key}}" class="button">
+						<span>Login with {{key}}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>

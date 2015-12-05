@@ -1,24 +1,25 @@
 'use strict';
 
-var mean = require('meanio');
+var mean = require('ns-meanio');
 
-module.exports = function(System, app, auth, database) {
+module.exports = function (System, app, auth, database) {
 
-  // Home route
-  var index = require('../controllers/index')(System);
-  app.route('/')
-    .get(index.render);
-  app.route('/api/aggregatedassets')
-    .get(index.aggregatedList);
+	var index = require('../controllers/index')(System);
 
-  app.get('/*',function(req,res,next){
-        res.header('workerID' , JSON.stringify(mean.options.workerid) );
-        next(); // http://expressjs.com/guide.html#passing-route control
-  });
+	app.route('/')
+		.get(index.render);
 
-  app.get('/api/get-public-config', function(req, res){
-    var config = mean.loadConfig();
+	app.route('/api/aggregatedassets')
+		.get(index.aggregatedList);
 
-    return res.send(config.public);
-  });
+	app.get('/*', function (req, res, next) {
+		res.header('workerID', JSON.stringify(mean.options.workerid));
+		next();
+	});
+
+	app.get('/api/get-public-config', function (req, res) {
+		var config = mean.loadConfig();
+		return res.send(config.public);
+	});
+
 };

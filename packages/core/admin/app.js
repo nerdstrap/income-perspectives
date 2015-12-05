@@ -1,70 +1,46 @@
 'use strict';
 
+var Module = require('ns-meanio').Module;
+
 /*
- * Defining the Package
+ * 1. Define the Package
  */
-var Module = require('meanio').Module;
 var Admin = new Module('admin');
 
 /*
- * All MEAN packages require registration
- * Dependency injection is used to define required modules
+ * 2. Register the Package (required Packages are added via Dependency Injection)
  */
+Admin.register(function (app, auth, database) {
 
-Admin.register(function(app, auth, database) {
+	/*
+	 * 3. Handle Express routes (the Package is passed by default)
+	 */
+	Admin.routes(app, auth, database);
 
-    var icons = 'admin/assets/img/icons/';
+	/*
+	 * 4. Specify client dependencies
+	 */
+	Admin.aggregateAsset('css', 'admin.css');
+	Admin.aggregateAsset('js', '../lib/ng-clip/src/ngClip.js', {
+		absolute: false,
+		global: true
+	});
+	Admin.aggregateAsset('js', '../lib/zeroclipboard/dist/ZeroClipboard.js', {
+		absolute: false,
+		global: true
+	});
+	Admin.angularDependencies(['ngClipboard']);
 
-    Admin.menus.add({
-        title: 'admin settings',
-        link: 'admin settings',
-        roles: ['admin'],
-        menu: 'main'
-    });
+	/*
+	 * 5. Inject Menu
+	 */
+	Admin.menus.add({
+		title: 'Site Admin',
+		link: 'admin',
+		roles: ['admin'],
+		menu: 'main',
+		weight: 1000
+	});
 
-    Admin.menus.add({
-        roles: ['admin'],
-        title: 'MODULES',
-        link: 'modules',
-        icon: icons + 'modules.png',
-        menu: 'admin'
-    });
-    Admin.menus.add({
-        roles: ['admin'],
-        title: 'THEMES',
-        link: 'themes',
-        icon: icons + 'themes.png',
-        menu: 'admin'
-    });
-    Admin.menus.add({
-        roles: ['admin'],
-        title: 'SETTINGS',
-        link: 'settings',
-        icon: icons + 'settings.png',
-        menu: 'admin'
-    });
-    Admin.menus.add({
-        roles: ['admin'],
-        title: 'USERS',
-        link: 'users',
-        icon: icons + 'users.png',
-        menu: 'admin'
-    });
-
-    Admin.aggregateAsset('css', 'admin.css');
-    Admin.aggregateAsset('js', '../lib/ng-clip/src/ngClip.js', {
-        absolute: false,
-        global: true
-    });
-
-    Admin.aggregateAsset('js', '../lib/zeroclipboard/dist/ZeroClipboard.js', {
-        absolute: false,
-        global: true
-    });
-
-    Admin.angularDependencies(['ngClipboard']);
-
-    // We enable routing. By default the Package Object is passed to the routes
-    Admin.routes(app, auth, database);
-    return Admin;
+	return Admin;
 });

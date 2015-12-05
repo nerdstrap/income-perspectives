@@ -17,8 +17,9 @@ function highchart() {
 
 			//Update when charts data changes
 			$scope.$watch('chartData', function (value) {
-				if (!value)
+				if (!value) {
 					return;
+				}
 
 				// Initiate the chartData.chart if it doesn't exist yet
 				$scope.chartData.chart = $scope.chartData.chart || {};
