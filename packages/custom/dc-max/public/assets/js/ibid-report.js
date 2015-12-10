@@ -2,16 +2,17 @@ function currency(val) {
 	return '$' + val.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
 }
 
-var AbidReport = function () {
+var IbidReport = function () {
 	return {
 
-		renderWorksheet: function (currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany) {
+		renderWorksheet: function (currentAge, retirementAge, numberOfPeriods, annualDeposit, growthRate, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany) {
 			$('#current-age-label').text(currentAge);
 			$('#retirement-age-label').text(retirementAge);
 			$('#number-of-periods-label').text(numberOfPeriods);
 			var payoffAge = retirementAge + numberOfPeriods;
 			$('#payoff-age-label').text(payoffAge);
-			$('#initial-deposit-label').text(currency(initialDeposit));
+			$('#annual-deposit-label').text(currency(annualDeposit));
+			$('#growth-rate-label').text(growthRate.toFixed(2));
 			$('#rate-of-return-label').text(rateOfReturn.toFixed(2));
 			$('#management-fee-label').text(managementFee.toFixed(2));
 			var netRateOfReturn = rateOfReturn - managementFee;
@@ -49,7 +50,7 @@ var AbidReport = function () {
 					data: seriesA
 				}, {
 					animation: false,
-					name: 'Annuity',
+					name: 'Index UL',
 					data: seriesB
 				}]
 			});
@@ -82,7 +83,7 @@ var AbidReport = function () {
 					stack: 'investmentIncome'
 				}, {
 					animation: false,
-					name: 'Annuity',
+					name: 'Index UL',
 					data: seriesB,
 					stack: 'insuranceProductIncome'
 				}]
@@ -93,8 +94,8 @@ var AbidReport = function () {
 
 		},
 
-		init: function (currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts) {
-			this.renderWorksheet(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany);
+		init: function (currentAge, retirementAge, numberOfPeriods, annualDeposit, growthRate, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts) {
+			this.renderWorksheet(currentAge, retirementAge, numberOfPeriods, annualDeposit, growthRate, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany);
 			this.renderBreakEvenAnalysisChart(categories, seriesA, seriesB);
 			this.renderCumulativePayoutChart(cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB);
 			this.renderPeriodicPayouts(gogoPayouts, slowgoPayouts, nogoPayouts);

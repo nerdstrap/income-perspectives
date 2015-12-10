@@ -1,6 +1,6 @@
 'use strict';
 
-function DcMaxController($scope, $state, Global) {
+function DcMaxController($scope, $rootScope, $state, Global, $stateParams) {
 	$scope.global = Global;
 	$scope.$state = $state;
 	$scope.package = {

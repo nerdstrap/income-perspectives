@@ -1,6 +1,6 @@
 'use strict';
 
-function ViewHeaderController($scope, $rootScope, $state) {
+function ViewHeaderController($scope, $rootScope, $state, $stateParams) {
 	var vm = this;
 
 	vm.master = {};
@@ -10,10 +10,13 @@ function ViewHeaderController($scope, $rootScope, $state) {
 	};
 
 	function setup() {
+		var title = $stateParams.title || 'View';
+		var parentTitle = $stateParams.parentTitle || 'Home';
+		var parentSref = $stateParams.parentSref || 'home';
 		vm.view = {
-			title: 'Page Title',
-			rootUrl: '/',
-			rootTitle: 'Home'
+			title: title,
+			parentSref: parentSref,
+			parentTitle: parentTitle
 		};
 	}
 

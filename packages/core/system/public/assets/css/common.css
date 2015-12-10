@@ -90,12 +90,17 @@ h6 i {
 
 /* forms */
 
-.frm-u {
+.frm-u,
+.frm-social {
 	box-shadow: none;
 	border: solid 1px #eee;
 	margin: 0;
 	outline: none;
 	color: #666;
+}
+
+.frm-social {
+	margin-bottom: 15px;
 }
 
 .frm-u header {
@@ -434,6 +439,94 @@ fieldset[disabled] a.btn-u {
 
 /* buttons */
 
+/* text colors */
+
+.color-sea {
+	color: #1abc9c;
+}
+
+.color-red {
+	color: #e74c3c;
+}
+
+.color-aqua {
+	color: #27d7e7;
+}
+
+.color-blue {
+	color: #3498db;
+}
+
+.color-grey {
+	color: #95a5a6;
+}
+
+.color-dark {
+	color: #555555;
+}
+
+.color-darker {
+	color: #333333;
+}
+
+.color-green {
+	color: #72c02c;
+}
+
+.color-brown {
+	color: #9c8061;
+}
+
+.color-light {
+	color: #ffffff;
+}
+
+.color-orange {
+	color: #e67e22;
+}
+
+.color-yellow {
+	color: #f1c40f;
+}
+
+.color-green1 {
+	color: #2ecc71;
+}
+
+.color-purple {
+	color: #9b6bcc;
+}
+
+.color-inherit {
+	color: inherit;
+}
+
+.color-dark-blue {
+	color: #4765a0;
+}
+
+.color-light-grey {
+	color: #585f69;
+}
+
+.color-light-green {
+	color: #79d5b3;
+}
+
+/* text colors */
+
+.v-align-container {
+	position: relative;
+	height: 14rem;
+}
+
+.v-align-middle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 .view {
 	padding: 40px 0;
 }
@@ -441,3 +534,4 @@ fieldset[disabled] a.btn-u {
 .has-error {
 	color: red;
 }
+

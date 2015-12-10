@@ -1,6 +1,6 @@
 'use strict';
 
-function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, StripeFactory) {
+function IbidController($scope, focus, IbidFactory, ChartFactory, AuthFactory, StripeFactory) {
 
 	var vm = this;
 
@@ -27,7 +27,7 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 	};
 
 	function updateGeneral(worksheet) {
-		if (vm.abidFrm.currentAge.$valid && vm.abidFrm.retirementAge.$valid && vm.abidFrm.numberOfPeriods.$valid) {
+		if (vm.ibidFrm.currentAge.$valid && vm.ibidFrm.retirementAge.$valid && vm.ibidFrm.numberOfPeriods.$valid) {
 			vm.status.firstOpen = false;
 			vm.status.secondOpen = true;
 			focus('secondOpened');
@@ -42,14 +42,17 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 	}
 
 	function getBaseline(worksheet) {
-		if (vm.abidFrm.currentAge.$valid && vm.abidFrm.retirementAge.$valid && vm.abidFrm.numberOfPeriods.$valid && vm.abidFrm.initialDeposit.$valid && vm.abidFrm.rateOfReturn.$valid && vm.abidFrm.managementFee.$valid) {
+		if (vm.ibidFrm.currentAge.$valid && vm.ibidFrm.retirementAge.$valid && vm.ibidFrm.numberOfPeriods.$valid && vm.ibidFrm.annualDeposit.$valid && vm.ibidFrm.growthRate.$valid && vm.ibidFrm.rateOfReturn.$valid && vm.ibidFrm.managementFee.$valid) {
+			if (worksheet.growthRate >= 1 || worksheet.growthRate <= -1) {
+				worksheet.growthRate = worksheet.growthRate / 100;
+			}
 			if (worksheet.rateOfReturn >= 1 || worksheet.rateOfReturn <= -1) {
 				worksheet.rateOfReturn = worksheet.rateOfReturn / 100;
 			}
 			if (worksheet.managementFee >= 1 || worksheet.managementFee <= -1) {
 				worksheet.managementFee = worksheet.managementFee / 100;
 			}
-			AbidFactory.getBaseline(worksheet)
+			IbidFactory.getBaseline(worksheet)
 				.success(function (data) {
 					vm.status.firstOpen = false;
 					vm.status.secondOpen = false;
@@ -73,14 +76,17 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 	}
 
 	function getBreakEvenAnalysis(worksheet) {
-		if (vm.abidFrm.$valid) {
+		if (vm.ibidFrm.$valid) {
+			if (worksheet.growthRate >= 1 || worksheet.growthRate <= -1) {
+				worksheet.growthRate = worksheet.growthRate / 100;
+			}
 			if (worksheet.initialWithdrawal >= 1 || worksheet.initialWithdrawal <= -1) {
 				worksheet.initialWithdrawal = worksheet.initialWithdrawal / 100;
 			}
 			if (worksheet.inflationRate >= 1 || worksheet.inflationRate <= -1) {
 				worksheet.inflationRate = worksheet.inflationRate / 100;
 			}
-			AbidFactory.getBreakEvenAnalysis(worksheet)
+			IbidFactory.getBreakEvenAnalysis(worksheet)
 				.success(function (data) {
 					vm.status.firstOpen = false;
 					vm.status.secondOpen = false;
@@ -104,7 +110,10 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 	}
 
 	function getPdf(worksheet) {
-		if (vm.abidFrm.$valid) {
+		if (vm.ibidFrm.$valid) {
+			if (worksheet.growthRate >= 1 || worksheet.growthRate <= -1) {
+				worksheet.growthRate = worksheet.growthRate / 100;
+			}
 			if (worksheet.initialWithdrawal >= 1 || worksheet.initialWithdrawal <= -1) {
 				worksheet.initialWithdrawal = worksheet.initialWithdrawal / 100;
 			}
@@ -112,11 +121,11 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 				worksheet.inflationRate = worksheet.inflationRate / 100;
 			}
 			vm.status.getPdfDisabled = true;
-			AbidFactory.getPdf(worksheet)
+			IbidFactory.getPdf(worksheet)
 				.success(function (data) {
 					vm.status.getPdfDisabled = false;
 					var blob = new Blob([data], {type: 'application/pdf'});
-					saveAs(blob, 'abidReport.pdf');
+					saveAs(blob, 'ibidReport.pdf');
 					//vm.pdfUrl = (window.URL || window.webkitURL).createObjectURL(blob);
 				})
 				.error(function (error) {
@@ -153,8 +162,8 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 
 	function reset() {
 		vm.init();
-		vm.abidFrm.$setUntouched();
-		vm.abidFrm.$setPristine();
+		vm.ibidFrm.$setUntouched();
+		vm.ibidFrm.$setPristine();
 	}
 
 	vm.updateGeneral = updateGeneral;
@@ -168,4 +177,4 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 }
 
 var app = angular.module('mean.dc-max');
-app.controller('AbidController', AbidController);
+app.controller('IbidController', IbidController);

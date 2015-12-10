@@ -1,6 +1,6 @@
 'use strict';
 
-function ContactController($scope, $rootScope, focus, AuthFactory) {
+function ContactController($scope, $rootScope, $stateParams, focus, AuthFactory) {
 	var vm = this;
 
 	vm.master = {};
@@ -19,6 +19,7 @@ function ContactController($scope, $rootScope, focus, AuthFactory) {
 		vm.message = angular.copy(vm.master);
 		vm.errors = [];
 		focus('firstOpened');
+		var title = $stateParams.title;
 	}
 
 	function reset() {

@@ -17,6 +17,9 @@ function UsersRoutes($meanStateProvider, $httpProvider, jwtInterceptorProvider) 
 		})
 		.state('auth.login', {
 			url: '/login',
+			params: {
+				title: 'Login'
+			},
 			templateUrl: 'users/views/login.html',
 			resolve: {
 				isAuthenticated: function (AuthFactory) {
@@ -26,6 +29,9 @@ function UsersRoutes($meanStateProvider, $httpProvider, jwtInterceptorProvider) 
 		})
 		.state('auth.register', {
 			url: '/register',
+			params: {
+				title: 'Register',
+			},
 			templateUrl: 'users/views/register.html',
 			resolve: {
 				isAuthenticated: function (AuthFactory) {
@@ -35,6 +41,9 @@ function UsersRoutes($meanStateProvider, $httpProvider, jwtInterceptorProvider) 
 		})
 		.state('auth.forgot-password', {
 			url: '/forgot-password',
+			params: {
+				title: 'Forgot Password',
+			},
 			templateUrl: 'users/views/forgot-password.html',
 			resolve: {
 				isAuthenticated: function (AuthFactory) {
@@ -44,6 +53,9 @@ function UsersRoutes($meanStateProvider, $httpProvider, jwtInterceptorProvider) 
 		})
 		.state('auth.reset-password', {
 			url: '/reset-password/:tokenId',
+			params: {
+				title: 'Reset Password',
+			},
 			templateUrl: 'users/views/reset-password.html',
 			resolve: {
 				isAuthenticated: function (AuthFactory) {

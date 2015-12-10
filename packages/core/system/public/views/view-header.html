@@ -1,8 +1,8 @@
-<div>
+<div ng-controller="ViewHeaderController as vhdrctr">
 	<div class="pull-left">
-		<h2>{{idxctr.view.title}}</h2>
+		<h2>{{vhdrctr.view.title}}</h2>
 	</div>
 	<div class="breadcrumbs pull-right">
-		<a ui-sref="{{idxctr.view.rootUrl}}">{{idxctr.view.rootTitle}}</a> / <span>{{idxctr.view.title}}</span>
+		<a ui-sref="{{vhdrctr.view.parentSref}}">{{vhdrctr.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{vhdrctr.view.title}}</span>
 	</div>
 </div>

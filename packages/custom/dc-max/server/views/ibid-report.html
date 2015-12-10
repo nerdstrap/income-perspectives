@@ -5,7 +5,7 @@
 	<!-- header -->
 	<div class="header">
 		<div class="row">
-			<div class="col-sm-6"><h3>dcMax - Index Annuity Comparison</h3></div>
+			<div class="col-sm-6"><h3>dcMax - Index UL Comparison</h3></div>
 			<div class="col-sm-6"><h3 id="timestamp-label" class="pull-right"></h3></div>
 		</div>
 	</div>
@@ -18,19 +18,19 @@
 			<div class="col-sm-2"><span id="client-name-label" class="font-bold"></span></div>
 			<div class="col-sm-2"><span class="pull-right">Current Age:</span></div>
 			<div class="col-sm-2"><span id="current-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Initial Deposit:</span></div>
-			<div class="col-sm-2"><span id="initial-deposit-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Annual Contribution:</span></div>
+			<div class="col-sm-2"><span id="annual-deposit-label" class="font-bold"></span></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-2"><span class="pull-right">Insurance Company:</span></div>
 			<div class="col-sm-2"><span id="insurance-company-label" class="font-bold"></span></div>
 			<div class="col-sm-2"><span class="pull-right">Retirement Age:</span></div>
 			<div class="col-sm-2"><span id="retirement-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Initial Withdrawal:</span></div>
-			<div class="col-sm-2"><span id="initial-withdrawal-label" class="font-bold"></span></div>
+			<div class="col-sm-2"><span class="pull-right">Increase:</span></div>
+			<div class="col-sm-2"><span id="growth-rate-label" class="font-bold"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Annuity Income:</span></div>
+			<div class="col-sm-2"><span class="pull-right">Index UL Income:</span></div>
 			<div class="col-sm-2"><span id="insurance-product-income-label" class="font-bold"></span></div>
 			<div class="col-sm-2"><span class="pull-right"># Retirement Years:</span></div>
 			<div class="col-sm-2"><span id="number-of-periods-label" class="font-bold"></span></div>
@@ -38,12 +38,12 @@
 			<div class="col-sm-2"><span id="net-rate-of-return-label" class="font-bold"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
-			<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
+			<div class="col-sm-2">&nbsp;</div>
+			<div class="col-sm-2">&nbsp;</div>
 			<div class="col-sm-2"><span class="pull-right">Payoff Age:</span></div>
 			<div class="col-sm-2"><span id="payoff-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2">&nbsp;</div>
-			<div class="col-sm-2">&nbsp;</div>
+			<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
+			<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
 		</div>
 	</div>
 	<!-- summary -->
@@ -59,7 +59,7 @@
 			<div class="col-sm-4">Income from 4% Rule</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4"><h3 id="cumulative-insurance-product-income-0-label" class="font-bold"></h3></div>
+			<div class="col-sm-4"><h3 id="cumulative-annuity-income-0-label" class="font-bold"></h3></div>
 			<div class="col-sm-4"><h3 class="font-bold">VS.</h3></div>
 			<div class="col-sm-4"><h3 id="cumulative-investment-income-0-label" class="font-bold"></h3></div>
 		</div>
@@ -110,13 +110,14 @@
 
 {% block _scripts %}
 {% parent %}
-<script type="text/javascript" src="/dc-max/assets/js/abid-report.js"></script>
+<script type="text/javascript" src="/dc-max/assets/js/ibid-report.js"></script>
 <script type="application/javascript">
 	$(document).ready(function () {
 		var currentAge = {{worksheet.currentAge|safe|json}};
 		var retirementAge = {{worksheet.retirementAge|safe|json}};
 		var numberOfPeriods = {{worksheet.numberOfPeriods|safe|json}};
-		var initialDeposit = {{worksheet.initialDeposit|safe|json}};
+		var annualDeposit = {{worksheet.annualDeposit|safe|json}};
+		var growthRate = {{worksheet.growthRate|safe|json}};
 		var rateOfReturn = {{worksheet.rateOfReturn|safe|json}};
 		var managementFee = {{worksheet.managementFee|safe|json}};
 		var insuranceProductIncome = {{worksheet.insuranceProductIncome|safe|json}};
@@ -136,7 +137,7 @@
 		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
 		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
 
-		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
+		IbidReport.init(currentAge, retirementAge, numberOfPeriods, annualDeposit, growthRate, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
 	});
 </script>
 {% endblock %}

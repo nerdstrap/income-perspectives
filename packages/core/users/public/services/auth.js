@@ -108,7 +108,11 @@ function AuthFactory($rootScope, $http, $location, $stateParams, $cookies, $q, $
 					$location.url('/');
 				},
 				function (error) {
-					throw 'Not Authorized';
+					if (error && error.data && error.data.length) {
+						throw new Error(error.data[0].msg);
+					} else {
+						throw new Error('register error');
+					}
 				}
 			);
 	};

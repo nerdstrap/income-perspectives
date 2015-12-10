@@ -104,13 +104,13 @@
 						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBreakEvenAnalysis(abidCtrl.worksheet)" value="Compare" tabindex="0"/>
 
 						<hr>
-						<p ng-show="abidCtrl.notAuthenticated">Subscribe to Modify Options</p>
+						<p ng-show="abidCtrl.status.advancedOptionsDisabled">Subscribe to Modify Options</p>
 
 						<div class="form-group" bs-has>
 							<label for="initial-withdrawal-input">Initial Withdrawal</label>
 
 							<div class="input-group">
-								<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="abidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="!abidCtrl.subscribed" tabindex="0"/>
+								<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="abidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 								<span class="input-group-addon">%</span>
 							</div>
 							<span class="has-error" ng-show="abidCtrl.abidFrm.initialWithdrawal.$dirty && abidCtrl.abidFrm.initialWithdrawal.$invalid">
@@ -122,7 +122,7 @@
 							<label for="inflation-rate-input">Annual Inflation Rate</label>
 
 							<div class="input-group">
-								<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="abidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="!abidCtrl.subscribed" tabindex="0"/>
+								<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="abidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 								<span class="input-group-addon">%</span>
 							</div>
 							<span class="has-error" ng-show="abidCtrl.abidFrm.inflationRate.$dirty && abidCtrl.abidFrm.inflationRate.$invalid">
@@ -132,14 +132,14 @@
 
 						<div class="form-group">
 							<label for="client-name-input">Client Name</label>
-							<input id="client-name-input" type="text" name="clientName" ng-model="abidCtrl.worksheet.clientName" class="form-control" ng-disabled="!abidCtrl.subscribed" tabindex="0"/>
+							<input id="client-name-input" type="text" name="clientName" ng-model="abidCtrl.worksheet.clientName" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 						</div>
 
 						<div class="form-group">
 							<label for="insurance-company-input">Insurance Company</label>
-							<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="abidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="!abidCtrl.subscribed" tabindex="0"/>
+							<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="abidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 						</div>
-						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getPdf(abidCtrl.worksheet)" value="Generate Pdf" ng-disabled="!abidCtrl.subscribed" tabindex="0"/>
+						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getPdf(abidCtrl.worksheet)" value="Generate Pdf" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 					</uib-accordion-group>
 				</uib-accordion>
 			</form>

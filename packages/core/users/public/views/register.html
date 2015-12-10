@@ -22,7 +22,7 @@
 
 						<div class="input-group">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-							<input id="email-input" type="text" email="email" ng-model="regCtrl.user.email" class="form-control" required tabindex="0"/>
+							<input id="email-input" type="text" name="email" ng-model="regCtrl.user.email" class="form-control" required tabindex="0"/>
 						</div>
 						<span class="has-error" ng-show="regCtrl.regFrm.email.$dirty && regCtrl.regFrm.email.$invalid">
 							<span ng-show="regCtrl.regFrm.email.$error.required">E-mail is required.</span>
@@ -69,7 +69,7 @@
 					<input class="btn-u" type="submit" data-ng-click="regCtrl.register(regCtrl.user)" value="Register" tabindex="0"/>
 
 					<div ng-repeat="error in regCtrl.errors">
-						<div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+						<div class="alert alert-danger animated fadeIn"><span>{{error.message}}</span></div>
 					</div>
 					<hr>
 					<h4>Already have an account?</h4>
@@ -78,14 +78,15 @@
 				</footer>
 			</form>
 		</div>
-		<div class="col-xs-4">
-			<ul class="list-unstyled">
-				<li ng-repeat="(key, val) in regCtrl.socialButtons" class="social-icon social-icon-{{key}}">
-					<a target="_self" ng-href="/api/auth/{{key}}" class="button">
-						<span>Login with {{key}}</span>
-					</a>
-				</li>
-			</ul>
+		<div class="col-xs-1">
+			<div class="v-align-container">
+				<div class="v-align-middle"><p>-OR-</p></div>
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<div ng-repeat="(key, val) in regCtrl.socialButtons" class="frm-social frm-social-{{key}}">
+				<a class="color-green" target="_self" ng-href="/api/auth/{{key}}">Login with {{key}}</a>
+			</div>
 		</div>
 	</div>
 </div>

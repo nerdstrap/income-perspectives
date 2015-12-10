@@ -9,7 +9,7 @@
 
 						<div class="input-group">
 							<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-							<input id="email-input" type="text" email="email" ng-model="loginCtrl.user.email" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+							<input id="email-input" type="text" name="email" ng-model="loginCtrl.user.email" class="form-control" focus-on="firstOpened" required tabindex="0"/>
 						</div>
 						<span class="has-error" ng-show="loginCtrl.loginFrm.email.$dirty && loginCtrl.loginFrm.email.$invalid">
 							<span ng-show="loginCtrl.loginFrm.email.$error.required">E-mail is required.</span>
@@ -31,7 +31,7 @@
 				<footer>
 					<input class="btn-u" type="submit" data-ng-click="loginCtrl.login(loginCtrl.user)" value="Login" tabindex="0"/>
 					<div ng-repeat="error in loginCtrl.errors">
-						<div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+						<div class="alert alert-danger animated fadeIn">{{error.message}}</div>
 					</div>
 					<hr>
 					<h4>Forget your Password?</h4>

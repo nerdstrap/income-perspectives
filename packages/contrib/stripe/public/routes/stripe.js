@@ -14,6 +14,9 @@ function StripeRoutes($stateProvider) {
 		})
 		.state('stripe.subscription', {
 			url: '/subscription',
+			params: {
+				title: 'Subscriptions',
+			},
 			templateUrl: 'stripe/views/subscription.html'
 		});
 }

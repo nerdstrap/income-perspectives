@@ -1,6 +1,6 @@
 'use strict';
 
-function UsersController($scope, $rootScope, Global, Circles, UsersFactory) {
+function UsersController($scope, $rootScope, Global, Circles, UsersFactory, $uibModal) {
 	$scope.global = Global;
 
 	var vm = this;
@@ -66,11 +66,24 @@ function UsersController($scope, $rootScope, Global, Circles, UsersFactory) {
 	}
 
 	function showAddUser() {
-		vm.newUser = angular.copy(vm.master);
-		vm.status.addUserVisible = true;
+		var modalInstance = $uibModal.open({
+			templateUrl: 'addUserModalContent.html',
+			controller: 'AddUserModalCtrl',
+			resolve: {
+				newUser: function () {
+					return vm.newUser;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			//$scope.selected = selectedItem;
+		}, function () {
+			//$log.info('Modal dismissed at: ' + new Date());
+		});
 	}
 
-	function cancelAddUser(){
+	function cancelAddUser() {
 		vm.newUser = angular.copy(vm.master);
 		vm.status.addUserVisible = false;
 	}
@@ -115,5 +128,19 @@ function UsersController($scope, $rootScope, Global, Circles, UsersFactory) {
 	vm.getUsers();
 }
 
+function AddUserModalCtrl($scope, $uibModalInstance, newUser) {
+
+	$scope.newUser = newUser;
+
+	$scope.ok = function () {
+		$uibModalInstance.close($scope.newUser);
+	};
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+}
+
 var app = angular.module('mean.admin');
 app.controller('UsersController', UsersController);
+app.controller('AddUserModalCtrl', AddUserModalCtrl);

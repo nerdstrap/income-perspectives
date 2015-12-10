@@ -6,12 +6,20 @@ module.exports = function (DcMax, app, auth, database) {
 
 	var controller = require('../controllers/dcMax')(DcMax);
 	app.route('/api/dc-max/abid/baseline')
-		.get(controller.getBaseline);
+		.get(controller.getAbidBaseline);
 	app.route('/api/dc-max/abid/break-even-analysis')
-		.get(controller.getBreakEvenAnalysis);
+		.get(controller.getAbidBreakEvenAnalysis);
 	app.route('/api/dc-max/abid/report', auth.requiresLogin)
-		.get(controller.getReport);
+		.get(controller.getAbidReport);
 	app.route('/api/dc-max/abid/pdf', auth.requiresLogin)
-		.get(controller.getPdf);
+		.get(controller.getAbidPdf);
+	app.route('/api/dc-max/ibid/baseline')
+		.get(controller.getIbidBaseline);
+	app.route('/api/dc-max/ibid/break-even-analysis')
+		.get(controller.getIbidBreakEvenAnalysis);
+	app.route('/api/dc-max/ibid/report', auth.requiresLogin)
+		.get(controller.getIbidReport);
+	app.route('/api/dc-max/ibid/pdf', auth.requiresLogin)
+		.get(controller.getIbidPdf);
 
 };

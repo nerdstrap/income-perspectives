@@ -3,6 +3,7 @@
 var mean = require('ns-meanio');
 var querystring = require('querystring');
 var abid = require('../libs/abid.js');
+var ibid = require('../libs/ibid.js');
 var _outputDirectory = './tmp/';
 
 var session;
@@ -76,19 +77,19 @@ function renderPdf(session, options, callback) {
 module.exports = function (DcMax) {
 	return {
 
-		getBaseline: function (req, res) {
+		getAbidBaseline: function (req, res) {
 			var worksheet = abid.mapWorksheet(req.query);
 			var baseline = abid.getBaseline(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.initialDeposit, worksheet.rateOfReturn, worksheet.managementFee, worksheet.initialWithdrawal, worksheet.inflationRate);
 			res.json(baseline);
 		},
 
-		getBreakEvenAnalysis: function (req, res) {
+		getAbidBreakEvenAnalysis: function (req, res) {
 			var worksheet = abid.mapWorksheet(req.query);
 			var breakEvenAnalysis = abid.getBreakEvenAnalysis(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.initialDeposit, worksheet.rateOfReturn, worksheet.managementFee, worksheet.insuranceProductIncome, worksheet.initialWithdrawal, worksheet.inflationRate);
 			res.json(breakEvenAnalysis);
 		},
 
-		getReport: function (req, res) {
+		getAbidReport: function (req, res) {
 			var worksheet = abid.mapWorksheet(req.query);
 			var breakEvenAnalysis = abid.getBreakEvenAnalysis(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.initialDeposit, worksheet.rateOfReturn, worksheet.managementFee, worksheet.insuranceProductIncome, worksheet.initialWithdrawal, worksheet.inflationRate);
 			res.locals.package = 'dc-max';
@@ -102,10 +103,71 @@ module.exports = function (DcMax) {
 				});
 		},
 
-		getPdf: function (req, res) {
+		getAbidPdf: function (req, res) {
 			var rawQuerystring = querystring.stringify(req.query);
 			var reportFileName = 'abid-report.pdf';
 			var reportUrl = req.protocol + '://' + req.get('host') + '/api/dc-max/abid/report?' + rawQuerystring;
+			var reportOptions = {
+				switches: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
+				viewportSize: {
+					width: 1575,
+					height: 1650
+				},
+				url: reportUrl,
+				fileName: reportFileName,
+				outputDirectory: _outputDirectory,
+				timeout: 1000
+			};
+
+			createPhantomSession(reportOptions.switches, function (error, _session) {
+				if (error) {
+					res.send(500, error);
+				}
+
+				renderPdf(_session, reportOptions, function (error, filename) {
+					if (error) {
+						res.send(500, error);
+					}
+
+					if (!filename) {
+						res.send(404);
+					}
+
+					res.download(filename);
+				});
+			});
+		},
+
+		getIbidBaseline: function (req, res) {
+			var worksheet = ibid.mapWorksheet(req.query);
+			var baseline = ibid.getBaseline(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.annualDeposit, worksheet.growthRate, worksheet.rateOfReturn, worksheet.managementFee, worksheet.initialWithdrawal, worksheet.inflationRate);
+			res.json(baseline);
+		},
+
+		getIbidBreakEvenAnalysis: function (req, res) {
+			var worksheet = ibid.mapWorksheet(req.query);
+			var breakEvenAnalysis = ibid.getBreakEvenAnalysis(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.annualDeposit, worksheet.growthRate, worksheet.rateOfReturn, worksheet.managementFee, worksheet.insuranceProductIncome, worksheet.initialWithdrawal, worksheet.inflationRate);
+			res.json(breakEvenAnalysis);
+		},
+
+		getIbidReport: function (req, res) {
+			var worksheet = ibid.mapWorksheet(req.query);
+			var breakEvenAnalysis = ibid.getBreakEvenAnalysis(worksheet.currentAge, worksheet.retirementAge, worksheet.numberOfPeriods, worksheet.annualDeposit, worksheet.growthRate, worksheet.rateOfReturn, worksheet.managementFee, worksheet.insuranceProductIncome, worksheet.initialWithdrawal, worksheet.inflationRate);
+			res.locals.package = 'dc-max';
+			res.locals.worksheet = worksheet;
+			res.locals.breakEvenAnalysis = breakEvenAnalysis;
+			DcMax.render(
+				'ibid-report'
+				, res.locals
+				, function (err, html) {
+					res.send(html);
+				});
+		},
+
+		getIbidPdf: function (req, res) {
+			var rawQuerystring = querystring.stringify(req.query);
+			var reportFileName = 'ibid-report.pdf';
+			var reportUrl = req.protocol + '://' + req.get('host') + '/api/dc-max/ibid/report?' + rawQuerystring;
 			var reportOptions = {
 				switches: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
 				viewportSize: {
