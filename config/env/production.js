@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-prod',
+	//db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-prod',
+	db: 'mongodb://nerdstrap:Jock(5^0@ds056288.mongolab.com:56288/mean-prod',
 	/**
 	 * Database options that will be passed directly to mongoose.connect
 	 * Below are some examples.
@@ -26,7 +27,7 @@ module.exports = {
 		 }
 		 */
 	},
-	hostname: 'http://localhost:3000',
+	hostname: 'http://ip-dc-max.herokuapp.com/',
 	app: {
 		name: 'Income Perspectives dcMax'
 	},
@@ -41,31 +42,31 @@ module.exports = {
 		facebook: {
 			clientID: 'APP_ID',
 			clientSecret: 'APP_SECRET',
-			callbackURL: 'http://localhost:3000/api/auth/facebook/callback',
+			callbackURL: 'http://ip-dc-max.herokuapp.com//api/auth/facebook/callback',
 			enabled: false
 		},
 		twitter: {
 			clientID: 'CONSUMER_KEY',
 			clientSecret: 'CONSUMER_SECRET',
-			callbackURL: 'http://localhost:3000/api/auth/twitter/callback',
+			callbackURL: 'http://ip-dc-max.herokuapp.com//api/auth/twitter/callback',
 			enabled: false
 		},
 		github: {
 			clientID: 'APP_ID',
 			clientSecret: 'APP_SECRET',
-			callbackURL: 'http://localhost:3000/api/auth/github/callback',
+			callbackURL: 'http://ip-dc-max.herokuapp.com//api/auth/github/callback',
 			enabled: false
 		},
 		google: {
 			clientID: 'APP_ID',
 			clientSecret: 'APP_SECRET',
-			callbackURL: 'http://localhost:3000/api/auth/google/callback',
+			callbackURL: 'http://ip-dc-max.herokuapp.com//api/auth/google/callback',
 			enabled: false
 		},
 		linkedin: {
 			clientID: 'API_KEY',
 			clientSecret: 'SECRET_KEY',
-			callbackURL: 'http://localhost:3000/api/auth/linkedin/callback',
+			callbackURL: 'http://ip-dc-max.herokuapp.com/api/auth/linkedin/callback',
 			enabled: false
 		}
 	},
@@ -77,5 +78,5 @@ module.exports = {
 			pass: 'PASSWORD'
 		}
 	},
-	secret: 'SOME_TOKEN_SECRET'
+	secret: 'J0ck$trap'
 };

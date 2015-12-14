@@ -10,7 +10,7 @@ function ViewHeaderController($scope, $rootScope, $state, $stateParams) {
 	};
 
 	function setup() {
-		var title = $stateParams.title || 'View';
+		var title = $stateParams.title || 'Index Annuity';
 		var parentTitle = $stateParams.parentTitle || 'Home';
 		var parentSref = $stateParams.parentSref || 'home';
 		vm.view = {

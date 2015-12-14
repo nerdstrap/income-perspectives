@@ -1,14 +1,14 @@
 {
-  "name": "mean",
-  "description": "MEAN.io: A fullstack JavaScript framework powered by MongoDB, ExpressJS, AngularJS, NodeJS.",
-  "version": "0.5.5",
+  "name": "ip-dcmax",
+  "description": "Income Perspectives - dcMax",
+  "version": "0.9.0",
   "private": false,
-  "author": "Linnovate <mean@linnovate.net>",
-  "contributors": "https://github.com/linnovate/mean/graphs/contributors",
+  "author": "Michael Baltic <geekstrap@live.com>",
+  "contributors": "",
   "mean": "0.5.5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/linnovate/mean.git"
+    "url": "https://github.com/nerdstrap/income-perspectives.git"
   },
   "license": "MIT",
   "scripts": {
