@@ -130,8 +130,10 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 	function init() {
 		vm.user = AuthFactory;
 		if (vm.user.authenticated) {
-			StripeFactory.getCustomer().success(function (data) {
-				vm.status.advancedOptionsDisabled = false;
+			StripeFactory.getCustomer().success(function (response) {
+				if (response && response.plan) {
+					vm.status.advancedOptionsDisabled = false;
+				}
 			});
 		}
 		vm.worksheet = angular.copy(vm.master);

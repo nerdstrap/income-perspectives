@@ -102,7 +102,7 @@ function AuthFactory($rootScope, $http, $location, $stateParams, $cookies, $q, $
 			})
 			.then(
 				function (response) {
-					self.user = getUser(response);
+					self.user = getUser(response.data);
 					self.authenticated = true;
 					$rootScope.$emit(AuthEvents.loggedIn, self.user);
 					$location.url('/');

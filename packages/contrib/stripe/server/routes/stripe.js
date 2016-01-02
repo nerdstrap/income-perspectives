@@ -99,7 +99,7 @@ module.exports = function (Stripe, app, auth, database) {
 			}
 
 			if (!stripeCustomer) {
-				return res.send(200);
+				return res.send(204);
 			}
 
 			return res.json(stripeCustomer);

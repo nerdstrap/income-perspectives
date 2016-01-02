@@ -4,9 +4,10 @@ var mean = require('ns-meanio');
 var querystring = require('querystring');
 var abid = require('../libs/abid.js');
 var ibid = require('../libs/ibid.js');
-var _outputDirectory = './tmp/';
 
+/* phantomjs */
 var session;
+var outputDirectory = './tmp/';
 
 function createPhantomSession(switches, callback) {
 	if (session) {
@@ -17,6 +18,10 @@ function createPhantomSession(switches, callback) {
 			console.log('phantom.create ' + switches[0] + ', ' + switches[1]);
 			session = _session;
 			return callback(null, session);
+		}, {
+			dnodeOpts: {
+				weak: false
+			}
 		});
 	}
 }
@@ -32,17 +37,10 @@ function renderPdf(session, options, callback) {
 
 	try {
 		session.createPage(function (_page) {
-			console.log('phantom.createPage: ' + JSON.stringify(_page));
 			page = _page;
-
 			_page.set('viewportSize', options.viewportSize, function (result) {
-				console.log('phantom.set.viewportSize: ' + JSON.stringify(result));
-
 				_page.open(options.url, function (status) {
-
 					if (status === 'success') {
-						console.log('phantom.open: success');
-
 						setTimeout(function () {
 							var filename = options.outputDirectory + options.fileName;
 							_page.render(filename, function () {
@@ -70,7 +68,7 @@ function renderPdf(session, options, callback) {
 		} catch (innerException) {
 			e.innerException = innerException;
 		}
-		return callback('phantomjs exception: ' + JSON.stringify(e));
+		return callback('phantom exception: ' + JSON.stringify(e));
 	}
 }
 
@@ -107,6 +105,7 @@ module.exports = function (DcMax) {
 			var rawQuerystring = querystring.stringify(req.query);
 			var reportFileName = 'abid-report.pdf';
 			var reportUrl = req.protocol + '://' + req.get('host') + '/api/dc-max/abid/report?' + rawQuerystring;
+			var phantomOptions = ['--ignore-ssl-errors=yes', '--ssl-protocol=any'];
 			var reportOptions = {
 				switches: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
 				viewportSize: {
@@ -115,11 +114,11 @@ module.exports = function (DcMax) {
 				},
 				url: reportUrl,
 				fileName: reportFileName,
-				outputDirectory: _outputDirectory,
+				outputDirectory: outputDirectory,
 				timeout: 1000
 			};
 
-			createPhantomSession(reportOptions.switches, function (error, _session) {
+			createPhantomSession(phantomOptions, function (error, _session) {
 				if (error) {
 					res.send(500, error);
 				}
@@ -168,19 +167,19 @@ module.exports = function (DcMax) {
 			var rawQuerystring = querystring.stringify(req.query);
 			var reportFileName = 'ibid-report.pdf';
 			var reportUrl = req.protocol + '://' + req.get('host') + '/api/dc-max/ibid/report?' + rawQuerystring;
+			var phantomOptions = ['--ignore-ssl-errors=yes', '--ssl-protocol=any'];
 			var reportOptions = {
-				switches: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
 				viewportSize: {
 					width: 1575,
 					height: 1650
 				},
 				url: reportUrl,
 				fileName: reportFileName,
-				outputDirectory: _outputDirectory,
+				outputDirectory: outputDirectory,
 				timeout: 1000
 			};
 
-			createPhantomSession(reportOptions.switches, function (error, _session) {
+			createPhantomSession(phantomOptions, function (error, _session) {
 				if (error) {
 					res.send(500, error);
 				}
