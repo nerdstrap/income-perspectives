@@ -121,7 +121,7 @@ module.exports = function (DcMax) {
 				url: reportUrl,
 				fileName: reportFileName,
 				outputDirectory: outputDirectory,
-				timeout: 1000
+				timeout: 2000
 			};
 
 			createPhantomSession(phantomOptions, function (error, _session) {
@@ -187,7 +187,7 @@ module.exports = function (DcMax) {
 				url: reportUrl,
 				fileName: reportFileName,
 				outputDirectory: outputDirectory,
-				timeout: 1000
+				timeout: 2000
 			};
 
 			createPhantomSession(phantomOptions, function (error, _session) {

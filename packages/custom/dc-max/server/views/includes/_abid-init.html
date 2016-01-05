@@ -15,7 +15,7 @@
 		var categories = {{breakEvenAnalysis.categories|safe|json}};
 		var seriesA = {{breakEvenAnalysis.seriesA|safe|json}};
 		var seriesB = {{breakEvenAnalysis.seriesB|safe|json}};
-		var breakEvenAge = {{breakEvenAnalysis.breakEvenAge|safe|json}};
+		var breakEvenMessage = {{breakEvenAnalysis.breakEvenMessage|safe|json}};
 		var cumulativePayoutCategories = {{breakEvenAnalysis.cumulativePayoutCategories|safe|json}};
 		var cumulativePayoutSeriesA = {{breakEvenAnalysis.cumulativePayoutSeriesA|safe|json}};
 		var cumulativePayoutSeriesB = {{breakEvenAnalysis.cumulativePayoutSeriesB|safe|json}};
@@ -23,6 +23,6 @@
 		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
 		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
 
-		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
+		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenMessage, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
 	});
 </script>

@@ -30,7 +30,9 @@ var IbidReport = function () {
 					text: 'Break-even Analysis'
 				},
 				chart: {
-					type: 'line'
+					type: 'line',
+					height: 600,
+					width: 975
 				},
 				xAxis: {
 					categories: categories
@@ -62,7 +64,9 @@ var IbidReport = function () {
 					text: 'Cumulative Payout '
 				},
 				chart: {
-					type: 'column'
+					type: 'column',
+					height: 600,
+					width: 975
 				},
 				xAxis: {
 					categories: categories
