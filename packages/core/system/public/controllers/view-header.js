@@ -34,6 +34,15 @@ function ViewHeaderController($scope, $rootScope, $state, $stateParams) {
 
 	vm.init();
 	vm.setup();
+
+	$rootScope.$on('updateviewheader', function (event, options) {
+		if (!options) {
+			options = {};
+		}
+		vm.view.title = options.title || 'Index Annuity';
+		vm.view.parentSref = options.parentSref || 'home';
+		vm.view.parentTitle = options.parentTitle || 'Home';
+	});
 }
 
 var app = angular.module('mean.system');

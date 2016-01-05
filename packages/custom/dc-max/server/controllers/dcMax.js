@@ -39,24 +39,26 @@ function renderPdf(session, options, callback) {
 		session.createPage(function (_page) {
 			page = _page;
 			_page.set('viewportSize', options.viewportSize, function (result) {
-				_page.open(options.url, function (status) {
-					if (status === 'success') {
-						setTimeout(function () {
-							var filename = options.outputDirectory + options.fileName;
-							_page.render(filename, function () {
-								console.log('phantom.render');
-								_page.close();
-								_page = null;
-								callback(null, filename);
-							});
+				_page.set('paperSize', options.paperSize, function (result) {
+					_page.open(options.url, function (status) {
+						if (status === 'success') {
+							setTimeout(function () {
+								var filename = options.outputDirectory + options.fileName;
+								_page.render(filename, function () {
+									console.log('phantom.render');
+									_page.close();
+									_page = null;
+									callback(null, filename);
+								});
 
-						}, options.timeout);
+							}, options.timeout);
 
-					} else {
-						_page.close();
-						_page = null;
-						callback('phantom.open: ' + status);
-					}
+						} else {
+							_page.close();
+							_page = null;
+							callback('phantom.open: ' + status);
+						}
+					});
 				});
 			});
 		});
@@ -107,10 +109,14 @@ module.exports = function (DcMax) {
 			var reportUrl = req.protocol + '://' + req.get('host') + '/api/dc-max/abid/report?' + rawQuerystring;
 			var phantomOptions = ['--ignore-ssl-errors=yes', '--ssl-protocol=any'];
 			var reportOptions = {
-				switches: ['--ignore-ssl-errors=yes', '--ssl-protocol=any'],
 				viewportSize: {
 					width: 1575,
 					height: 1650
+				},
+				paperSize: {
+					format: 'A4',
+					orientation: 'portrait',
+					border: '1in'
 				},
 				url: reportUrl,
 				fileName: reportFileName,
@@ -172,6 +178,11 @@ module.exports = function (DcMax) {
 				viewportSize: {
 					width: 1575,
 					height: 1650
+				},
+				paperSize: {
+					format: 'A4',
+					orientation: 'portrait',
+					border: '1in'
 				},
 				url: reportUrl,
 				fileName: reportFileName,

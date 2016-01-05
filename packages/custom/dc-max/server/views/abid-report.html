@@ -2,108 +2,195 @@
 {% block content %}
 <div class="report">
 
-	<!-- header -->
-	<div class="header">
-		<div class="row">
-			<div class="col-sm-6"><h3>dcMax - Index Annuity Comparison</h3></div>
-			<div class="col-sm-6"><h3 id="timestamp-label" class="pull-right"></h3></div>
+	<div class="report-page">
+		<!-- header -->
+		<div class="header">
+			<div class="row">
+				<div class="col-sm-6"><h3>dcMax - Index Annuity Comparison</h3></div>
+				<div class="col-sm-6"><h3 id="timestamp-label" class="pull-right"></h3></div>
+			</div>
 		</div>
+		<!-- header -->
 	</div>
-	<!-- header -->
 
-	<!-- summary -->
-	<div class="summary">
-		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Client Name:</span></div>
-			<div class="col-sm-2"><span id="client-name-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Current Age:</span></div>
-			<div class="col-sm-2"><span id="current-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Initial Deposit:</span></div>
-			<div class="col-sm-2"><span id="initial-deposit-label" class="font-bold"></span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Insurance Company:</span></div>
-			<div class="col-sm-2"><span id="insurance-company-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Retirement Age:</span></div>
-			<div class="col-sm-2"><span id="retirement-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Initial Withdrawal:</span></div>
-			<div class="col-sm-2"><span id="initial-withdrawal-label" class="font-bold"></span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Annuity Income:</span></div>
-			<div class="col-sm-2"><span id="insurance-product-income-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right"># Retirement Years:</span></div>
-			<div class="col-sm-2"><span id="number-of-periods-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Net ROR:</span></div>
-			<div class="col-sm-2"><span id="net-rate-of-return-label" class="font-bold"></span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
-			<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
-			<div class="col-sm-2"><span class="pull-right">Payoff Age:</span></div>
-			<div class="col-sm-2"><span id="payoff-age-label" class="font-bold"></span></div>
-			<div class="col-sm-2">&nbsp;</div>
-			<div class="col-sm-2">&nbsp;</div>
-		</div>
+	<div class="report-page" style="page-break-before: always">
+		<p>
+			Welcome to DCMAX, where retirement income planning is redefined.
+		</p>
+		<p>
+			DID YOU KNOW?
+		</p>
+		<p>
+		<p>
+			<strong>FACT</strong>: Prior to the early 80’s, most Americans were provided a company-sponsored pension plan that would provide for a guaranteed retirement paycheck, usually based on a formula that took into account years of service and income level. This was the dominant form of retirement security for the vast majority of workers.
+		</p>
+		<p>
+			<strong>FACT</strong>: These types of defined-benefit plans are expensive for a company to fund and administer and are rare today. The perceived need for a less-expensive retirement plan saw the rise of defined contribution plans where the company was not obligated to guarantee a retirement paycheck for the worker. Rather, the company allows the employee to defer a portion of their income into the plan and a matching contribution might be deposited into the plan for the employee by the employer.
+		</p>
+		<p>
+			<strong>FACT</strong>: The move to defined contribution plans from defined benefit plans shifts the risk from the employer to the employee.
+		</p>
+		<p>
+			<strong>FACT</strong>: Today, employees are faced with tough decisions about how to manage their company-sponsored retirement funds during their working years. Upon retirement, the employee becomes their own payroll department and must manage those funds to provide sustainable income for the entirety of their retirement years.
+		</p>
+		<p>
+			<strong>FACT</strong>: DCMAX was designed to help clients understand the risks associated with income planning and to offer solutions to mitigate those risks and increase retirement income. DCMAX will demonstrate the value of alternate solutions by providing clients a unique perspective on income planning.
+		</p>
 	</div>
-	<!-- summary -->
 
-	<!-- cumulative income comparison -->
-	<div class="summary text-center">
-		<div class="row">
-			<div class="col-sm-12"><h3>First Year</h3></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-4">Income from Annuity</div>
-			<div class="col-sm-4">&nbsp;</div>
-			<div class="col-sm-4">Income from 4% Rule</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-4"><h3 id="cumulative-insurance-product-income-0-label" class="font-bold"></h3></div>
-			<div class="col-sm-4"><h3 class="font-bold">VS.</h3></div>
-			<div class="col-sm-4"><h3 id="cumulative-investment-income-0-label" class="font-bold"></h3></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
-			<div class="col-sm-4">&nbsp;</div>
-			<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
-		</div>
+	<div class="report-page" style="page-break-before: always">
+		<p>
+			AFTER-TAX INCOME PLANNING... THE NEXT EVOLUTION
+		</p>
+		<p>
+			Since 2006, defined contribution plans were allowed to feature an after-tax option known as the Roth 401k/403B/457. This option allows employees to defer, up to the applicable age-based maximum, dollars into the plan on an after-tax basis. This option allows the employee to pay taxes, currently, on the deferral and receive tax-free treatment when the money is withdrawn from the plan subject to satisfying the usual withdrawal requirements. The DCMAX philosophy encourages diversification of investments as well as across tax qualifications; both pre-tax and after-tax.</p>
+		<p>
+			FUNDING THE AFTER-TAX BUCKET
+		</p>
+		<p>
+			Most defined contribution plans offer a menu of mutual funds, bonds, stocks and perhaps a guaranteed fund option. All of us have heard that we should have a well-diversified portfolio. The DCMAX program calls for an age-based approach to asset allocation. This will help provide guidance on how to allocate between stocks and bonds based on your age. Asset allocation can provide some level of protection against market fluctuations, but it does not guarantee that your retirement income plan will perform as intended. For example, in 2008 the S&P 500 index dropped a whopping 38% as a result of the financial crisis. What if you were set to retire in 2008? What effect would that have on your retirement income plan? Let’s take a look at an example below to illustrate the point:
+		</p>
 	</div>
-	<!-- cumulative income comparison -->
 
-	<!-- cumulative income chart -->
-	<div class="chart-container">
-		<div id="break-even-analysis-chart"></div>
+	<div class="report-page" style="page-break-before: always">
+		<p>
+			THE 4% RULE... A STANDARD IS ADOPTED
+		</p>
+		<p>
+			By the 1990’s it became evident that retirees were facing the problem described in the example above. The success of the income plan was dependent on HOW and WHEN the returns occurred. This problem lead to research that hoped to offer guidance on how to distribute your plan assets in a way that didn’t risk running out of money during your lifetime. The predominant method resulting from the research was known as the “4% rule”. This dictates that you can safely withdraw 4% of your account balance in your first year of retirement, and adjust that amount every year for an inflation factor. Let’s take a look at an example: Assume you retire with a balance of $200,000 in your 401k. The 4% rule allows for a first year withdrawal of $8,000. In year two, a withdrawal of $8240 would be permissible, assuming inflation of 3%. The 4% rule set the standard for how to safely design your income plan without the risk of running out of money during your lifetime.
+		</p>
+
+		<p>
+			BEATING THE 4% RULE
+		</p>
+		<p>
+			DCMAX was created to help you get more out of retirement. To do so we must challenge the status quo and bring new solutions to offer better retirement income with less risk. As mentioned above, DCMAX calls for the use of alternative investment concepts to create efficiencies, reduce risk, and provide better income than would normally be allowed.
+		</p>
+
+		<p>
+			INDEXED UNIVERSAL LIFE INSURANCE THE CLEAR CHOICE
+		</p>
+		<p>
+			As mentioned above, most defined contribution plans offer an investment menu consisting of mutual funds, stocks, bonds etc. We have now learned, from the example above, the effect that market fluctuations and performance can have on our retirement income plan. What if we could find a solution that offers the potential for tax-free retirement income and market based returns, but not the risk associated with the market? Let’s take a look at why Indexed Universal Life Insurance may be the right solution for you.
+		</p>
 	</div>
-	<!-- cumulative income chart -->
 
-	<!-- breakeven analysis -->
-	<div class="summary text-center">
-		<div class="row">
-			<div class="col-sm-12"><h2>Breakeven Age</h2></div>
+	<div class="report-page" style="page-break-before: always">
+		<p>
+			As you can see from the chart, IUL does not experience a loss when the market declines. If you recall from the sequence-of-returns example above, it was the the market fluctuations (and when they occurred) that required the use of the 4% rule. If we can remove the risk of market declines in our portfolio, then we are not subject to only withdrawing 4%. Let’s see how utilizing an Indexed Universal Life Insurance contract can enhance our retirement income plan. Below is your customized report created by the DCMAX proprietary Insurance Based Income Designer (IBID). The IBID will demonstrate how an IUL will enhance your retirement income and verify the results.
+		</p>
+
+		<p>
+			Your Personal Info:
+		</p>
+
+		<!-- summary -->
+		<div class="summary">
+			<div class="row">
+				<div class="col-sm-2"><span class="pull-right">Client Name:</span></div>
+				<div class="col-sm-2"><span id="client-name-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Current Age:</span></div>
+				<div class="col-sm-2"><span id="current-age-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Initial Deposit:</span></div>
+				<div class="col-sm-2"><span id="initial-deposit-label" class="font-bold"></span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2"><span class="pull-right">Insurance Company:</span></div>
+				<div class="col-sm-2"><span id="insurance-company-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Retirement Age:</span></div>
+				<div class="col-sm-2"><span id="retirement-age-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Initial Withdrawal:</span></div>
+				<div class="col-sm-2"><span id="initial-withdrawal-label" class="font-bold"></span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2"><span class="pull-right">Annuity Income:</span></div>
+				<div class="col-sm-2"><span id="insurance-product-income-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right"># Retirement Years:</span></div>
+				<div class="col-sm-2"><span id="number-of-periods-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Net ROR:</span></div>
+				<div class="col-sm-2"><span id="net-rate-of-return-label" class="font-bold"></span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
+				<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
+				<div class="col-sm-2"><span class="pull-right">Payoff Age:</span></div>
+				<div class="col-sm-2"><span id="payoff-age-label" class="font-bold"></span></div>
+				<div class="col-sm-2">&nbsp;</div>
+				<div class="col-sm-2">&nbsp;</div>
+			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12"><h2 id="breakeven-age-label" class="font-bold"></h2></div>
+		<!-- summary -->
+
+		<!-- cumulative income chart -->
+		<div class="chart-container">
+			<div id="baseline-chart"></div>
 		</div>
+		<!-- cumulative income chart -->
 	</div>
-	<!-- breakeven analysis -->
 
-	<!-- go-go slow-go no-go chart -->
-	<div class="schedule">
-		<div class="row">
-			<div id="go-go-schedule" class="col-sm-4"></div>
-			<div id="slow-go-schedule" class="col-sm-4"></div>
-			<div id="no-go-schedule" class="col-sm-4"></div>
+	<div class="report-page" style="page-break-before: always">
+		<!-- cumulative income comparison -->
+		<div class="summary text-center">
+			<div class="row">
+				<div class="col-sm-12"><h3>First Year</h3></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">Income from Annuity</div>
+				<div class="col-sm-4">&nbsp;</div>
+				<div class="col-sm-4">Income from 4% Rule</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"><h3 id="cumulative-insurance-product-income-0-label" class="font-bold"></h3></div>
+				<div class="col-sm-4"><h3 class="font-bold">VS.</h3></div>
+				<div class="col-sm-4"><h3 id="cumulative-investment-income-0-label" class="font-bold"></h3></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
+				<div class="col-sm-4">&nbsp;</div>
+				<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
+			</div>
 		</div>
-	</div>
-	<!-- go-go slow-go no-go chart -->
+		<!-- cumulative income comparison -->
 
-	<!-- periodic analysis chart -->
-	<div class="chart-container">
-		<div id="cumulative-payout-chart"></div>
+		<!-- cumulative income chart -->
+		<div class="chart-container">
+			<div id="break-even-analysis-chart"></div>
+		</div>
+		<!-- cumulative income chart -->
 	</div>
-	<!-- periodic analysis chart -->
 
+	<div class="report-page" style="page-break-before: always">
+		<!-- breakeven analysis -->
+		<div class="summary text-center">
+			<div class="row">
+				<div class="col-sm-12"><h2>Breakeven Age</h2></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><h2 id="breakeven-age-label" class="font-bold"></h2></div>
+			</div>
+		</div>
+		<!-- breakeven analysis -->
+	</div>
+
+	<div class="report-page" style="page-break-before: always">
+		<!-- go-go slow-go no-go chart -->
+		<div class="schedule">
+			<div class="row">
+				<div id="go-go-schedule" class="col-sm-4"></div>
+				<div id="slow-go-schedule" class="col-sm-4"></div>
+				<div id="no-go-schedule" class="col-sm-4"></div>
+			</div>
+		</div>
+		<!-- go-go slow-go no-go chart -->
+	</div>
+
+	<div class="report-page" style="page-break-before: always">
+		<!-- periodic analysis chart -->
+		<div class="chart-container">
+			<div id="cumulative-payout-chart"></div>
+		</div>
+		<!-- periodic analysis chart -->
+	</div>
 </div>
 
 {% endblock %}
@@ -111,32 +198,5 @@
 {% block _scripts %}
 {% parent %}
 <script type="text/javascript" src="/dc-max/assets/js/abid-report.js"></script>
-<script type="application/javascript">
-	$(document).ready(function () {
-		var currentAge = {{worksheet.currentAge|safe|json}};
-		var retirementAge = {{worksheet.retirementAge|safe|json}};
-		var numberOfPeriods = {{worksheet.numberOfPeriods|safe|json}};
-		var initialDeposit = {{worksheet.initialDeposit|safe|json}};
-		var rateOfReturn = {{worksheet.rateOfReturn|safe|json}};
-		var managementFee = {{worksheet.managementFee|safe|json}};
-		var insuranceProductIncome = {{worksheet.insuranceProductIncome|safe|json}};
-		var initialWithdrawal = {{worksheet.initialWithdrawal|safe|json}};
-		var inflationRate = {{worksheet.inflationRate|safe|json}};
-		var clientName = {{worksheet.clientName|safe|json}};
-		var insuranceCompany = {{worksheet.insuranceCompany|safe|json}};
-
-		var categories = {{breakEvenAnalysis.categories|safe|json}};
-		var seriesA = {{breakEvenAnalysis.seriesA|safe|json}};
-		var seriesB = {{breakEvenAnalysis.seriesB|safe|json}};
-		var breakEvenAge = {{breakEvenAnalysis.breakEvenAge|safe|json}};
-		var cumulativePayoutCategories = {{breakEvenAnalysis.cumulativePayoutCategories|safe|json}};
-		var cumulativePayoutSeriesA = {{breakEvenAnalysis.cumulativePayoutSeriesA|safe|json}};
-		var cumulativePayoutSeriesB = {{breakEvenAnalysis.cumulativePayoutSeriesB|safe|json}};
-		var gogoPayouts = {{breakEvenAnalysis.gogoPayouts|safe|json}};
-		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
-		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
-
-		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
-	});
-</script>
+{% include 'includes/_abid-init.html' %}
 {% endblock %}

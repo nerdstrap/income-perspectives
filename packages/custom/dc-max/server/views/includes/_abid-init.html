@@ -1,0 +1,28 @@
+<script type="application/javascript">
+	$(document).ready(function () {
+		var currentAge = {{worksheet.currentAge|safe|json}};
+		var retirementAge = {{worksheet.retirementAge|safe|json}};
+		var numberOfPeriods = {{worksheet.numberOfPeriods|safe|json}};
+		var initialDeposit = {{worksheet.initialDeposit|safe|json}};
+		var rateOfReturn = {{worksheet.rateOfReturn|safe|json}};
+		var managementFee = {{worksheet.managementFee|safe|json}};
+		var insuranceProductIncome = {{worksheet.insuranceProductIncome|safe|json}};
+		var initialWithdrawal = {{worksheet.initialWithdrawal|safe|json}};
+		var inflationRate = {{worksheet.inflationRate|safe|json}};
+		var clientName = {{worksheet.clientName|safe|json}};
+		var insuranceCompany = {{worksheet.insuranceCompany|safe|json}};
+
+		var categories = {{breakEvenAnalysis.categories|safe|json}};
+		var seriesA = {{breakEvenAnalysis.seriesA|safe|json}};
+		var seriesB = {{breakEvenAnalysis.seriesB|safe|json}};
+		var breakEvenAge = {{breakEvenAnalysis.breakEvenAge|safe|json}};
+		var cumulativePayoutCategories = {{breakEvenAnalysis.cumulativePayoutCategories|safe|json}};
+		var cumulativePayoutSeriesA = {{breakEvenAnalysis.cumulativePayoutSeriesA|safe|json}};
+		var cumulativePayoutSeriesB = {{breakEvenAnalysis.cumulativePayoutSeriesB|safe|json}};
+		var gogoPayouts = {{breakEvenAnalysis.gogoPayouts|safe|json}};
+		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
+		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
+
+		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenAge, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
+	});
+</script>

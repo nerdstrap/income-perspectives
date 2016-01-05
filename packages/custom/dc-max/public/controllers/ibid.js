@@ -1,6 +1,6 @@
 'use strict';
 
-function IbidController($scope, focus, IbidFactory, ChartFactory, AuthFactory, StripeFactory) {
+function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, AuthFactory, StripeFactory) {
 
 	var vm = this;
 
@@ -158,6 +158,11 @@ function IbidController($scope, focus, IbidFactory, ChartFactory, AuthFactory, S
 		vm.status.cumulativePayoutVisible = false;
 		vm.status.pdfDownloaded = false;
 		vm.status.advancedOptionsDisabled = true;
+		$rootScope.$emit('updateviewheader', {
+			title: 'Index UL',
+			parentSref: 'home',
+			parentTitle: 'Home'
+		});
 	}
 
 	function reset() {

@@ -5,9 +5,9 @@ function Views($scope, $rootScope, $stateParams, $q, $timeout) {
 
 	viewsFactory.updateViewHeader = function () {
 		var deferred = $q.defer();
-		$rootScope.viewTitle = $stateParams.title;
-		$rootScope.viewParentSref = 'home';
-		$rootScope.viewParentTitle = 'Home';
+		$rootScope.viewTitle = $stateParams.title || 'Index Annuity';
+		$rootScope.viewParentTitle = $stateParams.parentTitle || 'Home';
+		$rootScope.viewParentSref = $stateParams.parentSref || 'home';
 		$timeout(deferred.resolve);
 		return deferred.promise;
 	};

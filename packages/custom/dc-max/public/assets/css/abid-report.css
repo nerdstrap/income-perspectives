@@ -1,24 +1,33 @@
 body {
-	width: 1275px;
-	max-width: 1275px;
-	min-width: 1275px;
-
-	height: 1650px;
-	min-height: 1650px;
+	/*background-color: #00ffff;*/
+	/*width: 1275px;*/
+	/*max-width: 1275px;*/
+	/*min-width: 1275px;*/
+	/*padding: 150px;*/
+	font-size: 16px;
 }
 
 .report {
-	margin: 150px;
-	width: 975px;
-	max-width: 975px;
-	min-width: 975px;
 }
+
+.report-page {
+	/*background-color: #fff;*/
+	/*width: 975px;*/
+	/*max-width: 975px;*/
+	/*min-width: 975px;*/
+}
+
+/*.report-page + .report-page {*/
+	/*margin-top: 300px;*/
+/*}*/
 
 .header,
 .summary,
 .schedule,
 .chart-container {
-	margin-bottom: 75px;
+	width: 975px;
+	max-width: 975px;
+	min-width: 975px;
 }
 
 .cumulative-income-chart {

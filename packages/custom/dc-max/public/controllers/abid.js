@@ -1,6 +1,6 @@
 'use strict';
 
-function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, StripeFactory) {
+function AbidController($scope, $rootScope, focus, AbidFactory, ChartFactory, AuthFactory, StripeFactory) {
 
 	var vm = this;
 
@@ -151,6 +151,11 @@ function AbidController($scope, focus, AbidFactory, ChartFactory, AuthFactory, S
 		vm.status.cumulativePayoutVisible = false;
 		vm.status.pdfDownloaded = false;
 		vm.status.advancedOptionsDisabled = true;
+		$rootScope.$emit('updateviewheader', {
+			title: 'Index Annuity',
+			parentSref: 'home',
+			parentTitle: 'Home'
+		});
 	}
 
 	function reset() {
