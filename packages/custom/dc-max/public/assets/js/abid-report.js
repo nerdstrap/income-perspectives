@@ -221,7 +221,7 @@ var AbidReport = function () {
 				var age = gogoPayouts[g].age;
 				var cumulativeInsuranceProductIncome = currency(gogoPayouts[g].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(gogoPayouts[g].cumulativeInvestmentIncome);
-				gogoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
+				gogoPayoutRows += '<tr><th scope="row">' + age + '</th><td>' + cumulativeInsuranceProductIncome + '</td><td>' + cumulativeInvestmentIncome + '</td></tr>';
 				g++;
 			}
 			$('#gogo-payout-rows').html(gogoPayoutRows);
@@ -233,7 +233,7 @@ var AbidReport = function () {
 				var age = slowgoPayouts[s].age;
 				var cumulativeInsuranceProductIncome = currency(slowgoPayouts[s].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(slowgoPayouts[s].cumulativeInvestmentIncome);
-				slowgoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
+				slowgoPayoutRows += '<tr><th scope="row">' + age + '</th><td>' + cumulativeInsuranceProductIncome + '</td><td>' + cumulativeInvestmentIncome + '</td></tr>';
 				s++;
 			}
 			$('#slowgo-payout-rows').html(slowgoPayoutRows);
@@ -245,7 +245,7 @@ var AbidReport = function () {
 				var age = nogoPayouts[n].age;
 				var cumulativeInsuranceProductIncome = currency(nogoPayouts[n].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(nogoPayouts[n].cumulativeInvestmentIncome);
-				nogoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
+				nogoPayoutRows += '<tr><th scope="row">' + age + '</th><td>' + cumulativeInsuranceProductIncome + '</td><td>' + cumulativeInvestmentIncome + '</td></tr>';
 				n++;
 			}
 			$('#nogo-payout-rows').html(nogoPayoutRows);
