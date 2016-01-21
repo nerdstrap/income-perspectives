@@ -77,116 +77,359 @@
 
 	<div class="report-page" style="page-break-before: always">
 		<p>
-			As you can see from the chart, IUL does not experience a loss when the market declines. If you recall from the sequence-of-returns example above, it was the the market fluctuations (and when they occurred) that required the use of the 4% rule. If we can remove the risk of market declines in our portfolio, then we are not subject to only withdrawing 4%. Let’s see how utilizing an Indexed Universal Life Insurance contract can enhance our retirement income plan. Below is your customized report created by the DCMAX proprietary Insurance Based Income Designer (IBID). The IBID will demonstrate how an IUL will enhance your retirement income and verify the results.
+			As you can see from the chart, IUL does not experience a loss when the market declines. If you recall from the sequence-of-returns example above, it was the the market fluctuations (and when they occurred) that the use of the 4% rule. If we can remove the risk of market declines in our portfolio, then we are not subject to only withdrawing 4%. Let’s see how utilizing an Indexed Universal Life Insurance contract can enhance our retirement income plan. Below is your customized report created by the DCMAX proprietary Insurance Based Income Designer (IBID). The IBID will demonstrate how an IUL will enhance your retirement income and verify the results.
 		</p>
 
 		<p>
 			Your Personal Info:
 		</p>
 
-		<!-- summary -->
-		<div class="summary">
-			<div class="row">
-				<div class="col-sm-2"><span class="pull-right">Client Name:</span></div>
-				<div class="col-sm-2"><span id="client-name-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Current Age:</span></div>
-				<div class="col-sm-2"><span id="current-age-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Initial Deposit:</span></div>
-				<div class="col-sm-2"><span id="initial-deposit-label" class="font-bold"></span></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2"><span class="pull-right">Insurance Company:</span></div>
-				<div class="col-sm-2"><span id="insurance-company-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Retirement Age:</span></div>
-				<div class="col-sm-2"><span id="retirement-age-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Initial Withdrawal:</span></div>
-				<div class="col-sm-2"><span id="initial-withdrawal-label" class="font-bold"></span></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2"><span class="pull-right">Annuity Income:</span></div>
-				<div class="col-sm-2"><span id="insurance-product-income-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right"># Retirement Years:</span></div>
-				<div class="col-sm-2"><span id="number-of-periods-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Net ROR:</span></div>
-				<div class="col-sm-2"><span id="net-rate-of-return-label" class="font-bold"></span></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2"><span class="pull-right">Inflation Rate:</span></div>
-				<div class="col-sm-2"><span id="inflation-rate-label" class="font-bold"></span></div>
-				<div class="col-sm-2"><span class="pull-right">Payoff Age:</span></div>
-				<div class="col-sm-2"><span id="payoff-age-label" class="font-bold"></span></div>
-				<div class="col-sm-2">&nbsp;</div>
-				<div class="col-sm-2">&nbsp;</div>
-			</div>
+		<!-- client demographics -->
+		<div class="frm-u">
+			<header>
+				Client Demographics
+			</header>
+			<fieldset>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="client-name-input">Client Name</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+								<input id="client-name-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="insurance-company-input">Insurance Company</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-folder-open"></span></span>
+								<input id="insurance-company-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						&nbsp;
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="current-age-input">Current Age</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+								<input id="current-age-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="initial-deposit-input">Initial Deposit</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+								<input id="initial-deposit-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="insurance-product-income-input">Annual Income</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+								<input id="insurance-product-income-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">.00</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="retirement-age-input">Retirement Age</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								<input id="retirement-age-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="rate-of-return-input">Gross Rate of Return</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="rate-of-return-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="initial-withdrawal-input">Initial Withdrawal</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="initial-withdrawal-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="number-of-periods-input">Number of Retirement Years</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								<input id="number-of-periods-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="management-fee-input">Management Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="management-fee-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="inflation-rate-input">Annual Inflation Rate</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="inflation-rate-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
 		</div>
-		<!-- summary -->
+		<!-- client demographics -->
 
-		<!-- cumulative income chart -->
-		<div class="chart-container">
-			<div id="baseline-chart"></div>
+		<div class="frm-u">
+			<header>Your First Year Of Retirement</header>
+			<fieldset>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="baseline-investment-income-input">Income From 4% Rule</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+								<input id="baseline-investment-income-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="baseline-rate-of-return-input">Annual Rate of Return</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="baseline-rate-of-return-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<footer>
+				<div id="baseline-chart"></div>
+			</footer>
 		</div>
-		<!-- cumulative income chart -->
 	</div>
 
 	<div class="report-page" style="page-break-before: always">
-		<!-- cumulative income comparison -->
-		<div class="summary text-center">
-			<div class="row">
-				<div class="col-sm-12"><h3>First Year</h3></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-4">Income from Annuity</div>
-				<div class="col-sm-4">&nbsp;</div>
-				<div class="col-sm-4">Income from 4% Rule</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-4"><h3 id="cumulative-insurance-product-income-0-label" class="font-bold"></h3></div>
-				<div class="col-sm-4"><h3 class="font-bold">VS.</h3></div>
-				<div class="col-sm-4"><h3 id="cumulative-investment-income-0-label" class="font-bold"></h3></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
-				<div class="col-sm-4">&nbsp;</div>
-				<div class="col-sm-4"><span class="gross-rate-of-return-label"></span></div>
-			</div>
+		<!-- break-even analysis -->
+		<div class="frm-u">
+			<header>Your First Year Of Retirement</header>
+			<fieldset>
+				<fieldset>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="break-even-insurance-product-income-input">Income From Annuity</label>
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+									<input id="break-even-insurance-product-income-input" type="text" class="form-control" tabindex="0"/>
+									<span class="input-group-addon">.00</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="break-even-investment-income-input">Income From 4% Rule</label>
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+									<input id="break-even-investment-income-input" type="text" class="form-control" tabindex="0"/>
+									<span class="input-group-addon">.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="break-even-income-differential-input">Index Annuity Advantage</label>
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
+									<input id="break-even-income-differential-input" type="text" class="form-control" tabindex="0"/>
+									<span class="input-group-addon">%&nbsp;</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="break-even-rate-of-return-input">Annual Rate Of Return</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+								<input id="break-even-rate-of-return-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</fieldset>
+			<footer>
+				<div id="break-even-analysis-chart"></div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="break-even-age-input">Break-Even Age</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+								<input id="break-even-age-input" type="text" class="form-control" tabindex="0"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Break-Even Age Never Reached</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						&nbsp;
+					</div>
+				</div>
+			</footer>
 		</div>
-		<!-- cumulative income comparison -->
-		<br/>
-		<!-- cumulative income chart -->
-		<div class="chart-container">
-			<div id="break-even-analysis-chart"></div>
-		</div>
-		<!-- cumulative income chart -->
-		<br/>
-		<!-- breakeven analysis -->
-		<div class="summary text-center">
-			<div class="row">
-				<div class="col-sm-12"><h2>Breakeven Age</h2></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12"><h2 id="breakeven-age-label" class="font-bold"></h2></div>
-			</div>
-		</div>
-		<!-- breakeven analysis -->
 	</div>
 
 	<div class="report-page" style="page-break-before: always">
-		<!-- go-go slow-go no-go chart -->
-		<div class="schedule">
-			<div class="row">
-				<div id="go-go-schedule" class="col-sm-4"></div>
-				<div id="slow-go-schedule" class="col-sm-4"></div>
-				<div id="no-go-schedule" class="col-sm-4"></div>
-			</div>
+		<!-- periodic analysis -->
+		<div class="frm-u">
+			<header>Your "Go-Go" Years</header>
+			<fieldset>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="periodic-insurance-product-income-input">Income From Annuity</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+								<input id="periodic-insurance-product-income-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">.00</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="periodic-investment-income-input">Income From 4% Rule</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+								<input id="periodic-investment-income-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">.00</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="periodic-income-differential-input">Index Annuity Advantage</label>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
+								<input id="periodic-income-differential-input" type="text" class="form-control" tabindex="0"/>
+								<span class="input-group-addon">%&nbsp;</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="periodic-rate-of-return-input">Annual Rate Of Return</label>
+						<div class="input-group">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+							<input id="periodic-rate-of-return-input" type="text" class="form-control" tabindex="0"/>
+							<span class="input-group-addon">%&nbsp;</span>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<footer>
+				<div id="periodic-chart"></div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">Go-Go Years</h3>
+								<h4><span id="gogo-income-differential-label"></span>% Advantage</h4>
+							</div>
+							<table class="table">
+								<thead>
+								<tr>
+									<th>Age</th>
+									<th>Annuity</th>
+									<th>4% Rule</th>
+								</tr>
+								</thead>
+								<tbody id="gogo-payout-rows"></tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title">Slow-Go Years</h3>
+								<h4><span id="slowgo-income-differential-label"></span>% Advantage</h4>
+							</div>
+							<table class="table">
+								<thead>
+								<tr>
+									<th>Age</th>
+									<th>Annuity</th>
+									<th>4% Rule</th>
+								</tr>
+								</thead>
+								<tbody id="slowgo-payout-rows"></tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<h3 class="panel-title">No-Go Years</h3>
+								<h4><span id="nogo-income-differential-label"></span>% Advantage</h4>
+							</div>
+							<table class="table">
+								<thead>
+								<tr>
+									<th>Age</th>
+									<th>Annuity</th>
+									<th>4% Rule</th>
+								</tr>
+								</thead>
+								<tbody id="nogo-payout-rows"></tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</footer>
 		</div>
-		<!-- go-go slow-go no-go chart -->
-		<br/>
-		<!-- periodic analysis chart -->
-		<div class="chart-container">
-			<div id="cumulative-payout-chart"></div>
-		</div>
-		<!-- periodic analysis chart -->
+		<!-- periodic analysis -->
 	</div>
+
 	<div class="report-page" style="page-break-before: always">
 		<p>
 			Contingency Benefits
@@ -195,6 +438,7 @@
 			Roth vs IUL Matrix
 		</p>
 	</div>
+
 	<div class="report-page" style="page-break-before: always">
 		<p>
 			Disclosures

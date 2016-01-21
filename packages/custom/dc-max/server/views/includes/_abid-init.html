@@ -12,17 +12,15 @@
 		var clientName = {{worksheet.clientName|safe|json}};
 		var insuranceCompany = {{worksheet.insuranceCompany|safe|json}};
 
-		var categories = {{breakEvenAnalysis.categories|safe|json}};
-		var seriesA = {{breakEvenAnalysis.seriesA|safe|json}};
-		var seriesB = {{breakEvenAnalysis.seriesB|safe|json}};
-		var breakEvenMessage = {{breakEvenAnalysis.breakEvenMessage|safe|json}};
-		var cumulativePayoutCategories = {{breakEvenAnalysis.cumulativePayoutCategories|safe|json}};
-		var cumulativePayoutSeriesA = {{breakEvenAnalysis.cumulativePayoutSeriesA|safe|json}};
-		var cumulativePayoutSeriesB = {{breakEvenAnalysis.cumulativePayoutSeriesB|safe|json}};
+		var firstPayout = {{breakEvenAnalysis.firstPayout|safe|json}};
+		var breakEvenSeriesData = {{breakEvenAnalysis.breakEvenSeriesData|safe|json}};
+		var firstPeriodicPayout = {{breakEvenAnalysis.firstPeriodicPayout|safe|json}};
+		var periodicSeriesData = {{breakEvenAnalysis.periodicSeriesData|safe|json}};
 		var gogoPayouts = {{breakEvenAnalysis.gogoPayouts|safe|json}};
 		var slowgoPayouts = {{breakEvenAnalysis.slowgoPayouts|safe|json}};
 		var nogoPayouts = {{breakEvenAnalysis.nogoPayouts|safe|json}};
+		var breakEvenAge = {{breakEvenAnalysis.breakEvenAge|safe|json}};
 
-		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenMessage, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts);
+		AbidReport.init(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, firstPayout, breakEvenSeriesData, firstPeriodicPayout, periodicSeriesData, gogoPayouts, slowgoPayouts, nogoPayouts, breakEvenAge);
 	});
 </script>

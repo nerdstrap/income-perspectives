@@ -14,5 +14,8 @@
 		"stripe": "latest",
 		"stripe-webhook-middleware": "latest"
 	},
+	"scripts": {
+		"postinstall": "bower install"
+	},
 	"license": "MIT"
 }

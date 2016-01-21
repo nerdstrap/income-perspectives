@@ -46,15 +46,8 @@ module.exports.getBaseline = function (currentAge, retirementAge, numberOfPeriod
 	var index = -1;
 	var payouts = new Array(numberOfPeriods);
 	payouts[++index] = {
-		age: age
-		//,accountValue: accountValue
-		//,annualWithdrawal: annualWithdrawal
-		//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
-		//,accountValueAtEndOfYear: accountValueAtEndOfYear
-		, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
-		//,yearsCompounded: yearsCompounded
-		//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
-		//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
+		age: age,
+		cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 	};
 	while (++index <= numberOfPeriods) {
 		age = age + 1;
@@ -69,28 +62,23 @@ module.exports.getBaseline = function (currentAge, retirementAge, numberOfPeriod
 		cumulativePresentValueOfInvestmentIncome += presentValueOfInvestmentIncome;
 
 		payouts[index] = {
-			age: age
-			//,accountValue: accountValue
-			//,annualWithdrawal: annualWithdrawal
-			//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
-			//,accountValueAtEndOfYear: accountValueAtEndOfYear
-			, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
-			//,yearsCompounded: yearsCompounded
-			//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
-			//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
+			age: age,
+			cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
 		}
 	}
 
-	var investmentIncome = payouts[0].cumulativeInvestmentIncome;
-	var categories = _.pluck(payouts, 'age');
-	var seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
-	var rateOfReturnMessage = 'Based on ' + Math.floor(rateOfReturn * 100) + '% ROR';
+	var grossRateOfReturn = Math.floor(rateOfReturn * 100);
+
+	var firstPayout = _.first(payouts);
+
+	var baselineSeriesData = {};
+	baselineSeriesData.categories = _.pluck(payouts, 'age');
+	baselineSeriesData.seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
 
 	return {
-		investmentIncome: investmentIncome,
-		rateOfReturnMessage: rateOfReturnMessage,
-		categories: categories,
-		seriesA: seriesA
+		grossRateOfReturn: grossRateOfReturn,
+		firstPayout: firstPayout,
+		baselineSeriesData: baselineSeriesData
 	};
 };
 
@@ -104,7 +92,6 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 
 	var breakEvenAge = retirementAge;
 	var breakEvenAgeSet = false;
-	var breakEvenMessage = 'Break-even Age is never reached!';
 
 	var accountValue = getFutureValueWithGrowth(annualDeposit, netRateOfReturn, growthRate, yearsUntilRetirement);
 	var annualWithdrawal = accountValue * initialWithdrawal;
@@ -116,7 +103,7 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 	var cumulativeInsuranceProductIncome = insuranceProductIncome;
 	var presentValueOfInvestmentIncome = getPresentValue(annualWithdrawal, rateOfReturn, yearsCompounded);
 	var cumulativePresentValueOfInvestmentIncome = presentValueOfInvestmentIncome;
-	var incomeDifferential = (insuranceProductIncome / annualWithdrawal) * 100;
+	var cumulativeIncomeDifferential = (cumulativeInsuranceProductIncome / cumulativeInvestmentIncome - 1) * 100;
 
 	if (cumulativeInvestmentIncome > cumulativeInsuranceProductIncome) {
 		breakEvenAgeSet = true;
@@ -127,20 +114,10 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 	var payouts = new Array(numberOfPeriods);
 
 	payouts[index] = {
-		age: age
-		//,accountValue: accountValue
-		//,annualWithdrawal: annualWithdrawal
-		//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
-		//,accountValueAtEndOfYear: accountValueAtEndOfYear
-		, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
-		//,yearsCompounded: yearsCompounded
-		//,insuranceProductIncome: insuranceProductIncome
-		//,presentValueOfInsuranceProductIncome: presentValueOfInsuranceProductIncome
-		//,cumulativePresentValueOfInsuranceProductIncome: cumulativePresentValueOfInsuranceProductIncome
-		, cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
-		//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
-		//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
-		//,incomeDifferential: incomeDifferential
+		age: age,
+		cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome),
+		cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome),
+		cumulativeIncomeDifferential: Math.floor(cumulativeIncomeDifferential)
 	};
 
 	while (++index < numberOfPeriods) {
@@ -157,23 +134,13 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 		cumulativeInsuranceProductIncome += insuranceProductIncome;
 		presentValueOfInvestmentIncome = getPresentValue(annualWithdrawal, rateOfReturn, yearsCompounded);
 		cumulativePresentValueOfInvestmentIncome += presentValueOfInvestmentIncome;
-		incomeDifferential = (insuranceProductIncome / annualWithdrawal) * 100;
+		cumulativeIncomeDifferential = (cumulativeInsuranceProductIncome / cumulativeInvestmentIncome - 1) * 100;
 
 		payouts[index] = {
-			age: age
-			//,accountValue: accountValue
-			//,annualWithdrawal: annualWithdrawal
-			//,accountValueAfterAnnualWithdrawal: accountValueAfterAnnualWithdrawal
-			//,accountValueAtEndOfYear: accountValueAtEndOfYear
-			, cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome)
-			//,yearsCompounded: yearsCompounded
-			//,insuranceProductIncome: insuranceProductIncome
-			//,presentValueOfInsuranceProductIncome: presentValueOfInsuranceProductIncome
-			//,cumulativePresentValueOfInsuranceProductIncome: cumulativePresentValueOfInsuranceProductIncome
-			, cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome)
-			//,presentValueOfInvestmentIncome: presentValueOfInvestmentIncome
-			//,cumulativePresentValueOfInvestmentIncome: cumulativePresentValueOfInvestmentIncome
-			//,incomeDifferential: incomeDifferential
+			age: age,
+			cumulativeInvestmentIncome: Math.floor(cumulativeInvestmentIncome),
+			cumulativeInsuranceProductIncome: Math.floor(cumulativeInsuranceProductIncome),
+			cumulativeIncomeDifferential: Math.floor(cumulativeIncomeDifferential)
 		};
 
 		if (!breakEvenAgeSet && cumulativeInvestmentIncome > cumulativeInsuranceProductIncome) {
@@ -182,39 +149,52 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 		}
 	}
 
-	if (breakEvenAgeSet) {
-		breakEvenMessage = 'Break-even age reached when you are ' + breakEvenAge + ' years old';
-	}
-	var rateOfReturnMessage = 'Based on ' + Math.floor(rateOfReturn * 100) + '% ROR';
+	var grossRateOfReturn = Math.floor(rateOfReturn * 100);
 
-	var categories = _.pluck(payouts, 'age');
-	var seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
-	var seriesB = _.pluck(payouts, 'cumulativeInsuranceProductIncome');
-	var investmentIncome = payouts[0].cumulativeInvestmentIncome;
-	var insuranceProductIncome = payouts[0].cumulativeInsuranceProductIncome;
+	var firstPayout = _.first(payouts);
 
-	var chunks = _.chunkAll(payouts, chunkSize);
-	var gogoPayouts = chunks[0];
-	var slowgoPayouts = chunks[1];
-	var nogoPayouts = chunks[2];
+	var breakEvenSeriesData = {};
+	breakEvenSeriesData.categories = _.pluck(payouts, 'age');
+	breakEvenSeriesData.seriesA = _.pluck(payouts, 'cumulativeInvestmentIncome');
+	breakEvenSeriesData.seriesB = _.pluck(payouts, 'cumulativeInsuranceProductIncome');
+	breakEvenSeriesData.seriesC = _.pluck(payouts, 'cumulativeIncomeDifferential');
 
-	var cumulativePayoutCategories = ['Go-Go', 'Slow-Go', 'No-Go'];
-	var cumulativePayoutSeriesA = [gogoPayouts[0].cumulativeInvestmentIncome, slowgoPayouts[0].cumulativeInvestmentIncome, nogoPayouts[0].cumulativeInvestmentIncome];
-	var cumulativePayoutSeriesB = [gogoPayouts[0].cumulativeInsuranceProductIncome, slowgoPayouts[0].cumulativeInsuranceProductIncome, nogoPayouts[0].cumulativeInsuranceProductIncome];
+	var split1Payouts = _.splitAt(payouts, chunkSize);
+	var split2Payouts = _.splitAt(split1Payouts[1], chunkSize);
 
-	return {
-		investmentIncome: investmentIncome,
-		insuranceProductIncome: insuranceProductIncome,
-		rateOfReturnMessage: rateOfReturnMessage,
-		categories: categories,
-		seriesA: seriesA,
-		seriesB: seriesB,
-		breakEvenMessage: breakEvenMessage,
-		cumulativePayoutCategories: cumulativePayoutCategories,
-		cumulativePayoutSeriesA: cumulativePayoutSeriesA,
-		cumulativePayoutSeriesB: cumulativePayoutSeriesB,
+	var gogoPayouts = split1Payouts[0];
+	var slowgoPayouts = split2Payouts[0];
+	var nogoPayouts = split2Payouts[1];
+
+	var lastGogoPayout = _.last(gogoPayouts);
+	var lastSlowgoPayout = _.last(slowgoPayouts);
+	var lastNogoPayout = _.last(nogoPayouts);
+
+	var periodicPayouts = [lastGogoPayout, lastSlowgoPayout, lastNogoPayout];
+
+	var gogoCategoryLabel = 'Go-Go (First ' + gogoPayouts.length + ' years)|' + lastGogoPayout.cumulativeIncomeDifferential + '% Advantage';
+	var slowgoCategoryLabel = 'Slow-Go (Middle ' + slowgoPayouts.length + ' years)|' + lastSlowgoPayout.cumulativeIncomeDifferential + '% Advantage';
+	var nogoCategoryLabel = 'No-Go (Final ' + nogoPayouts.length + ' years)|' + lastNogoPayout.cumulativeIncomeDifferential + '% Advantage';
+
+	var periodicAnalysis = {};
+	periodicAnalysis.categories = [gogoCategoryLabel, slowgoCategoryLabel, nogoCategoryLabel];
+	periodicAnalysis.seriesA = _.pluck(periodicPayouts, 'cumulativeInvestmentIncome');
+	periodicAnalysis.seriesB = _.pluck(periodicPayouts, 'cumulativeInsuranceProductIncome');
+	periodicAnalysis.seriesC = _.pluck(periodicPayouts, 'cumulativeIncomeDifferential');
+
+	var response = {
+		grossRateOfReturn: grossRateOfReturn,
+		firstPayout: firstPayout,
+		breakEvenSeriesData: breakEvenSeriesData,
+		firstPeriodicPayout: lastGogoPayout,
+		periodicSeriesData: periodicAnalysis,
 		gogoPayouts: gogoPayouts,
 		slowgoPayouts: slowgoPayouts,
 		nogoPayouts: nogoPayouts
 	};
+	if (breakEvenAgeSet) {
+		response.breakEvenAge = breakEvenAge;
+	}
+
+	return response;
 };

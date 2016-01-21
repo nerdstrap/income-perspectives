@@ -16,5 +16,8 @@
 		"mime": "latest",
 		"lodash-contrib": "latest"
 	},
+	"scripts": {
+		"postinstall": "bower install"
+	},
 	"license": "MIT"
 }

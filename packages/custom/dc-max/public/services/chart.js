@@ -1,8 +1,5 @@
 'use strict';
 
-var app = angular.module('mean.dc-max');
-app.factory('ChartFactory', ChartFactory);
-
 function ChartFactory($filter) {
 	var chartFactory = {};
 
@@ -12,16 +9,33 @@ function ChartFactory($filter) {
 				enabled: false
 			},
 			title: {
-				text: '4% Rule Baseline'
+				text: null
 			},
 			chart: {
-				type: 'line'
+				type: 'line',
+				height: 400,
+				width: 688
+			},
+			credits: {
+				enabled: false
 			},
 			xAxis: {
-				categories: categories
+				categories: categories,
+				title: {
+					text: 'Age',
+					style: {
+						fontWeight: 'bold'
+					}
+				}
 			},
 			yAxis: {
-				floor: 0
+				floor: 0,
+				title: {
+					text: 'Cumulative Payout',
+					style: {
+						fontWeight: 'bold'
+					}
+				}
 			},
 			tooltip: {
 				formatter: function () {
@@ -30,7 +44,8 @@ function ChartFactory($filter) {
 			},
 			series: [{
 				name: '4% Rule',
-				data: seriesA
+				data: seriesA,
+				color: '#95a5a6'
 			}]
 		};
 	};
@@ -44,16 +59,33 @@ function ChartFactory($filter) {
 				borderWidth: 0
 			},
 			title: {
-				text: 'Break-even Analysis'
+				text: null
+			},
+			credits: {
+				enabled: false
 			},
 			chart: {
-				type: 'line'
+				type: 'line',
+				height: 400,
+				width: 688
 			},
 			xAxis: {
-				categories: categories
+				categories: categories,
+				title: {
+					text: 'Age',
+					style: {
+						fontWeight: 'bold'
+					}
+				}
 			},
 			yAxis: {
-				floor: 0
+				floor: 0,
+				title: {
+					text: 'Cumulative Payout',
+					style: {
+						fontWeight: 'bold'
+					}
+				}
 			},
 			tooltip: {
 				formatter: function () {
@@ -62,10 +94,18 @@ function ChartFactory($filter) {
 			},
 			series: [{
 				name: '4% Rule',
-				data: seriesA
+				data: seriesA,
+				color: '#95a5a6',
+				marker: {
+					symbol: 'circle'
+				}
 			}, {
 				name: 'Annuity',
-				data: seriesB
+				data: seriesB,
+				color: '#72c02c',
+				marker: {
+					symbol: 'circle'
+				}
 			}]
 		};
 	};
@@ -79,18 +119,35 @@ function ChartFactory($filter) {
 				borderWidth: 0
 			},
 			title: {
-				text: 'Cumulative Payout '
+				text: null
 			},
 			chart: {
-				type: 'column'
+				type: 'column',
+				height: 400,
+				width: 688
+			},
+			credits: {
+				enabled: false
 			},
 			xAxis: {
-				categories: categories
+				categories: categories,
+				title: {
+					text: null
+				},
+				labels: {
+					formatter: function () {
+						var lines = this.value.split('|');
+						return lines[0] + '<br/>' + lines[1];
+					}
+				}
 			},
 			yAxis: {
 				floor: 0,
 				title: {
-					text: 'Payout $'
+					text: 'Cumulative Payout',
+					style: {
+						fontWeight: 'bold'
+					}
 				}
 			},
 			tooltip: {
@@ -106,14 +163,19 @@ function ChartFactory($filter) {
 			series: [{
 				name: '4% Rule',
 				data: seriesA,
-				stack: 'investmentIncome'
+				stack: 'investmentIncome',
+				color: '#95a5a6'
 			}, {
 				name: 'Annuity',
 				data: seriesB,
-				stack: 'insuranceProductIncome'
+				stack: 'insuranceProductIncome',
+				color: '#72c02c'
 			}]
 		};
 	};
 
 	return chartFactory;
 }
+
+var app = angular.module('mean.dc-max');
+app.factory('ChartFactory', ChartFactory);

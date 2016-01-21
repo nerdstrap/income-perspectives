@@ -6,145 +6,265 @@ var AbidReport = function () {
 	return {
 
 		renderWorksheet: function (currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany) {
-			$('#current-age-label').text(currentAge);
-			$('#retirement-age-label').text(retirementAge);
-			$('#number-of-periods-label').text(numberOfPeriods);
-			var payoffAge = retirementAge + numberOfPeriods;
-			$('#payoff-age-label').text(payoffAge);
-			$('#initial-deposit-label').text(currency(initialDeposit));
-			$('#rate-of-return-label').text(rateOfReturn.toFixed(2));
-			$('#management-fee-label').text(managementFee.toFixed(2));
-			var netRateOfReturn = rateOfReturn - managementFee;
-			$('#net-rate-of-return-label').text(netRateOfReturn.toFixed(2));
-			$('#insurance-product-income-label').text(currency(insuranceProductIncome));
-			$('#initial-withdrawal-label').text(initialWithdrawal.toFixed(2));
-			$('#inflation-rate-label').text(inflationRate.toFixed(2));
-			$('#client-name-label').text(clientName);
-			$('#insurance-company-label').text(insuranceCompany);
+			$('#client-name-input').val(clientName);
+			$('#insurance-company-input').val(insuranceCompany);
+			$('#current-age-input').val(currentAge);
+			$('#retirement-age-input').val(retirementAge);
+			$('#number-of-periods-input').val(numberOfPeriods);
+			//var payoffAge = retirementAge + numberOfPeriods;
+			//$('#payoff-age-input').val(payoffAge);
+			$('#initial-deposit-input').val(initialDeposit);
+			$('#rate-of-return-input').val(rateOfReturn.toFixed(2));
+			$('#management-fee-input').val(managementFee.toFixed(2));
+			//var netRateOfReturn = rateOfReturn - managementFee;
+			//$('#net-rate-of-return-input').val(netRateOfReturn.toFixed(2));
+			$('#insurance-product-income-input').val(insuranceProductIncome);
+			$('#initial-withdrawal-input').val(initialWithdrawal.toFixed(2));
+			$('#inflation-rate-input').val(inflationRate.toFixed(2));
 		},
 
-		renderBreakEvenAnalysisData: function (breakEvenMessage) {
-			$('#breakeven-age-label').text(breakEvenMessage);
+		renderBaselineData: function (investmentIncome, rateOfReturn) {
+			$('#baseline-investment-income-input').val(investmentIncome);
+			$('#baseline-rate-of-return-input').val(rateOfReturn.toFixed(2));
+		},
+
+		renderBaselineChart: function (categories, seriesA) {
+			$('#baseline-chart').highcharts({
+				legend: {
+					enabled: false
+				},
+				title: {
+					text: null
+				},
+				chart: {
+					type: 'line',
+					height: 400,
+					width: 780
+				},
+				credits: {
+					enabled: false
+				},
+				xAxis: {
+					categories: categories,
+					title: {
+						text: 'Age',
+						style: {
+							fontWeight: 'bold'
+						}
+					}
+				},
+				yAxis: {
+					floor: 0,
+					title: {
+						text: 'Cumulative Payout',
+						style: {
+							fontWeight: 'bold'
+						}
+					}
+				},
+				tooltip: {
+					formatter: function () {
+						return '<b>Age: ' + this.x + '</b><br/>' + this.series.name + ': ' + currency(this.y);
+					}
+				},
+				series: [{
+					name: '4% Rule',
+					data: seriesA,
+					color: '#95a5a6'
+				}]
+			});
+		},
+
+		renderBreakEvenAnalysisData: function (insuranceProducIncome, investmentIncome, incomeDifferential, rateOfReturn, breakEvenAge) {
+			$('#break-even-investment-income-input').val(investmentIncome);
+			$('#break-even-insurance-product-income-input').val(insuranceProducIncome);
+			$('#break-even-income-differential-input').val(incomeDifferential);
+			$('#break-even-rate-of-return-input').val(rateOfReturn.toFixed(2));
+			$('#break-even-age-input').val(breakEvenAge);
 		},
 
 		renderBreakEvenAnalysisChart: function (categories, seriesA, seriesB) {
 			$('#break-even-analysis-chart').highcharts({
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
 				title: {
-					text: 'Break-even Analysis'
+					text: null
+				},
+				credits: {
+					enabled: false
 				},
 				chart: {
 					type: 'line',
-					height: 600,
-					width: 975
+					height: 400,
+					width: 780
 				},
 				xAxis: {
-					categories: categories
+					categories: categories,
+					title: {
+						text: 'Age',
+						style: {
+							fontWeight: 'bold'
+						}
+					}
 				},
 				yAxis: {
 					floor: 0,
 					title: {
-						text: 'Payout $'
+						text: 'Cumulative Payout',
+						style: {
+							fontWeight: 'bold'
+						}
 					}
 				},
 				tooltip: {
-					enabled: false
+					formatter: function () {
+						return '<b>Age: ' + this.x + '</b><br/>' + this.series.name + ': ' + currency(this.y);
+					}
 				},
 				series: [{
-					animation: false,
 					name: '4% Rule',
-					data: seriesA
+					data: seriesA,
+					color: '#95a5a6',
+					marker: {
+						symbol: 'circle'
+					}
 				}, {
-					animation: false,
 					name: 'Annuity',
-					data: seriesB
+					data: seriesB,
+					color: '#72c02c',
+					marker: {
+						symbol: 'circle'
+					}
 				}]
 			});
 		},
 
-		renderCumulativePayoutData: function (seriesA0, seriesB0, grossRateOfReturn) {
-			$('#cumulative-insurance-product-income-0-label').text(currency(seriesB0));
-			$('#cumulative-investment-income-0-label').text(currency(seriesA0));
-			$('.gross-rate-of-return-label').text('Based on ' + (grossRateOfReturn * 100).toFixed(0) + '% ROR');
+		renderPeriodicData: function (insuranceProducIncome, investmentIncome, incomeDifferential, rateOfReturn) {
+			$('#periodic-investment-income-input').val(investmentIncome);
+			$('#periodic-insurance-product-income-input').val(insuranceProducIncome);
+			$('#periodic-income-differential-input').val(incomeDifferential);
+			$('#periodic-rate-of-return-input').val(rateOfReturn.toFixed(2));
 		},
 
-		renderCumulativePayoutChart: function (categories, seriesA, seriesB) {
-			$('#cumulative-payout-chart').highcharts({
+		renderPeriodicChart: function (categories, seriesA, seriesB) {
+			$('#periodic-chart').highcharts({
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
 				title: {
-					text: 'Cumulative Payout '
+					text: null
 				},
 				chart: {
 					type: 'column',
-					height: 600,
-					width: 975
+					height: 400,
+					width: 780
+				},
+				credits: {
+					enabled: false
 				},
 				xAxis: {
-					categories: categories
+					categories: categories,
+					title: {
+						text: null
+					},
+					labels: {
+						formatter: function () {
+							var lines = this.value.split('|');
+							return lines[0] + '<br/>' + lines[1];
+						}
+					}
 				},
 				yAxis: {
 					floor: 0,
 					title: {
-						text: 'Payout $'
+						text: 'Cumulative Payout',
+						style: {
+							fontWeight: 'bold'
+						}
 					}
 				},
 				tooltip: {
-					enabled: false
+					formatter: function () {
+						return '<b>' + this.key + '</b><br/>' + this.series.name + ': ' + currency(this.y);
+					}
+				},
+				plotOptions: {
+					column: {
+						stacking: 'normal'
+					}
 				},
 				series: [{
-					animation: false,
 					name: '4% Rule',
 					data: seriesA,
-					stack: 'investmentIncome'
+					stack: 'investmentIncome',
+					color: '#95a5a6'
 				}, {
-					animation: false,
 					name: 'Annuity',
 					data: seriesB,
-					stack: 'insuranceProductIncome'
+					stack: 'insuranceProductIncome',
+					color: '#72c02c'
 				}]
 			});
 		},
 
-		renderPeriodicPayouts: function (gogoPayouts, slowgoPayouts, nogoPayouts) {
+		renderPeriodicPayouts: function (gogoPayouts, gogoIncomeDifferential, slowgoPayouts, slowgoIncomeDifferential, nogoPayouts, nogoIncomeDifferential) {
 			var g = 0;
-			var gogoTable = "<div class='row'><div class='col-xs-12'><h4>Go Go (First " + gogoPayouts.length + " years)</h4></div></div>";
+			var gogoPayoutRows = '';
 			while (g < gogoPayouts.length) {
 				var age = gogoPayouts[g].age;
 				var cumulativeInsuranceProductIncome = currency(gogoPayouts[g].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(gogoPayouts[g].cumulativeInvestmentIncome);
-				gogoTable += "<div class='row'><div class='col-xs-4'>" + age + "</div><div class='col-xs-4'>" + cumulativeInvestmentIncome + "</div><div class='col-xs-4'>" + cumulativeInsuranceProductIncome + "</div></div>";
+				gogoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
 				g++;
 			}
-			$('#go-go-schedule').html(gogoTable);
+			$('#gogo-payout-rows').html(gogoPayoutRows);
+			$('#gogo-income-differential-label').text(gogoIncomeDifferential);
 
 			var s = 0;
-			var slowgoTable = "<div class='row'><div class='col-xs-12'><h4>Slow Go (Middle " + slowgoPayouts.length + " years)</h4></div></div>";
+			var slowgoPayoutRows = '';
 			while (s < slowgoPayouts.length) {
 				var age = slowgoPayouts[s].age;
 				var cumulativeInsuranceProductIncome = currency(slowgoPayouts[s].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(slowgoPayouts[s].cumulativeInvestmentIncome);
-				slowgoTable += "<div class='row'><div class='col-xs-4'>" + age + "</div><div class='col-xs-4'>" + cumulativeInvestmentIncome + "</div><div class='col-xs-4'>" + cumulativeInsuranceProductIncome + "</div></div>";
+				slowgoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
 				s++;
 			}
-			$('#slow-go-schedule').html(slowgoTable);
+			$('#slowgo-payout-rows').html(slowgoPayoutRows);
+			$('#slowgo-income-differential-label').text(slowgoIncomeDifferential);
 
 			var n = 0;
-			var nogoTable = "<div class='row'><div class='col-xs-12'><h4>No Go (Final " + nogoPayouts.length + " years)</h4></div></div>";
+			var nogoPayoutRows = '';
 			while (n < nogoPayouts.length) {
 				var age = nogoPayouts[n].age;
 				var cumulativeInsuranceProductIncome = currency(nogoPayouts[n].cumulativeInsuranceProductIncome);
 				var cumulativeInvestmentIncome = currency(nogoPayouts[n].cumulativeInvestmentIncome);
-				nogoTable += "<div class='row'><div class='col-xs-4'>" + age + "</div><div class='col-xs-4'>" + cumulativeInvestmentIncome + "</div><div class='col-xs-4'>" + cumulativeInsuranceProductIncome + "</div></div>";
+				nogoPayoutRows += '<tr><th scope="row">' + age + '</th><td class="col-md-4">' + cumulativeInvestmentIncome + '</td><td>' + cumulativeInsuranceProductIncome + '</td></tr>';
 				n++;
 			}
-			$('#no-go-schedule').html(nogoTable);
+			$('#nogo-payout-rows').html(nogoPayoutRows);
+			$('#nogo-income-differential-label').text(nogoIncomeDifferential);
 		},
 
-		init: function (currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, categories, seriesA, seriesB, breakEvenMessage, cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB, gogoPayouts, slowgoPayouts, nogoPayouts) {
+		init: function (currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany, firstPayout, breakEvenSeriesData, firstPeriodicPayout, periodicSeriesData, gogoPayouts, slowgoPayouts, nogoPayouts, breakEvenAge) {
 			this.renderWorksheet(currentAge, retirementAge, numberOfPeriods, initialDeposit, rateOfReturn, managementFee, insuranceProductIncome, initialWithdrawal, inflationRate, clientName, insuranceCompany);
-			this.renderBreakEvenAnalysisData(breakEvenMessage);
-			this.renderBreakEvenAnalysisChart(cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB);
-			this.renderCumulativePayoutData(cumulativePayoutSeriesA[0], cumulativePayoutSeriesB[0], rateOfReturn);
-			this.renderCumulativePayoutChart(cumulativePayoutCategories, cumulativePayoutSeriesA, cumulativePayoutSeriesB);
-			this.renderPeriodicPayouts(gogoPayouts, slowgoPayouts, nogoPayouts);
+
+			this.renderBaselineData(firstPayout.cumulativeInvestmentIncome, rateOfReturn);
+			this.renderBaselineChart(breakEvenSeriesData.categories, breakEvenSeriesData.seriesA);
+
+			this.renderBreakEvenAnalysisData(firstPayout.cumulativeInsuranceProductIncome, firstPayout.cumulativeInvestmentIncome, firstPayout.cumulativeIncomeDifferential, rateOfReturn);
+			this.renderBreakEvenAnalysisChart(breakEvenSeriesData.categories, breakEvenSeriesData.seriesA, breakEvenSeriesData.seriesB, breakEvenSeriesData.seriesC);
+
+			this.renderPeriodicData(firstPeriodicPayout.cumulativeInsuranceProductIncome, firstPeriodicPayout.cumulativeInvestmentIncome, firstPeriodicPayout.cumulativeIncomeDifferential, rateOfReturn);
+			this.renderPeriodicChart(periodicSeriesData.categories, periodicSeriesData.seriesA, periodicSeriesData.seriesB, periodicSeriesData.seriesC);
+
+			this.renderPeriodicPayouts(gogoPayouts, periodicSeriesData.seriesC[0], slowgoPayouts, periodicSeriesData.seriesC[1], nogoPayouts, periodicSeriesData.seriesC[2]);
 		}
 
 	};

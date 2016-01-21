@@ -7,6 +7,7 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 	vm.master = {
 		numberOfPeriods: 30,
 		initialWithdrawal: 0.04,
+		annualWithdrawal: 0.04,
 		inflationRate: 0.03
 	};
 	vm.baselineMaster = {};
@@ -66,7 +67,7 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 					vm.status.cumulativePayoutVisible = false;
 
 					vm.baseline = angular.copy(data);
-					vm.baselineChart = ChartFactory.getBaselineChart(vm.baseline.categories, vm.baseline.seriesA);
+					vm.baselineChart = ChartFactory.getBaselineChart(vm.baseline.baselineSeriesData.categories, vm.baseline.baselineSeriesData.seriesA);
 				})
 				.error(function (error) {
 					console.log(error);
@@ -77,9 +78,6 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 
 	function getBreakEvenAnalysis(worksheet) {
 		if (vm.ibidFrm.$valid) {
-			if (worksheet.growthRate >= 1 || worksheet.growthRate <= -1) {
-				worksheet.growthRate = worksheet.growthRate / 100;
-			}
 			if (worksheet.initialWithdrawal >= 1 || worksheet.initialWithdrawal <= -1) {
 				worksheet.initialWithdrawal = worksheet.initialWithdrawal / 100;
 			}
@@ -99,8 +97,8 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 					vm.status.cumulativePayoutVisible = true;
 
 					vm.breakEvenAnalysis = angular.copy(data);
-					vm.breakEvenAnalysisChart = ChartFactory.getBreakEvenAnalysisChart(vm.breakEvenAnalysis.categories, vm.breakEvenAnalysis.seriesA, vm.breakEvenAnalysis.seriesB);
-					vm.cumulativePayoutChart = ChartFactory.getCumulativePayoutChart(vm.breakEvenAnalysis.cumulativePayoutCategories, vm.breakEvenAnalysis.cumulativePayoutSeriesA, vm.breakEvenAnalysis.cumulativePayoutSeriesB);
+					vm.breakEvenAnalysisChart = ChartFactory.getBreakEvenAnalysisChart(vm.breakEvenAnalysis.breakEvenSeriesData.categories, vm.breakEvenAnalysis.breakEvenSeriesData.seriesA, vm.breakEvenAnalysis.breakEvenSeriesData.seriesB);
+					vm.cumulativePayoutChart = ChartFactory.getCumulativePayoutChart(vm.breakEvenAnalysis.periodicSeriesData.categories, vm.breakEvenAnalysis.periodicSeriesData.seriesA, vm.breakEvenAnalysis.periodicSeriesData.seriesB);
 				})
 				.error(function (error) {
 					console.log(error);
@@ -111,9 +109,6 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 
 	function getPdf(worksheet) {
 		if (vm.ibidFrm.$valid) {
-			if (worksheet.growthRate >= 1 || worksheet.growthRate <= -1) {
-				worksheet.growthRate = worksheet.growthRate / 100;
-			}
 			if (worksheet.initialWithdrawal >= 1 || worksheet.initialWithdrawal <= -1) {
 				worksheet.initialWithdrawal = worksheet.initialWithdrawal / 100;
 			}
@@ -139,8 +134,10 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 	function init() {
 		vm.user = AuthFactory;
 		if (vm.user.authenticated) {
-			StripeFactory.getCustomer().success(function (data) {
+			StripeFactory.getCustomer().success(function (response) {
+				//if (response && response.plan) {
 				vm.status.advancedOptionsDisabled = false;
+				//}
 			});
 		}
 		vm.worksheet = angular.copy(vm.master);
