@@ -124,6 +124,9 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 
 		accountValue = accountValueAtEndOfYear;
 		annualWithdrawal *= annualInflationRate;
+		if (accountValue < annualWithdrawal) {
+			annualWithdrawal = accountValue;
+		}
 		accountValueAfterAnnualWithdrawal = accountValue - annualWithdrawal;
 		accountValueAtEndOfYear = accountValueAfterAnnualWithdrawal * annualRateOfReturn;
 		cumulativeInvestmentIncome += annualWithdrawal;

@@ -4,6 +4,7 @@
 			<form name="abidCtrl.abidFrm" novalidate>
 				<uib-accordion close-others="false">
 					<uib-accordion-group is-open="abidCtrl.status.firstOpen">
+
 						<uib-accordion-heading>
 							General
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.firstOpen, 'glyphicon-chevron-right': !abidCtrl.status.firstOpen}"></i>
@@ -46,13 +47,14 @@
 
 					</uib-accordion-group>
 					<uib-accordion-group is-open="abidCtrl.status.secondOpen">
+
 						<uib-accordion-heading>
 							Investment Account
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.secondOpen, 'glyphicon-chevron-right': !abidCtrl.status.secondOpen}"></i>
 						</uib-accordion-heading>
+
 						<div class="form-group" bs-has>
 							<label for="initial-deposit-input">Initial Deposit</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
 								<input id="initial-deposit-input" type="number" name="initialDeposit" ng-model="abidCtrl.worksheet.initialDeposit" focus-on="secondOpened" class="form-control" required tabindex="0"/>
@@ -65,7 +67,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="rate-of-return-input">Gross Rate of Return</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="rate-of-return-input" type="number" name="rateOfReturn" ng-model="abidCtrl.worksheet.rateOfReturn" class="form-control" required tabindex="0"/>
@@ -78,7 +79,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="management-fee-input">Management Fee</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="management-fee-input" type="number" name="managementFee" ng-model="abidCtrl.worksheet.managementFee" class="form-control" required tabindex="0"/>
@@ -91,16 +91,17 @@
 
 						<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
 						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBaseline(abidCtrl.worksheet)" value="Plot 4%" tabindex="0"/>
+
 					</uib-accordion-group>
 					<uib-accordion-group is-open="abidCtrl.status.thirdOpen">
+
 						<uib-accordion-heading>
 							Index Annuity
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.thirdOpen, 'glyphicon-chevron-right': !abidCtrl.status.thirdOpen}"></i>
 						</uib-accordion-heading>
+
 						<div class="form-group" bs-has>
-
 							<label for="insurance-product-income-input">Annual Income</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
 								<input id="insurance-product-income-input" type="number" name="insuranceProductIncome" ng-model="abidCtrl.worksheet.insuranceProductIncome" class="form-control" focus-on="thirdOpened" required tabindex="0"/>
@@ -119,7 +120,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="initial-withdrawal-input">Initial Withdrawal</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="abidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
@@ -132,7 +132,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="inflation-rate-input">Annual Inflation Rate</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="abidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
@@ -158,7 +157,9 @@
 								<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="abidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 							</div>
 						</div>
+
 						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getPdf(abidCtrl.worksheet)" value="Generate Pdf" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+
 					</uib-accordion-group>
 				</uib-accordion>
 			</form>

@@ -4,6 +4,7 @@
 			<form name="ibidCtrl.ibidFrm" novalidate>
 				<uib-accordion close-others="false">
 					<uib-accordion-group is-open="ibidCtrl.status.firstOpen">
+
 						<uib-accordion-heading>
 							General
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ibidCtrl.status.firstOpen, 'glyphicon-chevron-right': !ibidCtrl.status.firstOpen}"></i>
@@ -41,18 +42,20 @@
 								<span ng-show="ibidCtrl.ibidFrm.numberOfPeriods.$error.required">Number of Retirement Years is required.</span>
 							</span>
 						</div>
+
 						<input class="btn-u btn-u-default" type="button" data-ng-click="ibidCtrl.reset()" value="Reset" tabindex="-1"/>
 						<input class="btn-u" type="submit" data-ng-click="ibidCtrl.updateGeneral(ibidCtrl.worksheet)" value="Continue" tabindex="0"/>
 
 					</uib-accordion-group>
 					<uib-accordion-group is-open="ibidCtrl.status.secondOpen">
+
 						<uib-accordion-heading>
 							Investment Account
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ibidCtrl.status.secondOpen, 'glyphicon-chevron-right': !ibidCtrl.status.secondOpen}"></i>
 						</uib-accordion-heading>
+
 						<div class="form-group" bs-has>
 							<label for="annual-deposit-input">Annual Contribution</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
 								<input id="annual-deposit-input" type="number" name="annualDeposit" ng-model="ibidCtrl.worksheet.annualDeposit" focus-on="secondOpened" class="form-control" required tabindex="0"/>
@@ -65,7 +68,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="growth-rate-input">Annual Contribution Increase</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="growth-rate-input" type="number" name="growthRate" ng-model="ibidCtrl.worksheet.growthRate" class="form-control" required tabindex="0"/>
@@ -78,7 +80,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="rate-of-return-input">Gross Rate of Return</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="rate-of-return-input" type="number" name="rateOfReturn" ng-model="ibidCtrl.worksheet.rateOfReturn" class="form-control" required tabindex="0"/>
@@ -91,7 +92,6 @@
 
 						<div class="form-group" bs-has>
 							<label for="management-fee-input">Management Fee</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="management-fee-input" type="number" name="managementFee" ng-model="ibidCtrl.worksheet.managementFee" class="form-control" required tabindex="0"/>
@@ -104,16 +104,17 @@
 
 						<input class="btn-u btn-u-default" type="button" data-ng-click="ibidCtrl.reset()" value="Reset" tabindex="-1"/>
 						<input class="btn-u" type="submit" data-ng-click="ibidCtrl.getBaseline(ibidCtrl.worksheet)" value="Plot 4%" tabindex="0"/>
+
 					</uib-accordion-group>
 					<uib-accordion-group is-open="ibidCtrl.status.thirdOpen">
+
 						<uib-accordion-heading>
 							Index UL
 							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ibidCtrl.status.thirdOpen, 'glyphicon-chevron-right': !ibidCtrl.status.thirdOpen}"></i>
 						</uib-accordion-heading>
+
 						<div class="form-group" bs-has>
-
 							<label for="insurance-product-income-input">Annual Income</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
 								<input id="insurance-product-income-input" type="number" name="insuranceProductIncome" ng-model="ibidCtrl.worksheet.insuranceProductIncome" class="form-control" focus-on="thirdOpened" required tabindex="0"/>
@@ -128,24 +129,23 @@
 						<input class="btn-u" type="submit" data-ng-click="ibidCtrl.getBreakEvenAnalysis(ibidCtrl.worksheet)" value="Compare" tabindex="0"/>
 
 						<hr>
+
 						<p ng-show="ibidCtrl.status.advancedOptionsDisabled">Subscribe to Modify Options</p>
 
 						<div class="form-group" bs-has>
-							<label for="annual-withdrawal-input">Annual Withdrawal</label>
-
+							<label for="initial-withdrawal-input">Initial Withdrawal</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-								<input id="annual-withdrawal-input" type="number" name="annualWithdrawal" ng-model="ibidCtrl.worksheet.annualWithdrawal" class="form-control" required ng-disabled="ibidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+								<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="ibidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="ibidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 								<span class="input-group-addon">%&nbsp;</span>
 							</div>
-							<span class="has-error" ng-show="ibidCtrl.ibidFrm.annualWithdrawal.$dirty && ibidCtrl.ibidFrm.annualWithdrawal.$invalid">
-								<span ng-show="ibidCtrl.ibidFrm.annualWithdrawal.$error.required">Annual Withdrawal is required.</span>
+							<span class="has-error" ng-show="ibidCtrl.ibidFrm.initialWithdrawal.$dirty && ibidCtrl.ibidFrm.initialWithdrawal.$invalid">
+								<span ng-show="ibidCtrl.ibidFrm.initialWithdrawal.$error.required">Annual Withdrawal is required.</span>
 							</span>
 						</div>
 
 						<div class="form-group" bs-has>
 							<label for="inflation-rate-input">Annual Inflation Rate</label>
-
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
 								<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="ibidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="ibidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
@@ -171,7 +171,9 @@
 								<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="ibidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="ibidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
 							</div>
 						</div>
+
 						<input class="btn-u" type="submit" data-ng-click="ibidCtrl.getPdf(ibidCtrl.worksheet)" value="Generate Pdf" ng-disabled="ibidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+
 					</uib-accordion-group>
 				</uib-accordion>
 			</form>

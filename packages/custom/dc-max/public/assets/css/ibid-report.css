@@ -1,0 +1,58 @@
+.report {
+	width: 842px;
+	max-width: 842px;
+}
+.frm-u {
+	box-shadow: none;
+	border: solid 1px #eee;
+	margin: 0;
+	outline: none;
+	color: #666;
+}
+
+.frm-u header {
+	color: inherit;
+	display: block;
+	font-size: 20px;
+	background: #fff;
+	font-weight: 400;
+	padding: 8px 30px;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.frm-u fieldset + fieldset {
+	border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.frm-u fieldset {
+	display: block;
+	padding: 25px 30px 5px;
+	border: none;
+}
+
+.frm-u footer {
+	background: #fff;
+	padding: 15px 30px;
+	display: block;
+	border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.form-control {
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.input-group-addon {
+	border-radius: 0;
+}
+
+.form-control:focus {
+	border-color: #bbb;
+	box-shadow: 0 0 2px #c9c9c9;
+}
+
+.input-group-addon {
+	color: #b3b3b3;
+	font-size: 14px;
+	background: #fff;
+}
