@@ -29,6 +29,26 @@ SystemPackage.register(function (app, auth, database, circles) {
 	SystemPackage.aggregateAsset('css', 'view-header.css');
 	SystemPackage.angularDependencies(['mean-factory-interceptor']);
 
+	SystemPackage.aggregateAsset('css', 'plugins.css');
+	SystemPackage.aggregateAsset('css', 'blocks.css');
+	SystemPackage.aggregateAsset('css', 'index-app.css');
+	SystemPackage.aggregateAsset('css', '../fancybox/jquery.fancybox.css');
+	SystemPackage.aggregateAsset('css', '../owl-carousel/owl.carousel.css');
+	SystemPackage.aggregateAsset('css', '../master-slider/style/masterslider.css');
+	SystemPackage.aggregateAsset('css', '../master-slider/skins/black-2/style.css');
+
+	SystemPackage.aggregateAsset('js', '../master-slider/masterslider.min.js');
+	SystemPackage.aggregateAsset('js', '../master-slider/jquery.easing.min.js');
+	SystemPackage.aggregateAsset('js', '../counter/waypoints.min.js');
+	SystemPackage.aggregateAsset('js', '../counter/jquery.counterup.min.js');
+	SystemPackage.aggregateAsset('js', '../fancybox/jquery.fancybox.pack.js');
+	SystemPackage.aggregateAsset('js', '../owl-carousel/owl.carousel.min.js');
+
+	SystemPackage.aggregateAsset('js', '../lib/index-app.js');
+	SystemPackage.aggregateAsset('js', '../lib/fancy-box.js');
+	SystemPackage.aggregateAsset('js', '../lib/owl-carousel.js');
+	SystemPackage.aggregateAsset('js', '../lib/master-slider-fw.js');
+
 	/*
 	 * Express Middleware will be configured BEFORE this Package
 	 */

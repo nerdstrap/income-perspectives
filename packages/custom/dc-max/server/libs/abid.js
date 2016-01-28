@@ -173,9 +173,9 @@ module.exports.getBreakEvenAnalysis = function (currentAge, retirementAge, numbe
 
 	var periodicPayouts = [lastGogoPayout, lastSlowgoPayout, lastNogoPayout];
 
-	var gogoCategoryLabel = 'Go-Go (First ' + gogoPayouts.length + ' years)|' + lastGogoPayout.cumulativeIncomeDifferential + '% Advantage';
-	var slowgoCategoryLabel = 'Slow-Go (Middle ' + slowgoPayouts.length + ' years)|' + lastSlowgoPayout.cumulativeIncomeDifferential + '% Advantage';
-	var nogoCategoryLabel = 'No-Go (Final ' + nogoPayouts.length + ' years)|' + lastNogoPayout.cumulativeIncomeDifferential + '% Advantage';
+	var gogoCategoryLabel = 'Go-Go (through ' + gogoPayouts.length + ' years)|' + lastGogoPayout.cumulativeIncomeDifferential + '% Advantage';
+	var slowgoCategoryLabel = 'Slow-Go (through ' + (gogoPayouts.length + slowgoPayouts.length) + ' years)|' + lastSlowgoPayout.cumulativeIncomeDifferential + '% Advantage';
+	var nogoCategoryLabel = 'No-Go (through ' + payouts.length + ' years)|' + lastNogoPayout.cumulativeIncomeDifferential + '% Advantage';
 
 	var periodicAnalysis = {};
 	periodicAnalysis.categories = [gogoCategoryLabel, slowgoCategoryLabel, nogoCategoryLabel];
