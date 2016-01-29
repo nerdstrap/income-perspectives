@@ -44,10 +44,10 @@ SystemPackage.register(function (app, auth, database, circles) {
 	SystemPackage.aggregateAsset('js', '../fancybox/jquery.fancybox.pack.js');
 	SystemPackage.aggregateAsset('js', '../owl-carousel/owl.carousel.min.js');
 
-	SystemPackage.aggregateAsset('js', 'indexApp1.js');
-	SystemPackage.aggregateAsset('js', 'fancy-box.js');
-	SystemPackage.aggregateAsset('js', 'owl-carousel.js');
-	SystemPackage.aggregateAsset('js', 'master-slider-fw.js');
+	SystemPackage.aggregateAsset('js', '../js1/indexApp1.js');
+	SystemPackage.aggregateAsset('js', '../js1/fancy-box.js');
+	SystemPackage.aggregateAsset('js', '../js1/owl-carousel.js');
+	SystemPackage.aggregateAsset('js', '../js1/master-slider-fw.js');
 
 	/*
 	 * Express Middleware will be configured BEFORE this Package
