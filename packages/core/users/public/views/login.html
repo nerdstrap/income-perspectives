@@ -1,4 +1,13 @@
 <div class="view auth-login-view" data-ng-controller="LoginController as loginCtrl">
+	<div class="container">
+		<div class="pull-left">
+			<h2>{{loginCtrl.view.title}}</h2>
+		</div>
+		<div class="breadcrumbs pull-right">
+			<a ui-sref="{{loginCtrl.view.parentSref}}">{{loginCtrl.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{loginCtrl.view.title}}</span>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-xs-8">
 			<form class="frm-u" name="loginCtrl.loginFrm" novalidate>

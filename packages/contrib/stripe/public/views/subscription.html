@@ -1,82 +1,96 @@
-<div class="view subscription-view" data-ng-controller="SubscriptionController as subCtrl">
-	<h1>Subscription Plans</h1>
-
-	<div class="row" ng-show="!subCtrl.status.newCardVisible">
-		<div class="col-xs-6">
-			<div class="panel panel-success">
-				<div class="panel-heading">Individuals $39.99/month</div>
-				<div class="panel-body">
-					<p ng-show="subCtrl.customer.subscriptionId">
-						You are currently subscribed with card ending in {{subCtrl.customer.last4}}
-					</p>
-					<button class="btn btn-success" type="button" data-ng-click="subCtrl.subscribe()" ng-show="!subCtrl.status.showUnsubscribe" tabindex="0">Subscribe</button>
-					<button class="btn btn-danger" type="button" data-ng-click="subCtrl.unsubscribe()" ng-show="subCtrl.status.showUnsubscribe" ng-disabled="subCtrl.status.unsubscribeDisabled" tabindex="-1">Unsubscribe</button>
-				</div>
+<div data-ng-controller="SubscriptionController as subCtrl">
+	<div class="view-header">
+		<div class="container">
+			<div class="pull-left">
+				<h2>{{subCtrl.view.title}}</h2>
 			</div>
-		</div>
-		<div class="col-xs-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">Free</div>
-				<div class="panel-body">
-					<p>demo worksheets and value proposition</p>
-				</div>
+			<div class="breadcrumbs pull-right">
+				<a ui-sref="{{subCtrl.view.parentSref}}">{{subCtrl.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{subCtrl.view.title}}</span>
 			</div>
 		</div>
 	</div>
 
-	<div class="row" ng-show="subCtrl.status.newCardVisible">
-		<div class="col-xs-6">
-			<div class="panel panel-success">
-				<div class="panel-heading">New Credit Card</div>
-				<div class="panel-body">
-					<form name="subCtrl.newCardFrm" novalidate>
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="form-group" bs-has>
-									<label for="number-input">Number</label>
-									<input id="number-input" type="text" size="20" name="number" data-stripe="number" ng-model="subCtrl.newCard.number" class="form-control" focus-on="firstOpened" required tabindex="0"/>
-									<span class="has-error" ng-show="subCtrl.newCardFrm.number.$dirty && subCtrl.newCardFrm.number.$invalid">
-										<span ng-show="subCtrl.newCardFrm.number.$error.required">Card Number is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-2">
-								<div class="form-group" bs-has>
-									<label for="cvc-input">CVC</label>
-									<input id="cvc-input" type="text" size="4" name="cvc" data-stripe="cvc" ng-model="subCtrl.newCard.cvc" class="form-control" required tabindex="0"/>
-									<span class="has-error" ng-show="subCtrl.newCardFrm.cvc.$dirty && subCtrl.newCardFrm.cvc.$invalid">
-										<span ng-show="subCtrl.newCardFrm.cvc.$error.required">CVC is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-2">
-								<div class="form-group" bs-has>
-									<label for="month-input">Month</label>
-									<input id="month-input" type="text" size="2" name="month" data-stripe="exp-month" ng-model="subCtrl.newCard.month" class="form-control" required tabindex="0"/>
-									<span class="has-error" ng-show="subCtrl.newCardFrm.month.$dirty && subCtrl.newCardFrm.month.$invalid">
-										<span ng-show="subCtrl.newCardFrm.month.$error.required">Month is required.</span>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-2">
-								<div class="form-group" bs-has>
-									<label for="year-input">Year</label>
-									<input id="year-input" type="text" size="2" name="year" data-stripe="exp-year" ng-model="subCtrl.newCard.year" class="form-control" required tabindex="0"/>
-									<span class="has-error" ng-show="subCtrl.newCardFrm.year.$dirty && subCtrl.newCardFrm.year.$invalid">
-										<span ng-show="subCtrl.newCardFrm.year.$error.required">Year is required.</span>
-									</span>
-								</div>
-							</div>
+	<div class="view subscription-view">
+		<div class="container">
+			<h1>Subscription Plans</h1>
+
+			<div class="row" ng-show="!subCtrl.status.newCardVisible">
+				<div class="col-xs-6">
+					<div class="panel panel-success">
+						<div class="panel-heading">Individuals $39.99/month</div>
+						<div class="panel-body">
+							<p ng-show="subCtrl.customer.subscriptionId">
+								You are currently subscribed with card ending in {{subCtrl.customer.last4}} </p>
+							<button class="btn btn-success" type="button" data-ng-click="subCtrl.subscribe()" ng-show="!subCtrl.status.showUnsubscribe" tabindex="0">Subscribe</button>
+							<button class="btn btn-danger" type="button" data-ng-click="subCtrl.unsubscribe()" ng-show="subCtrl.status.showUnsubscribe" ng-disabled="subCtrl.status.unsubscribeDisabled" tabindex="-1">Unsubscribe</button>
 						</div>
-						<div class="row">
-							<div class="col-xs-12">
-								<button class="btn btn-default" type="button" data-ng-click="subCtrl.cancelAddNewCard()" tabindex="-1">Cancel</button>
-								<div class="pull-right">
-									<button class="btn btn-primary" type="button" data-ng-click="subCtrl.addNewCard()" ng-disabled="subCtrl.status.addNewCardDisabled" tabindex="0">Save Credit Card</button>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Free</div>
+						<div class="panel-body">
+							<p>demo worksheets and value proposition</p>
 						</div>
-					</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-show="subCtrl.status.newCardVisible">
+				<div class="col-xs-6">
+					<div class="panel panel-success">
+						<div class="panel-heading">New Credit Card</div>
+						<div class="panel-body">
+							<form name="subCtrl.newCardFrm" novalidate>
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="form-group" bs-has>
+											<label for="number-input">Number</label>
+											<input id="number-input" type="text" size="20" name="number" data-stripe="number" ng-model="subCtrl.newCard.number" class="form-control" focus-on="firstOpened" required tabindex="0"/>
+											<span class="has-error" ng-show="subCtrl.newCardFrm.number.$dirty && subCtrl.newCardFrm.number.$invalid">
+												<span ng-show="subCtrl.newCardFrm.number.$error.required">Card Number is required.</span>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<div class="form-group" bs-has>
+											<label for="cvc-input">CVC</label>
+											<input id="cvc-input" type="text" size="4" name="cvc" data-stripe="cvc" ng-model="subCtrl.newCard.cvc" class="form-control" required tabindex="0"/>
+											<span class="has-error" ng-show="subCtrl.newCardFrm.cvc.$dirty && subCtrl.newCardFrm.cvc.$invalid">
+												<span ng-show="subCtrl.newCardFrm.cvc.$error.required">CVC is required.</span>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<div class="form-group" bs-has>
+											<label for="month-input">Month</label>
+											<input id="month-input" type="text" size="2" name="month" data-stripe="exp-month" ng-model="subCtrl.newCard.month" class="form-control" required tabindex="0"/>
+											<span class="has-error" ng-show="subCtrl.newCardFrm.month.$dirty && subCtrl.newCardFrm.month.$invalid">
+												<span ng-show="subCtrl.newCardFrm.month.$error.required">Month is required.</span>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<div class="form-group" bs-has>
+											<label for="year-input">Year</label>
+											<input id="year-input" type="text" size="2" name="year" data-stripe="exp-year" ng-model="subCtrl.newCard.year" class="form-control" required tabindex="0"/>
+											<span class="has-error" ng-show="subCtrl.newCardFrm.year.$dirty && subCtrl.newCardFrm.year.$invalid">
+												<span ng-show="subCtrl.newCardFrm.year.$error.required">Year is required.</span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<button class="btn btn-default" type="button" data-ng-click="subCtrl.cancelAddNewCard()" tabindex="-1">Cancel</button>
+										<div class="pull-right">
+											<button class="btn btn-primary" type="button" data-ng-click="subCtrl.addNewCard()" ng-disabled="subCtrl.status.addNewCardDisabled" tabindex="0">Save Credit Card</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

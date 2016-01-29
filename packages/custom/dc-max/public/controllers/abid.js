@@ -4,6 +4,12 @@ function AbidController($scope, $rootScope, focus, AbidFactory, ChartFactory, Au
 
 	var vm = this;
 
+	vm.view = {
+		title: 'Index Annuity',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {
 		numberOfPeriods: 30,
 		initialWithdrawal: 0.04,
@@ -132,7 +138,7 @@ function AbidController($scope, $rootScope, focus, AbidFactory, ChartFactory, Au
 		if (vm.user.authenticated) {
 			StripeFactory.getCustomer().success(function (response) {
 				//if (response && response.plan) {
-					vm.status.advancedOptionsDisabled = false;
+				vm.status.advancedOptionsDisabled = false;
 				//}
 			});
 		}

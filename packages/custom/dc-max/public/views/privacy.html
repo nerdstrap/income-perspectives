@@ -1,75 +1,86 @@
-<div class="view privacy-view">
+<div data-ng-controller="PrivacyController as privCtrl">
+	<div class="view-header">
+		<div class="container">
+			<div class="pull-left">
+				<h2>{{privCtrl.view.title}}</h2>
+			</div>
+			<div class="breadcrumbs pull-right">
+				<a ui-sref="{{privCtrl.view.parentSref}}">{{privCtrl.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{privCtrl.view.title}}</span>
+			</div>
+		</div>
+	</div>
 
-	<ol>
-		<li><b>Applicability</b>
-
-			<p>This Statement of Privacy and Security applies to all information gathered or maintained by Income Perspectives. This includes information transmitted to us by email, telephone, fax, or otherwise by one of our affiliates or agents. This site may contain links to other sites. We are not responsible for the privacy practices, the
-			   security measures,
-			   or the content of any such web site.</p>
-		</li>
-		<li><b>Your Privacy</b>
-
-			<p>We are committed to protecting your privacy. We do not sell, trade or rent your personal information to others.
-
-			   Questions regarding this statement should be directed to: privacy@incomeperspectives.com or by writing to:</p>
-
-			<p>Income Perspectives<br/>
-			   attn: Privacy Officer
-			</p>
-
-		</li>
-		<li><b>Disclosure of Personally Identifiable Information</b>
+	<div class="view privacy-view">
+		<div class="container">
 			<ol>
-				<li>What Can I Do Without Disclosing Any Information?
-					<p>You may learn about our software, without disclosing any personally identifiable information. However, for any customized analysis, we require you to provide us with certain personally identifiable information.</p>
-					<ol>
-						<li>Why Do I Need to Submit Personal Information?
-							<p>
-								Personal Information
-								To subscribe to our software, you may need to provide the type of credit card you wish to use, the credit card number, the date of expiration, credit card security code, your phone number, and mailing address. Where payment by Electronic Funds Transfer (EFT) is possible, you may need to provide you bank name, your
-								account number and your routing number.</p>
-						</li>
-						<li>Any changes to the Statement of Privacy and Security will be posted immediately on this site, and you should always review the statement prior to submitting information.</li>
-					</ol>
+				<li><b>Applicability</b>
+
+					<p>This Statement of Privacy and Security applies to all information gathered or maintained by Income Perspectives. This includes information transmitted to us by email, telephone, fax, or otherwise by one of our affiliates or agents. This site may contain links to other sites. We are not responsible for the privacy practices, the
+					   security measures,
+					   or the content of any such web site.</p>
 				</li>
-				<li>What Do You Do with this Information?<p>
-					We take the information that you provide and return the results of our proprietary software in order to deliver the reports you request. Payment information, when provided, is securely transmitted to a payment processor to establish a billing profile.</p>
-				</li>
-				<li>Will Any of the Personal Information Collected be Disclosed to Outside Parties?
-					<p>
-						We do not divulge, sell, trade or rent your personal information to any others.</p>
-				</li>
-				<li>How Do I Remove My Information from Your Database?
-					<p>If you do not wish to receive marketing email from us, you can remove yourself from our distribution lists at any time by:</p>
+				<li><b>Your Privacy</b>
+
+					<p>We are committed to protecting your privacy. We do not sell, trade or rent your personal information to others.
+
+					   Questions regarding this statement should be directed to: privacy@incomeperspectives.com or by writing to:</p>
 
 					<p>Income Perspectives<br/>
-					   attn: Privacy Officer
-					</p>
-				</li>
-			</ol>
-		</li>
-		<li><b>What Happens When I enter personal information Online?</b>
-			<ol>
-				<li>How is the Information that I Send to You Protected?
-					All of the information that you transmit to us electronically, including basic information necessary for basic calculators as well as personally identifiable information disclosed during registration, including credit card and other personally identifiable information is securely protected using at a minimum
-					<b>SSL (Secure Socket
-					   Layer) 128-bit encryption</b>. VeriSign provides the digital certificate enabling us to employ SSL encryption. Furthermore, we have implemented strict policy guidelines to safeguard the privacy of your personally identifiable financial information from unauthorized access or improper use, and we will continue to enhance our
-					security
-					procedures as new technology becomes available.
-				</li>
-				<li>How Do You Ensure the Security of the Payment Information Once I Give it to You?
-					Processing of online software subscriptions is facilitated through Authorize.net. When you submit your credit card information, it is securely transmitted to Authorize.net and a Recurring Billing profile is established. We temporarily receive, but
-					<b>do not</b> permanently store, complete credit card or EFT information on our
-					server or
-					at our offline site. For security and verification purposes we store the last four digits only of an online purchaser’s credit card. The credit card’s last four digits are stored with the purchase order(s) with which they are associated and are stored only for use as record locators and to verify purchase orders.
-				</li>
-			</ol>
-		</li>
-		<li><b>Consent</b>
+					   attn: Privacy Officer </p>
 
-			<p>By submitting information on our web site, you consent to the collection and use by us of the information you disclosed in accordance with this Statement of Privacy and Security. If we decide to change our privacy and/or security policies, we will post those changes on this page so that you are always aware of what information we
-			   collect, how we use it, and under what circumstances we disclose it.
-			</p>
-		</li>
-	</ol>
+				</li>
+				<li><b>Disclosure of Personally Identifiable Information</b>
+					<ol>
+						<li>What Can I Do Without Disclosing Any Information?
+							<p>You may learn about our software, without disclosing any personally identifiable information. However, for any customized analysis, we require you to provide us with certain personally identifiable information.</p>
+							<ol>
+								<li>Why Do I Need to Submit Personal Information?
+									<p>
+										Personal Information
+										To subscribe to our software, you may need to provide the type of credit card you wish to use, the credit card number, the date of expiration, credit card security code, your phone number, and mailing address. Where payment by Electronic Funds Transfer (EFT) is possible, you may need to provide you bank name, your
+										account number and your routing number.</p>
+								</li>
+								<li>Any changes to the Statement of Privacy and Security will be posted immediately on this site, and you should always review the statement prior to submitting information.</li>
+							</ol>
+						</li>
+						<li>What Do You Do with this Information?<p>
+							We take the information that you provide and return the results of our proprietary software in order to deliver the reports you request. Payment information, when provided, is securely transmitted to a payment processor to establish a billing profile.</p>
+						</li>
+						<li>Will Any of the Personal Information Collected be Disclosed to Outside Parties?
+							<p>
+								We do not divulge, sell, trade or rent your personal information to any others.</p>
+						</li>
+						<li>How Do I Remove My Information from Your Database?
+							<p>If you do not wish to receive marketing email from us, you can remove yourself from our distribution lists at any time by:</p>
+
+							<p>Income Perspectives<br/>
+							   attn: Privacy Officer </p>
+						</li>
+					</ol>
+				</li>
+				<li><b>What Happens When I enter personal information Online?</b>
+					<ol>
+						<li>How is the Information that I Send to You Protected?
+							All of the information that you transmit to us electronically, including basic information necessary for basic calculators as well as personally identifiable information disclosed during registration, including credit card and other personally identifiable information is securely protected using at a minimum
+							<b>SSL (Secure Socket
+							   Layer) 128-bit encryption</b>. VeriSign provides the digital certificate enabling us to employ SSL encryption. Furthermore, we have implemented strict policy guidelines to safeguard the privacy of your personally identifiable financial information from unauthorized access or improper use, and we will continue to enhance our
+							security
+							procedures as new technology becomes available.
+						</li>
+						<li>How Do You Ensure the Security of the Payment Information Once I Give it to You?
+							Processing of online software subscriptions is facilitated through Authorize.net. When you submit your credit card information, it is securely transmitted to Authorize.net and a Recurring Billing profile is established. We temporarily receive, but
+							<b>do not</b> permanently store, complete credit card or EFT information on our
+							server or
+							at our offline site. For security and verification purposes we store the last four digits only of an online purchaser’s credit card. The credit card’s last four digits are stored with the purchase order(s) with which they are associated and are stored only for use as record locators and to verify purchase orders.
+						</li>
+					</ol>
+				</li>
+				<li><b>Consent</b>
+
+					<p>By submitting information on our web site, you consent to the collection and use by us of the information you disclosed in accordance with this Statement of Privacy and Security. If we decide to change our privacy and/or security policies, we will post those changes on this page so that you are always aware of what information we
+					   collect, how we use it, and under what circumstances we disclose it. </p>
+				</li>
+			</ol>
+		</div>
+	</div>
 </div>

@@ -40,6 +40,12 @@ function SubscriptionController($scope, $rootScope, Global, StripeFactory, AuthF
 
 	var vm = this;
 
+	vm.view = {
+		title: 'Subscriptions',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.status = {
 		showSubscribe: false,
 		addNewCardDisabled: false,

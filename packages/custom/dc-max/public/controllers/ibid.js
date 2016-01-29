@@ -4,6 +4,12 @@ function IbidController($scope, $rootScope, focus, IbidFactory, ChartFactory, Au
 
 	var vm = this;
 
+	vm.view = {
+		title: 'Index UL',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {
 		numberOfPeriods: 30,
 		initialWithdrawal: 0.04,

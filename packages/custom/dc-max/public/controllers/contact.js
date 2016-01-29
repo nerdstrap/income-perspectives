@@ -3,6 +3,12 @@
 function ContactController($scope, $rootScope, $stateParams, focus, AuthFactory) {
 	var vm = this;
 
+	vm.view = {
+		title: 'Contact Us',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {};
 
 	vm.status = {

@@ -3,6 +3,12 @@
 function ForgotPasswordController($scope, $rootScope, focus, AuthFactory) {
 	var vm = this;
 
+	vm.view = {
+		title: 'Forgot Password',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {};
 
 	vm.status = {

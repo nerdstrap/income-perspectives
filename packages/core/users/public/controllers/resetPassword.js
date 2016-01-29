@@ -3,6 +3,12 @@
 function ResetPasswordController($scope, $rootScope, focus, AuthFactory) {
 	var vm = this;
 
+	vm.view = {
+		title: 'Reset Password',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {};
 
 	vm.status = {};

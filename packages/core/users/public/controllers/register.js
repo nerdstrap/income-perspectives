@@ -3,6 +3,12 @@
 function RegisterController($scope, $rootScope, focus, AuthFactory, UsersSettingsFactory) {
 	var vm = this;
 
+	vm.view = {
+		title: 'Register',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {};
 
 	vm.status = {

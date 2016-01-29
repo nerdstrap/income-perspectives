@@ -1,4 +1,12 @@
 <div class="view auth-register-view" data-ng-controller="RegisterController as regCtrl">
+	<div class="container">
+		<div class="pull-left">
+			<h2>{{regCtrl.view.title}}</h2>
+		</div>
+		<div class="breadcrumbs pull-right">
+			<a ui-sref="{{regCtrl.view.parentSref}}">{{regCtrl.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{regCtrl.view.title}}</span>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-xs-8">

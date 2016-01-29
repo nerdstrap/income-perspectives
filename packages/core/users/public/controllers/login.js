@@ -3,6 +3,12 @@
 function LoginController($scope, $rootScope, focus, AuthFactory) {
 	var vm = this;
 
+	vm.view = {
+		title: 'Login',
+		parentSref: 'home',
+		parentTitle: 'Home'
+	};
+
 	vm.master = {};
 
 	vm.status = {

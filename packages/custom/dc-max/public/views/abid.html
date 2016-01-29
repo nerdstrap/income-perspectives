@@ -1,401 +1,416 @@
-<div class="view abid-view" data-ng-controller="AbidController as abidCtrl">
-	<div class="row">
-		<div class="col-md-4">
-			<form name="abidCtrl.abidFrm" novalidate>
-				<uib-accordion close-others="false">
-					<uib-accordion-group is-open="abidCtrl.status.firstOpen">
-
-						<uib-accordion-heading>
-							General
-							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.firstOpen, 'glyphicon-chevron-right': !abidCtrl.status.firstOpen}"></i>
-						</uib-accordion-heading>
-
-						<div class="form-group" bs-has>
-							<label for="current-age-input">Current Age</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-								<input id="current-age-input" type="number" name="currentAge" ng-model="abidCtrl.worksheet.currentAge" class="form-control" focus-on="firstOpened" required tabindex="0"/>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.currentAge.$dirty && abidCtrl.abidFrm.currentAge.$invalid">
-								<span ng-show="abidCtrl.abidFrm.currentAge.$error.required">Current Age is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group" bs-has>
-							<label for="retirement-age-input">Retirement Age</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input id="retirement-age-input" type="number" name="retirementAge" ng-model="abidCtrl.worksheet.retirementAge" class="form-control" required tabindex="0"/>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.retirementAge.$dirty && abidCtrl.abidFrm.retirementAge.$invalid">
-								<span ng-show="abidCtrl.abidFrm.retirementAge.$error.required">Retirement Age is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group" bs-has>
-							<label for="number-of-periods-input">Number of Retirement Years</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input id="number-of-periods-input" type="number" name="numberOfPeriods" ng-model="abidCtrl.worksheet.numberOfPeriods" class="form-control" required tabindex="0"/>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.numberOfPeriods.$dirty && abidCtrl.abidFrm.numberOfPeriods.$invalid">
-								<span ng-show="abidCtrl.abidFrm.numberOfPeriods.$error.required">Number of Retirement Years is required.</span>
-							</span>
-						</div>
-						<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
-						<input class="btn-u" type="submit" data-ng-click="abidCtrl.updateGeneral(abidCtrl.worksheet)" value="Continue" tabindex="0"/>
-
-					</uib-accordion-group>
-					<uib-accordion-group is-open="abidCtrl.status.secondOpen">
-
-						<uib-accordion-heading>
-							Investment Account
-							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.secondOpen, 'glyphicon-chevron-right': !abidCtrl.status.secondOpen}"></i>
-						</uib-accordion-heading>
-
-						<div class="form-group" bs-has>
-							<label for="initial-deposit-input">Initial Deposit</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-								<input id="initial-deposit-input" type="number" name="initialDeposit" ng-model="abidCtrl.worksheet.initialDeposit" focus-on="secondOpened" class="form-control" required tabindex="0"/>
-								<span class="input-group-addon">.00</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.initialDeposit.$dirty && abidCtrl.abidFrm.initialDeposit.$invalid">
-								<span ng-show="abidCtrl.abidFrm.initialDeposit.$error.required">Initial Deposit is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group" bs-has>
-							<label for="rate-of-return-input">Gross Rate of Return</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-								<input id="rate-of-return-input" type="number" name="rateOfReturn" ng-model="abidCtrl.worksheet.rateOfReturn" class="form-control" required tabindex="0"/>
-								<span class="input-group-addon">%&nbsp;</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.rateOfReturn.$dirty && abidCtrl.abidFrm.rateOfReturn.$invalid">
-								<span ng-show="abidCtrl.abidFrm.rateOfReturn.$error.required">Gross Rate of Return is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group" bs-has>
-							<label for="management-fee-input">Management Fee</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-								<input id="management-fee-input" type="number" name="managementFee" ng-model="abidCtrl.worksheet.managementFee" class="form-control" required tabindex="0"/>
-								<span class="input-group-addon">%&nbsp;</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.managementFee.$dirty && abidCtrl.abidFrm.managementFee.$invalid">
-								<span ng-show="abidCtrl.abidFrm.managementFee.$error.required">Management Fee is required.</span>
-							</span>
-						</div>
-
-						<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
-						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBaseline(abidCtrl.worksheet)" value="Plot 4%" tabindex="0"/>
-
-					</uib-accordion-group>
-					<uib-accordion-group is-open="abidCtrl.status.thirdOpen">
-
-						<uib-accordion-heading>
-							Index Annuity
-							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.thirdOpen, 'glyphicon-chevron-right': !abidCtrl.status.thirdOpen}"></i>
-						</uib-accordion-heading>
-
-						<div class="form-group" bs-has>
-							<label for="insurance-product-income-input">Annual Income</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-								<input id="insurance-product-income-input" type="number" name="insuranceProductIncome" ng-model="abidCtrl.worksheet.insuranceProductIncome" class="form-control" focus-on="thirdOpened" required tabindex="0"/>
-								<span class="input-group-addon">.00</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.insuranceProductIncome.$dirty && abidCtrl.abidFrm.insuranceProductIncome.$invalid">
-								<span ng-show="abidCtrl.abidFrm.insuranceProductIncome.$error.required">Annual Income is required.</span>
-							</span>
-						</div>
-
-						<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
-						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBreakEvenAnalysis(abidCtrl.worksheet)" value="Compare" tabindex="0"/>
-
-						<hr>
-						<p ng-show="abidCtrl.status.advancedOptionsDisabled">Subscribe to Modify Options</p>
-
-						<div class="form-group" bs-has>
-							<label for="initial-withdrawal-input">Initial Withdrawal</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-								<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="abidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
-								<span class="input-group-addon">%&nbsp;</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.initialWithdrawal.$dirty && abidCtrl.abidFrm.initialWithdrawal.$invalid">
-								<span ng-show="abidCtrl.abidFrm.initialWithdrawal.$error.required">Initial Withdrawal is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group" bs-has>
-							<label for="inflation-rate-input">Annual Inflation Rate</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-								<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="abidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
-								<span class="input-group-addon">%&nbsp;</span>
-							</div>
-							<span class="has-error" ng-show="abidCtrl.abidFrm.inflationRate.$dirty && abidCtrl.abidFrm.inflationRate.$invalid">
-								<span ng-show="abidCtrl.abidFrm.inflationRate.$error.required">Annual Inflation Rate is required.</span>
-							</span>
-						</div>
-
-						<div class="form-group">
-							<label for="client-name-input">Client Name</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-								<input id="client-name-input" type="text" name="clientName" ng-model="abidCtrl.worksheet.clientName" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="insurance-company-input">Insurance Company</label>
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-folder-open"></span></span>
-								<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="abidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
-							</div>
-						</div>
-
-						<input class="btn-u" type="submit" data-ng-click="abidCtrl.getPdf(abidCtrl.worksheet)" value="Generate Pdf" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
-
-					</uib-accordion-group>
-				</uib-accordion>
-			</form>
+<div data-ng-controller="AbidController as abidCtrl">
+	<div class="view-header">
+		<div class="container">
+			<div class="pull-left">
+				<h2>{{abidCtrl.view.title}}</h2>
+			</div>
+			<div class="breadcrumbs pull-right">
+				<a ui-sref="{{abidCtrl.view.parentSref}}">{{abidCtrl.view.parentTitle}}</a>&nbsp;/&nbsp;<span class="color-green">{{abidCtrl.view.title}}</span>
+			</div>
 		</div>
-		<div class="col-md-8">
-			<uib-tabset justified="true">
-				<uib-tab heading="4% Baseline" active="abidCtrl.status.baselineActive">
-					<div class="frm-u" ng-show="abidCtrl.status.baselineVisible">
-						<header>Your First Year Of Retirement</header>
-						<fieldset>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="baseline-investment-income-input">Income From 4% Rule</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-											<input id="baseline-investment-income-input" type="number" ng-model="abidCtrl.baseline.firstPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">.00</span>
-										</div>
+	</div>
+
+	<div class="view abid-view">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<form name="abidCtrl.abidFrm" novalidate>
+						<uib-accordion close-others="false">
+							<uib-accordion-group is-open="abidCtrl.status.firstOpen">
+
+								<uib-accordion-heading>
+									General
+									<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.firstOpen, 'glyphicon-chevron-right': !abidCtrl.status.firstOpen}"></i>
+								</uib-accordion-heading>
+
+								<div class="form-group" bs-has>
+									<label for="current-age-input">Current Age</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+										<input id="current-age-input" type="number" name="currentAge" ng-model="abidCtrl.worksheet.currentAge" class="form-control" focus-on="firstOpened" required tabindex="0"/>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.currentAge.$dirty && abidCtrl.abidFrm.currentAge.$invalid">
+										<span ng-show="abidCtrl.abidFrm.currentAge.$error.required">Current Age is required.</span>
+									</span>
 								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="baseline-rate-of-return-input">Annual Rate of Return</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-											<input id="baseline-rate-of-return-input" type="number" ng-model="abidCtrl.baseline.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">%&nbsp;</span>
-										</div>
+
+								<div class="form-group" bs-has>
+									<label for="retirement-age-input">Retirement Age</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										<input id="retirement-age-input" type="number" name="retirementAge" ng-model="abidCtrl.worksheet.retirementAge" class="form-control" required tabindex="0"/>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.retirementAge.$dirty && abidCtrl.abidFrm.retirementAge.$invalid">
+										<span ng-show="abidCtrl.abidFrm.retirementAge.$error.required">Retirement Age is required.</span>
+									</span>
 								</div>
-							</div>
-						</fieldset>
-						<footer>
-							<highchart value="abidCtrl.baselineChart"></highchart>
-						</footer>
-					</div>
-				</uib-tab>
-				<uib-tab heading="Break-Even Analysis" active="abidCtrl.status.breakEvenAnalysisActive">
-					<div class="frm-u" ng-show="abidCtrl.status.breakEvenAnalysisVisible">
-						<header>Your First Year Of Retirement</header>
-						<fieldset>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="break-even-insurance-product-income-input">Income From Annuity</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-											<input id="break-even-insurance-product-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeInsuranceProductIncome" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">.00</span>
-										</div>
+
+								<div class="form-group" bs-has>
+									<label for="number-of-periods-input">Number of Retirement Years</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+										<input id="number-of-periods-input" type="number" name="numberOfPeriods" ng-model="abidCtrl.worksheet.numberOfPeriods" class="form-control" required tabindex="0"/>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.numberOfPeriods.$dirty && abidCtrl.abidFrm.numberOfPeriods.$invalid">
+										<span ng-show="abidCtrl.abidFrm.numberOfPeriods.$error.required">Number of Retirement Years is required.</span>
+									</span>
 								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="break-even-investment-income-input">Income From 4% Rule</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-											<input id="break-even-investment-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">.00</span>
-										</div>
+								<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
+								<input class="btn-u" type="submit" data-ng-click="abidCtrl.updateGeneral(abidCtrl.worksheet)" value="Continue" tabindex="0"/>
+
+							</uib-accordion-group>
+							<uib-accordion-group is-open="abidCtrl.status.secondOpen">
+
+								<uib-accordion-heading>
+									Investment Account
+									<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.secondOpen, 'glyphicon-chevron-right': !abidCtrl.status.secondOpen}"></i>
+								</uib-accordion-heading>
+
+								<div class="form-group" bs-has>
+									<label for="initial-deposit-input">Initial Deposit</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+										<input id="initial-deposit-input" type="number" name="initialDeposit" ng-model="abidCtrl.worksheet.initialDeposit" focus-on="secondOpened" class="form-control" required tabindex="0"/>
+										<span class="input-group-addon">.00</span>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.initialDeposit.$dirty && abidCtrl.abidFrm.initialDeposit.$invalid">
+										<span ng-show="abidCtrl.abidFrm.initialDeposit.$error.required">Initial Deposit is required.</span>
+									</span>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="break-even-income-differential-input">Index Annuity Advantage</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
-											<input id="break-even-income-differential-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeIncomeDifferential" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">%&nbsp;</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<label for="break-even-rate-of-return-input">Annual Rate Of Return</label>
+
+								<div class="form-group" bs-has>
+									<label for="rate-of-return-input">Gross Rate of Return</label>
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-										<input id="break-even-rate-of-return-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
+										<input id="rate-of-return-input" type="number" name="rateOfReturn" ng-model="abidCtrl.worksheet.rateOfReturn" class="form-control" required tabindex="0"/>
 										<span class="input-group-addon">%&nbsp;</span>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.rateOfReturn.$dirty && abidCtrl.abidFrm.rateOfReturn.$invalid">
+										<span ng-show="abidCtrl.abidFrm.rateOfReturn.$error.required">Gross Rate of Return is required.</span>
+									</span>
 								</div>
-							</div>
-						</fieldset>
-						<footer>
-							<highchart value="abidCtrl.breakEvenAnalysisChart"></highchart>
-							<hr/>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group" ng-show="abidCtrl.breakEvenAnalysis.breakEvenAge">
-										<label for="break-even-age-input">Break-Even Age</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-											<input id="break-even-age-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.breakEvenAge" class="form-control" tabindex="-1" readonly/>
-										</div>
-									</div>
-									<div class="form-group" ng-show="!abidCtrl.breakEvenAnalysis.breakEvenAge">
-										<label>Break-Even Age Never Reached</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									&nbsp;
-								</div>
-							</div>
-						</footer>
-					</div>
-				</uib-tab>
-				<uib-tab heading="Periodic Analysis" active="abidCtrl.status.cumulativePayoutActive">
-					<div class="frm-u" ng-show="abidCtrl.status.cumulativePayoutVisible">
-						<header>Your "Go-Go" Years</header>
-						<fieldset>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="periodic-insurance-product-income-input">Income From Annuity</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-											<input id="periodic-insurance-product-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeInsuranceProductIncome" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">.00</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="periodic-investment-income-input">Income From 4% Rule</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
-											<input id="periodic-investment-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">.00</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label for="periodic-income-differential-input">Index Annuity Advantage</label>
-										<div class="input-group">
-											<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
-											<input id="periodic-income-differential-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeIncomeDifferential" class="form-control" tabindex="-1" readonly/>
-											<span class="input-group-addon">%&nbsp;</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<label for="periodic-rate-of-return-input">Annual Rate Of Return</label>
+
+								<div class="form-group" bs-has>
+									<label for="management-fee-input">Management Fee</label>
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
-										<input id="periodic-rate-of-return-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
+										<input id="management-fee-input" type="number" name="managementFee" ng-model="abidCtrl.worksheet.managementFee" class="form-control" required tabindex="0"/>
 										<span class="input-group-addon">%&nbsp;</span>
 									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.managementFee.$dirty && abidCtrl.abidFrm.managementFee.$invalid">
+										<span ng-show="abidCtrl.abidFrm.managementFee.$error.required">Management Fee is required.</span>
+									</span>
 								</div>
+
+								<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
+								<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBaseline(abidCtrl.worksheet)" value="Plot 4%" tabindex="0"/>
+
+							</uib-accordion-group>
+							<uib-accordion-group is-open="abidCtrl.status.thirdOpen">
+
+								<uib-accordion-heading>
+									Index Annuity
+									<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': abidCtrl.status.thirdOpen, 'glyphicon-chevron-right': !abidCtrl.status.thirdOpen}"></i>
+								</uib-accordion-heading>
+
+								<div class="form-group" bs-has>
+									<label for="insurance-product-income-input">Annual Income</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+										<input id="insurance-product-income-input" type="number" name="insuranceProductIncome" ng-model="abidCtrl.worksheet.insuranceProductIncome" class="form-control" focus-on="thirdOpened" required tabindex="0"/>
+										<span class="input-group-addon">.00</span>
+									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.insuranceProductIncome.$dirty && abidCtrl.abidFrm.insuranceProductIncome.$invalid">
+										<span ng-show="abidCtrl.abidFrm.insuranceProductIncome.$error.required">Annual Income is required.</span>
+									</span>
+								</div>
+
+								<input class="btn-u btn-u-default" type="button" data-ng-click="abidCtrl.reset()" value="Reset" tabindex="-1"/>
+								<input class="btn-u" type="submit" data-ng-click="abidCtrl.getBreakEvenAnalysis(abidCtrl.worksheet)" value="Compare" tabindex="0"/>
+
+								<hr>
+								<p ng-show="abidCtrl.status.advancedOptionsDisabled">Subscribe to Modify Options</p>
+
+								<div class="form-group" bs-has>
+									<label for="initial-withdrawal-input">Initial Withdrawal</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+										<input id="initial-withdrawal-input" type="number" name="initialWithdrawal" ng-model="abidCtrl.worksheet.initialWithdrawal" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+										<span class="input-group-addon">%&nbsp;</span>
+									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.initialWithdrawal.$dirty && abidCtrl.abidFrm.initialWithdrawal.$invalid">
+										<span ng-show="abidCtrl.abidFrm.initialWithdrawal.$error.required">Initial Withdrawal is required.</span>
+									</span>
+								</div>
+
+								<div class="form-group" bs-has>
+									<label for="inflation-rate-input">Annual Inflation Rate</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+										<input id="inflation-rate-input" type="number" name="inflationRate" ng-model="abidCtrl.worksheet.inflationRate" class="form-control" required ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+										<span class="input-group-addon">%&nbsp;</span>
+									</div>
+									<span class="has-error" ng-show="abidCtrl.abidFrm.inflationRate.$dirty && abidCtrl.abidFrm.inflationRate.$invalid">
+										<span ng-show="abidCtrl.abidFrm.inflationRate.$error.required">Annual Inflation Rate is required.</span>
+									</span>
+								</div>
+
+								<div class="form-group">
+									<label for="client-name-input">Client Name</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+										<input id="client-name-input" type="text" name="clientName" ng-model="abidCtrl.worksheet.clientName" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="insurance-company-input">Insurance Company</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-folder-open"></span></span>
+										<input id="insurance-company-input" type="text" name="insuranceCompany" ng-model="abidCtrl.worksheet.insuranceCompany" class="form-control" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+									</div>
+								</div>
+
+								<input class="btn-u" type="submit" data-ng-click="abidCtrl.getPdf(abidCtrl.worksheet)" value="Generate Pdf" ng-disabled="abidCtrl.status.advancedOptionsDisabled" tabindex="0"/>
+
+							</uib-accordion-group>
+						</uib-accordion>
+					</form>
+				</div>
+				<div class="col-md-8">
+					<uib-tabset justified="true">
+						<uib-tab heading="4% Baseline" active="abidCtrl.status.baselineActive">
+							<div class="frm-u" ng-show="abidCtrl.status.baselineVisible">
+								<header>Your First Year Of Retirement</header>
+								<fieldset>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="baseline-investment-income-input">Income From 4% Rule</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+													<input id="baseline-investment-income-input" type="number" ng-model="abidCtrl.baseline.firstPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">.00</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="baseline-rate-of-return-input">Annual Rate of Return</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+													<input id="baseline-rate-of-return-input" type="number" ng-model="abidCtrl.baseline.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">%&nbsp;</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<footer>
+									<highchart value="abidCtrl.baselineChart"></highchart>
+								</footer>
 							</div>
-						</fieldset>
-						<footer>
-							<highchart value="abidCtrl.cumulativePayoutChart"></highchart>
-							<hr/>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="panel panel-success">
-										<div class="panel-heading">
-											<h3 class="panel-title">Go-Go Years</h3>
-											<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[0]}}% Advantage</h4>
+						</uib-tab>
+						<uib-tab heading="Break-Even Analysis" active="abidCtrl.status.breakEvenAnalysisActive">
+							<div class="frm-u" ng-show="abidCtrl.status.breakEvenAnalysisVisible">
+								<header>Your First Year Of Retirement</header>
+								<fieldset>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="break-even-insurance-product-income-input">Income From Annuity</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+													<input id="break-even-insurance-product-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeInsuranceProductIncome" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">.00</span>
+												</div>
+											</div>
 										</div>
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Age</th>
-													<th>Annuity</th>
-													<th>4% Rule</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.gogoPayouts">
-													<th scope="row">{{payout.age}}</th>
-													<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
-													<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="panel panel-warning">
-										<div class="panel-heading">
-											<h3 class="panel-title">Slow-Go Years</h3>
-											<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[1]}}% Advantage</h4>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="break-even-investment-income-input">Income From 4% Rule</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+													<input id="break-even-investment-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">.00</span>
+												</div>
+											</div>
 										</div>
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Age</th>
-													<th>Annuity</th>
-													<th>4% Rule</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.slowgoPayouts">
-													<th scope="row">{{payout.age}}</th>
-													<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
-													<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
-												</tr>
-											</tbody>
-										</table>
 									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="panel panel-danger">
-										<div class="panel-heading">
-											<h3 class="panel-title">No-Go Years</h3>
-											<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[2]}}% Advantage</h4>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="break-even-income-differential-input">Index Annuity Advantage</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
+													<input id="break-even-income-differential-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPayout.cumulativeIncomeDifferential" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">%&nbsp;</span>
+												</div>
+											</div>
 										</div>
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Age</th>
-													<th>Annuity</th>
-													<th>4% Rule</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.nogoPayouts">
-													<th scope="row">{{payout.age}}</th>
-													<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
-													<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="col-md-6">
+											<label for="break-even-rate-of-return-input">Annual Rate Of Return</label>
+											<div class="input-group">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+												<input id="break-even-rate-of-return-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
+												<span class="input-group-addon">%&nbsp;</span>
+											</div>
+										</div>
 									</div>
-								</div>
+								</fieldset>
+								<footer>
+									<highchart value="abidCtrl.breakEvenAnalysisChart"></highchart>
+									<hr/>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group" ng-show="abidCtrl.breakEvenAnalysis.breakEvenAge">
+												<label for="break-even-age-input">Break-Even Age</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+													<input id="break-even-age-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.breakEvenAge" class="form-control" tabindex="-1" readonly/>
+												</div>
+											</div>
+											<div class="form-group" ng-show="!abidCtrl.breakEvenAnalysis.breakEvenAge">
+												<label>Break-Even Age Never Reached</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											&nbsp;
+										</div>
+									</div>
+								</footer>
 							</div>
-						</footer>
-					</div>
-				</uib-tab>
-			</uib-tabset>
+						</uib-tab>
+						<uib-tab heading="Periodic Analysis" active="abidCtrl.status.cumulativePayoutActive">
+							<div class="frm-u" ng-show="abidCtrl.status.cumulativePayoutVisible">
+								<header>Your "Go-Go" Years</header>
+								<fieldset>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="periodic-insurance-product-income-input">Income From Annuity</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+													<input id="periodic-insurance-product-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeInsuranceProductIncome" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">.00</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="periodic-investment-income-input">Income From 4% Rule</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+													<input id="periodic-investment-income-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeInvestmentIncome" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">.00</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="periodic-income-differential-input">Index Annuity Advantage</label>
+												<div class="input-group">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-thumbs-up"></span></span>
+													<input id="periodic-income-differential-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.firstPeriodicPayout.cumulativeIncomeDifferential" class="form-control" tabindex="-1" readonly/>
+													<span class="input-group-addon">%&nbsp;</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label for="periodic-rate-of-return-input">Annual Rate Of Return</label>
+											<div class="input-group">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-stats"></span></span>
+												<input id="periodic-rate-of-return-input" type="number" ng-model="abidCtrl.breakEvenAnalysis.grossRateOfReturn" class="form-control" tabindex="-1" readonly/>
+												<span class="input-group-addon">%&nbsp;</span>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+								<footer>
+									<highchart value="abidCtrl.cumulativePayoutChart"></highchart>
+									<hr/>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="panel panel-success">
+												<div class="panel-heading">
+													<h3 class="panel-title">Go-Go Years</h3>
+													<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[0]}}% Advantage</h4>
+												</div>
+												<table class="table">
+													<thead>
+													<tr>
+														<th>Age</th>
+														<th>Annuity</th>
+														<th>4% Rule</th>
+													</tr>
+													</thead>
+													<tbody>
+													<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.gogoPayouts">
+														<th scope="row">{{payout.age}}</th>
+														<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
+														<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="panel panel-warning">
+												<div class="panel-heading">
+													<h3 class="panel-title">Slow-Go Years</h3>
+													<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[1]}}% Advantage</h4>
+												</div>
+												<table class="table">
+													<thead>
+													<tr>
+														<th>Age</th>
+														<th>Annuity</th>
+														<th>4% Rule</th>
+													</tr>
+													</thead>
+													<tbody>
+													<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.slowgoPayouts">
+														<th scope="row">{{payout.age}}</th>
+														<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
+														<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="panel panel-danger">
+												<div class="panel-heading">
+													<h3 class="panel-title">No-Go Years</h3>
+													<h4>{{abidCtrl.breakEvenAnalysis.periodicSeriesData.seriesC[2]}}% Advantage</h4>
+												</div>
+												<table class="table">
+													<thead>
+													<tr>
+														<th>Age</th>
+														<th>Annuity</th>
+														<th>4% Rule</th>
+													</tr>
+													</thead>
+													<tbody>
+													<tr ng-repeat="payout in abidCtrl.breakEvenAnalysis.nogoPayouts">
+														<th scope="row">{{payout.age}}</th>
+														<td>{{payout.cumulativeInsuranceProductIncome|currency:'$':0}}</td>
+														<td>{{payout.cumulativeInvestmentIncome|currency:'$':0}}</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</footer>
+							</div>
+						</uib-tab>
+					</uib-tabset>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
