@@ -44,7 +44,7 @@ SystemPackage.register(function (app, auth, database, circles) {
 	SystemPackage.aggregateAsset('js', '../fancybox/jquery.fancybox.pack.js');
 	SystemPackage.aggregateAsset('js', '../owl-carousel/owl.carousel.min.js');
 
-	SystemPackage.aggregateAsset('js', 'index-app.js');
+	SystemPackage.aggregateAsset('js', 'indexApp1.js');
 	SystemPackage.aggregateAsset('js', 'fancy-box.js');
 	SystemPackage.aggregateAsset('js', 'owl-carousel.js');
 	SystemPackage.aggregateAsset('js', 'master-slider-fw.js');
