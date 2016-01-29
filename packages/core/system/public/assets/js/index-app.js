@@ -5,7 +5,7 @@
 * Website: http://htmlstream.com
 */
 
-var App = function () {
+var IndexApp1 = function () {
 	//Fixed Header
 	function handleHeader() {
 		jQuery(window).scroll(function() {
